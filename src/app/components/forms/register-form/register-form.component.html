@@ -1,0 +1,58 @@
+<app-card-wrapper [title]="'Sign Up'" [description]="'Create your free account!'" [imageSrc]="registerImageSrc"
+  [imgAlt]="'Library for the login form'">
+  <form [formGroup]="registerFormControl" (ngSubmit)="handleRegisterSubmit()">
+    <!-- fullname input -->
+    <div class="mb-3">
+      <label for="fullName" class="form-label">Full Name:</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-person"></i>
+        </span>
+        <input type="text" class="form-control"
+          [ngClass]="{'is-invalid': registerFormControl.get('fullName')?.invalid && registerFormControl.get('fullName')?.touched}"
+          id="fullName" formControlName="fullName" placeholder="Example: John Doe" required />
+      </div>
+      @if(registerFormControl.get('fullName')?.invalid && registerFormControl.get('fullName')?.touched){
+      <div class="form-text text-danger">
+        {{ registerFormControl.get('fullName')?.errors?.['required'] ? 'Full name is required.' : 'Full name must be at least 2 characters.' }}
+      </div>
+      }
+    </div>
+    <!-- email input -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address:</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-envelope-at"></i>
+        </span>
+        <input type="email" class="form-control"
+          [ngClass]="{'is-invalid': registerFormControl.get('email')?.invalid && registerFormControl.get('email')?.touched}"
+          id="email" formControlName="email" placeholder="Example: johndoe@gmail.com" autocomplete="email" required />
+      </div>
+      @if(registerFormControl.get('email')?.invalid && registerFormControl.get('email')?.touched){
+      <div class="form-text text-danger">
+        {{ registerFormControl.get('email')?.errors?.['required'] ? 'Email is required.' : 'Invalid email.' }}
+      </div>
+      }
+    </div>
+    <!-- password input -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-asterisk"></i>
+        </span>
+        <input type="password" class="form-control"
+          [ngClass]="{'is-invalid': registerFormControl.get('password')?.invalid && registerFormControl.get('password')?.touched}"
+          id="password" formControlName="password" placeholder="******" autocomplete="current-password" required />
+      </div>
+      @if(registerFormControl.get('password')?.invalid && registerFormControl.get('password')?.touched){
+      <div class="form-text text-danger">
+        {{ registerFormControl.get('password')?.errors?.['required'] ? 'Password is required.' : 'Password must be at least 6 characters.' }}
+      </div>
+      }
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="!registerFormControl.valid">Sign Up</button>
+  </form>
+</app-card-wrapper>

@@ -1,0 +1,25 @@
+/* small screens */
+.card-wrapper {
+  max-width: 100%;
+}
+
+/* tablet screens */
+@media (min-width: 768px) {
+  .card-wrapper {
+    max-width: 600px;
+  }
+}
+
+/* laptop screens */
+@media (min-width: 992px) {
+  .card-wrapper {
+    max-width: 800px;
+  }
+}
+
+/* large screens */
+@media (min-width: 1200px) {
+  .card-wrapper {
+    max-width: 1000px;
+  }
+}
