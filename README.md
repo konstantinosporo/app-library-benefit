@@ -1,4 +1,4 @@
-# AppLibraryBenefit
+# AppLibraryBenefit - Contributors: Poros K. Ioulios, Klapsis Kyriakos - TeamName: " "
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
 
@@ -18,10 +18,45 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## GitHub CLI Steps 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Explanatory guide in case we forget something! (commands etc.)
 
-## Further help
+## Step 1 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Git clone the repository on your desired folder path. Run `git clone https://github.com/konstantinosporo/app-library-benefit.git`. 
+
+## Step 2 
+
+Procceed to create a new branch when implementing a new functionality/feature. Run `git checkout -b feature/feature-name`.
+*For fixing issues replace feature with fix and run `git checkout -b fix/fix-name`.
+Expect this message in the CLI: `Switched to a new branch: branchname`.
+
+## Step 3
+
+Before procceding with anything verify the status of the files that have been changed. Run `git status`.
+
+## Step 4
+
+After checking which files were changed proceed to stage all the changes. Run `git add .`.
+In case you want to stage specific files. Run `git add specific-file-path`.
+
+## Step 5
+
+Once the changes are staged proceed to commit to your branch: Run `git commit -m 'Commit meaningfull message'`.
+
+## Step 6
+
+Now push the new branch online. Run `git push origin feature/feature-name` or `git push origin fix/fix-name`.
+
+## Step 7 
+
+Pull Request Steps : 1 - GitHub Pull Requests.
+                     2 - Create Pull Request.
+                     3 - Merge Pull Request.
+                     4 - Confirm Merge.
+                     5 - *Optional: Delete Branch after merging.
+
+## Step 8
+
+Pull Changes Locally after merging to update to the master branch: Run `git checkout master` and update running `git pull origin master`.
