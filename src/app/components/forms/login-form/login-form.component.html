@@ -1,0 +1,49 @@
+<app-card-wrapper [title]="'Sign In'" [description]="'Please sign in to your account.'" [imageSrc]="loginImageSrc"
+  [imgAlt]="'Library for the login form'">
+  <form [formGroup]="loginFormControl" (ngSubmit)="handleLoginSubmit()">
+    <!-- email input -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address:</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-envelope-at"></i>
+        </span>
+        <input type="email" class="form-control"
+          [ngClass]="{'is-invalid': loginFormControl.get('email')?.invalid && loginFormControl.get('email')?.touched}"
+          id="email" formControlName="email" placeholder="Example: johndoe@gmail.com" autocomplete="email" required />
+      </div>
+      @if(loginFormControl.get('email')?.invalid && loginFormControl.get('email')?.touched){
+      <div class="form-text text-danger">
+        {{ loginFormControl.get('email')?.errors?.['required'] ? 'Email is required.' : 'Invalid email format.' }}
+      </div>
+      }
+    </div>
+    <!-- password input -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-asterisk"></i>
+        </span>
+        <input type="password" class="form-control"
+          [ngClass]="{'is-invalid': loginFormControl.get('password')?.invalid && loginFormControl.get('password')?.touched}"
+          id="password" formControlName="password" placeholder="******" autocomplete="current-password" required />
+      </div>
+      @if(loginFormControl.get('password')?.invalid && loginFormControl.get('password')?.touched){
+      <div class="form-text text-danger">
+        {{ loginFormControl.get('password')?.errors?.['required'] ? 'Password is required.' : 'Password cannot be less than 6 characters.' }}
+      </div>
+      }
+    </div>
+
+    @if(loginError.length){
+    <div class="alert alert-danger alert-dismissible fade show mb-3 w-full" role="alert">
+      <i class="bi bi-exclamation-circle text-danger"></i>
+      <span class="text-danger ms-2">{{loginError}}</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    }
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginFormControl.valid">Sign In</button>
+  </form>
+</app-card-wrapper>
