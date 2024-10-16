@@ -16,7 +16,7 @@ export class LoginFormComponent {
   
   loginImageSrc: string = 'https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
   loginError: string = '';
-
+  
   registeredUser = [
     {
       email: 'konstantinosporo@hotmail.gr',

@@ -1,0 +1,58 @@
+@for(bookItem of bookList;track bookItem.title){
+<div class="container my-4 ">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-lg-10">
+      <div class="card book-card shadow-lg position-relative overflow-hidden border-0">
+        <div class="row g-0">
+          <div class="col-md-4 image-container">
+            <img [src]="bookItem.imageUrl" class="img-fluid rounded-start" alt="Book" loading="lazy">
+          </div>
+          <div class="col-md-8 my-auto">
+            <div class="card-body position-relative ">
+              <h5 class="card-title d-flex align-items-center">
+                {{ bookItem.title }}
+                <span class="d-md-none ms-auto mini-image">
+                  <img [src]="bookItem.imageUrl" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
+                </span>
+              </h5>
+              <p class="card-text">
+                <small class="text-muted">
+                  <i class="bi bi-calendar-check me-1"></i> Published on {{ bookItem.realeaseDate | date:'longDate' }}
+                </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  <i class="bi bi-person-rolodex me-1"></i> Written by <i>{{ bookItem.author }}</i>
+                </small>
+              </p>
+              <div class="custom-line mb-3"></div>
+              <p class="card-text">
+                {{ bookItem.description }}
+              </p>
+              <ul class="list-inline">
+                <li class="list-inline-item btn btn-sm text-white" [ngClass]="{
+                    'btn-green':  bookItem.availability,
+                    'btn-red': !bookItem.availability
+                  }">
+                  <i class="bi" [ngClass]="{
+                      'bi-check': bookItem.availability,
+                      'bi-x': !bookItem.availability
+                    }"></i>
+                  {{ bookItem.availability ? "Available" : "Not available" }}
+                </li>
+                <li class="list-inline-item">
+                  <a href="#" class="btn btn-primary btn-sm text-white">
+                    <i class="bi bi-book me-1"></i> Rent Book
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of card -->
+<hr class="border-primary col-10 col-md-8 col-lg-7 mx-auto">
+}

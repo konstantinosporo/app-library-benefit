@@ -1,3 +1,4 @@
+// THIS FILE OVERWRITES THE DEFAULT VALUES OF BOOTRSTRAP
 // Custom Bootstrap SCSS imports
 @import '../../node_modules/bootstrap/scss/functions';  
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;800&display=swap');
@@ -44,10 +45,10 @@ $grays: (
 // New Color Palette
 $primary:   #928c47!default; // Soft Olive: Calm and Professional
 $secondary: #c7bb9c !default; // Warm Beige: Friendly and Inviting
-$success:   #928c47 !default; // Olive Green: Stability and Growth
+$success:   #66c78d !default; // Olive Green: Stability and Growth
 $info:      #e9ddbf !default; // Light Cream: Informational and Gentle
 $warning:   #f3e7b4 !default; // Soft Yellow: Caution and Attention
-$danger:    #534c23 !default; // Deep Brown: Strong and Serious
+$danger:    #e3656b !default; // Deep Brown: Strong and Serious
 $light:     #f8f9fa !default; // Light Gray: Backgrounds and UI Elements
 $dark:      #343a40 !default; // Dark Gray: Professional and Strong
 
@@ -96,25 +97,25 @@ $theme-colors: (
 html{
   height: 100%;
 }
-// Check for main element override
-body {
-  --bs-font-poppins: 'Poppins', sans-serif;
 
-  // Change font family for Greek language (lang='el')
+body{
+  --bs-font-poppins: 'Poppins', sans-serif;
+  font-family: var(--bs-body-font-family, 'Poppins', sans-serif);
+
   [lang='el'] & {
     --bs-body-font-family: var(--bs-font-poppins);
   }
   [lang='en'] & {
     --bs-body-font-family: var(--bs-font-poppins);
   }
+    background-color: red;
 
-  background-image: linear-gradient(-30deg, #e9ddbf, transparent 10%);
 }
-
 
 nav {
   background-image: linear-gradient(-30deg, #e9ddbf, transparent 70%);
 }
+
 
 
 // Override Bootstrap variable

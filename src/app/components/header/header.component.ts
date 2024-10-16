@@ -10,19 +10,24 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  /**
+   * @konstantinosporo
+   * @description
+   * A simple array with navlink object.
+   * Adjusting this array, will update the actual links.
+   */
   navLinks = [
     {
       title: 'Home',
-      link: '/home'
+      link: '/'
     },
     {
       title: 'Library',
-      link: '/search-post'
+      link: '/library'
     },
     {
       title: 'News',
       link: '/tasks'
     },
-   
   ]
 }
