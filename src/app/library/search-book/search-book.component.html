@@ -1,0 +1,12 @@
+<div class="card mx-auto my-3 library-gradient col-10 col-md-8 border-0" style="border-radius: 10em;">
+  <div class="card-body p-2">
+    <div class="input-group ">
+      <input type="text" class="form-control rounded bg-transparent text-white" placeholder="Search Library"
+        aria-label="Type Keywords" aria-describedby="basic-addon2" #searchQuery />
+      <button type="button" class="btn btn-primary rounded-pill text-white" (click)="handleSearch(searchQuery.value)">
+        <i class="bi bi-search"></i>
+        Search
+      </button>
+    </div>
+  </div>
+</div>

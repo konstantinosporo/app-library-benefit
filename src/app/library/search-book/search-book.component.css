@@ -1,0 +1,22 @@
+.form-control {
+  border-color: transparent;
+}
+
+.input-group>.form-control:focus {
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.form-control::placeholder {
+  color: #fff;
+}
+
+.library-gradient {
+  color: #fff;
+  background-image: linear-gradient(30deg, #b4ad79, transparent 85%);
+}
+
+
+.btn-library:hover {
+  background-image: linear-gradient(-10deg, #e9ddbf, transparent 30%);
+}

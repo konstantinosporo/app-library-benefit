@@ -1,12 +1,10 @@
-
-/* You can add global styles to this file, and also import other style files */
 label {
   font-size: 1.2rem;
 }
 
 /* classes for form accesibility  */
 .is-invalid {
-  border-color: red !important;
+  border-color: var(--bs-red) !important;
   /* Change the border color to red */
 }
 

@@ -1,0 +1,6 @@
+<main>
+  <div class="container">
+    <app-search-book (handleSearchQueryEvent)="getUserQuery($event)"></app-search-book>
+    <app-book [bookList]="filteredBookList"></app-book>
+  </div>
+</main>
