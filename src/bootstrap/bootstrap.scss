@@ -1,0 +1,168 @@
+// Custom Bootstrap SCSS imports
+@import '../../node_modules/bootstrap/scss/functions';  
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Color system
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+// Adjusted Bootstrap Colors for Library Theme
+$blue: #6b9bd1 !default; // Softened Bootstrap Blue
+$indigo: #a56cc1 !default; // Softened Indigo
+$purple: #b99bdc !default; // Softened Purple
+$pink: #f1a7c6 !default; // Softened Pink
+$red: #e3656b !default; // Softened Red
+$orange: #f9c67a !default; // Softened Orange
+$yellow: #f5e6b7 !default; // Softened Yellow
+$green: #66c78d !default; // Softened Green
+$teal: #85e3d8 !default; // Softened Teal
+$cyan: #92d8e9 !default; // Softened Cyan
+
+$grays: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+);
+
+// New Color Palette
+$primary:   #928c47!default; // Soft Olive: Calm and Professional
+$secondary: #c7bb9c !default; // Warm Beige: Friendly and Inviting
+$success:   #928c47 !default; // Olive Green: Stability and Growth
+$info:      #e9ddbf !default; // Light Cream: Informational and Gentle
+$warning:   #f3e7b4 !default; // Soft Yellow: Caution and Attention
+$danger:    #534c23 !default; // Deep Brown: Strong and Serious
+$light:     #f8f9fa !default; // Light Gray: Backgrounds and UI Elements
+$dark:      #343a40 !default; // Dark Gray: Professional and Strong
+
+// Color variants (tints and shades)
+$primary-100: tint-color($primary, 80%) !default;
+$primary-200: tint-color($primary, 60%) !default;
+$primary-300: tint-color($primary, 50%) !default;
+$primary-900: shade-color($primary, 60%) !default;
+
+$secondary-100: tint-color($secondary, 80%) !default;
+$secondary-200: tint-color($secondary, 60%) !default;
+$secondary-300: tint-color($secondary, 50%) !default;
+
+// Adjusted Bootstrap Color Variants
+$bs-blue-100: tint-color($blue, 80%) !default;
+$bs-blue-200: tint-color($blue, 60%) !default;
+$bs-blue-300: tint-color($blue, 50%) !default;
+
+$bs-orange-100: tint-color($orange, 80%) !default;
+$bs-orange-200: tint-color($orange, 60%) !default;
+$bs-orange-300: tint-color($orange, 50%) !default;
+
+// Body color and background
+$body-color-dark: $gray-300 !default;
+$body-bg-dark: $primary-900 !default;
+
+// Theme colors map
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+  "blue":       $blue,
+  "purple":     $purple,
+  "red":        $red,
+  "yellow":     $yellow,
+  "green":      $green,
+  "orange":     $orange,
+  // Add more Bootstrap colors if needed
+) !default;
+
+html{
+  height: 100%;
+}
+// Check for main element override
+body {
+  --bs-font-poppins: 'Poppins', sans-serif;
+
+  // Change font family for Greek language (lang='el')
+  [lang='el'] & {
+    --bs-body-font-family: var(--bs-font-poppins);
+  }
+  [lang='en'] & {
+    --bs-body-font-family: var(--bs-font-poppins);
+  }
+
+  background-image: linear-gradient(-30deg, #e9ddbf, transparent 10%);
+}
+
+
+nav {
+  background-image: linear-gradient(-30deg, #e9ddbf, transparent 70%);
+}
+
+
+// Override Bootstrap variable
+$bs-dropdown-link-active-bg: $gray-500 !default;
+
+// Configuration
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/variables-dark'; 
+@import '../../node_modules/bootstrap/scss/maps'; 
+@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/utilities';
+
+// Layout & Components
+@import '../../node_modules/bootstrap/scss/root';
+@import '../../node_modules/bootstrap/scss/reboot';
+@import '../../node_modules/bootstrap/scss/type';
+@import '../../node_modules/bootstrap/scss/images';
+@import '../../node_modules/bootstrap/scss/containers';
+@import '../../node_modules/bootstrap/scss/grid';
+@import '../../node_modules/bootstrap/scss/tables';
+@import '../../node_modules/bootstrap/scss/forms';
+@import '../../node_modules/bootstrap/scss/buttons';
+@import '../../node_modules/bootstrap/scss/transitions';
+@import '../../node_modules/bootstrap/scss/dropdown';
+@import '../../node_modules/bootstrap/scss/button-group';
+@import '../../node_modules/bootstrap/scss/nav';
+@import '../../node_modules/bootstrap/scss/navbar';
+@import '../../node_modules/bootstrap/scss/card';
+// Uncomment as needed
+//@import '../../node_modules/bootstrap/scss/accordion';
+//@import '../../node_modules/bootstrap/scss/breadcrumb';
+//@import '../../node_modules/bootstrap/scss/pagination';
+//@import '../../node_modules/bootstrap/scss/badge';
+//@import '../../node_modules/bootstrap/scss/alert';
+//@import '../../node_modules/bootstrap/scss/progress';
+@import '../../node_modules/bootstrap/scss/list-group';
+@import '../../node_modules/bootstrap/scss/close';
+//@import '../../node_modules/bootstrap/scss/toasts';
+//@import '../../node_modules/bootstrap/scss/modal';
+//@import '../../node_modules/bootstrap/scss/tooltip';
+//@import '../../node_modules/bootstrap/scss/popover';
+//@import '../../node_modules/bootstrap/scss/carousel';
+//@import '../../node_modules/bootstrap/scss/spinners';
+//@import '../../node_modules/bootstrap/scss/offcanvas';
+//@import '../../node_modules/bootstrap/scss/placeholders';
+
+// Helpers
+@import '../../node_modules/bootstrap/scss/helpers';
+
+// Utilities
+@import '../../node_modules/bootstrap/scss/utilities/api';
