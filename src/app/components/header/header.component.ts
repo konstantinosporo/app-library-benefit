@@ -12,24 +12,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   navLinks = [
     {
-      title: 'Posts',
-      link: '/posts'
+      title: 'Home',
+      link: '/home'
     },
     {
-      title: 'Search Post',
+      title: 'Library',
       link: '/search-post'
     },
     {
-      title: 'Tasks',
+      title: 'News',
       link: '/tasks'
     },
-    {
-      title: 'Todos',
-      link: '/todos'
-    },
-    {
-      title: 'Products',
-      link: '/products'
-    }
+   
   ]
 }
