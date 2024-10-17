@@ -91,6 +91,8 @@ $theme-colors: (
   "yellow":     $yellow,
   "green":      $green,
   "orange":     $orange,
+  "teal":       $teal,
+  "black":      $black
   // Add more Bootstrap colors if needed
 ) !default;
 
@@ -116,10 +118,15 @@ nav {
   background-image: linear-gradient(-30deg, #e9ddbf, transparent 70%);
 }
 
+.bg-black-subtle {
+  background-color: hsl(20, 23%, 21%); /* Black with 10% opacity */
+}
+
 
 
 // Override Bootstrap variable
 $bs-dropdown-link-active-bg: $gray-500 !default;
+
 
 // Configuration
 @import '../../node_modules/bootstrap/scss/variables';
