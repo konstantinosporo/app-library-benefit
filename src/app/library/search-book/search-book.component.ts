@@ -1,30 +1,26 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SearchStateService } from '../../services/search-state.service';
+import { SearchFilterComponent } from "./search-filter/search-filter.component";
 
 @Component({
   selector: 'app-search-book',
   standalone: true,
-  imports: [],
+  imports: [SearchFilterComponent],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.css'
 })
 export class SearchBookComponent {
+  constructor(private readonly searchStateService: SearchStateService) { }
+  @Input() filterList: {id:string, title: string}[] = [];
+  
   /**
    * @konstantinosporo
    * @description
-   * This is a custom binding event.
-   * It emits a string value to its father component when a user
-   * clicks the search button.
-   * @emitparameter string
+   * Method to update the State when the search button is clicked.
+   * @param {string} searchQuery
    */
-  @Output() handleSearchQueryEvent: EventEmitter<string> = new EventEmitter<string>();
-  /**
-   * @konstantinosporo
-   * @description
-   * Handler for emitting the typed query.
-   * @param searchQuery 
-   */
-  handleSearch(searchQuery: string) {
-    //console.log(`Child: Searched for: ${searchQuery}`);
-    this.handleSearchQueryEvent.emit(searchQuery);
+  handleStateSearch(searchQuery: string) {
+    //console.log(`From Search-Book Component: ${searchQuery}`);
+    this.searchStateService.updateSearch(searchQuery);
   }
 }
