@@ -1,12 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { SearchBookComponent } from "./search-book/search-book.component";
+import { SearchStateService } from '../services/search-state.service';
 import { Book } from './book/book';
 import { BookComponent } from "./book/book.component";
+import { SearchBookComponent } from "./search-book/search-book.component";
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [SearchBookComponent, BookComponent],
+  imports: [SearchBookComponent, BookComponent, AsyncPipe],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })
@@ -62,27 +64,43 @@ export class LibraryComponent {
    */
   filteredBookList: Book[] = this.bookItems;
 
+   // Simple array for adding more filters
+  filterList: {id:string, title: string}[] = [
+    { id: 'all', title: 'All Books' },
+    { id: 'available', title: 'Available Books' },
+  ];
+
+  // Better practice and more efficient. Using a State Service.
+  constructor(private readonly searchStateService: SearchStateService) {
+    this.searchStateService.searchStream$.subscribe(searchString => this.updateFilteredListViaSearch(searchString));
+    this.searchStateService.searchStream$.subscribe(id => this.updateFilteredListViaFilter(id));
+  }
   /**
    * @konstantinosporo
    * @description
-   * A void method that filters the books 
-   * depending on the query string. It lowers the case of the letters in case the user
-   * typed with CAPS.
+   * A void method that filters the booksdepending on the state query string.
    * @param searchQuery 
    */
-  getUserQuery(searchQuery: string) {
-    //alert(`Father container got: ${searchQuery}`);
-
-    // Convert search query to lowercase for case-insensitive comparison
-    const lowerCaseQuery = searchQuery.toLowerCase();
-
-    // Filter the book list based on the search query
+  updateFilteredListViaSearch(searchString: string) {
+    const lowerCaseQuery = searchString.toLowerCase();
     this.filteredBookList = this.bookItems.filter(book =>
-      book.title.toLowerCase().includes(lowerCaseQuery) ||  // Adjust 'title' to your book property
-      book.author.toLowerCase().includes(lowerCaseQuery)   // Adjust 'author' to your book property if needed
+      book.title.toLowerCase().includes(lowerCaseQuery) ||  
+      book.author.toLowerCase().includes(lowerCaseQuery)   
     );
-
-    // You can also log or update UI as needed
-    console.log(this.filteredBookList);
   }
+  /**
+   * @konstantinosporo
+   * @description
+   * A void method that filters the books depending on filter buttons.
+   * @param searchQuery 
+   */
+  updateFilteredListViaFilter(filterId: string) {
+    if (filterId === 'all') {
+      this.filteredBookList = this.bookItems;
+    } else if(filterId === 'available'){
+      this.filteredBookList = this.bookItems.filter(book => book.availability);
+    }
+  }
+
+
 }
