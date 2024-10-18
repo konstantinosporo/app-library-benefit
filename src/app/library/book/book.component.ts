@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Book } from './book';
+import { Book, BookApi } from './book';
 import { DatePipe, NgClass } from '@angular/common';
 
 @Component({
@@ -16,5 +16,5 @@ export class BookComponent {
    * An input binding that accepts a list of Book objects;
    * @type {Book[ ]}
    */
-@Input() bookList: Book[] = [];
+@Input() bookList: BookApi[] = [];
 }

@@ -20,7 +20,7 @@ export class SearchBookComponent {
    * @param {string} searchQuery
    */
   handleStateSearch(searchQuery: string) {
-    //console.log(`From Search-Book Component: ${searchQuery}`);
+    console.log(`From Search-Book Component: ${searchQuery}`);
     this.searchStateService.updateSearch(searchQuery);
   }
 }

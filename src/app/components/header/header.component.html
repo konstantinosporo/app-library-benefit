@@ -8,18 +8,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngFor="let link of navLinks">
-          <a class="nav-link" [routerLink]="link.link" [routerLinkActive]="link.link">{{link.title}}</a>
+          <a class="nav-link" [routerLink]="link.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{link.title}}</a>
         </li>
-        <li class="nav-item dropdown">
+        <!-- @konstantinosporo -->
+        <!-- For now the forms are not needed. If the project doesnt contain login/register logic this code WILL be deleted. -->
+        <!-- <li class="nav-item dropdown">
           <button class="nav-link dropdown-toggle" onKeyPress href="#" data-bs-toggle="dropdown" aria-expanded="false">
             Forms
-          </button>
+          </button> 
           <ul class="dropdown-menu border-0">
             <li><a class="dropdown-item" [routerLink]="'login-form'" routerLinkActive="active">Login Form</a></li>
             <li><a class="dropdown-item" [routerLink]="'register-form'" routerLinkActive="active">Register Form</a>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
