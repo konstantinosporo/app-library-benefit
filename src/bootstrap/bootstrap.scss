@@ -119,7 +119,7 @@ main{
 }
 
 nav {
-  background-image: linear-gradient(-30deg, #e9ddbf, transparent 70%);
+  background-image: linear-gradient(-30deg, var(--bs-info), transparent 70%);
 }
 
 .bg-black-subtle {
@@ -139,6 +139,11 @@ ul.dropdown-menu {
 
 .navbar .nav-link {
   font-weight: $navbar-nav-link-font-weight;
+}
+
+.library-gradient {
+  color: #fff;
+  background-image: linear-gradient(30deg, var(--bs-primary), transparent 85%);
 }
 
 
