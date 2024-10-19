@@ -41,9 +41,19 @@
                   {{ bookItem.available ? "Available" : "Not available" }}
                 </li>
                 <li class="list-inline-item">
-                  <a href="#" class="btn btn-primary btn-sm text-white">
-                    <i class="bi bi-book me-1"></i> Rent Book
-                  </a>
+                  <button class="btn btn-sm btn-primary text-white"
+                    (click)="handleClick(bookItem._id,'view')">View</button>
+
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-sm btn-orange text-white"
+                    (click)="handleClick(bookItem._id, 'edit')">Edit</button>
+
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-sm btn-red text-white"
+                    (click)="handleClick(bookItem._id, 'delete')">Delete</button>
+
                 </li>
               </ul>
             </div>

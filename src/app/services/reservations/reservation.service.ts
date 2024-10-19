@@ -7,7 +7,7 @@ import { ReservationApi } from '../../reservations/reservation';
   providedIn: 'root'
 })
 export class ReservationService {
-    // Available books endpoint URL.
+    // Available reservations endpoint URL.
   private readonly reservationApiUrl: string = "https://book-api-bx2r.onrender.com/reservations";
   
   constructor(private readonly http: HttpClient) { }
@@ -15,7 +15,7 @@ export class ReservationService {
    /**
    * @konstantinosporo
    * @description
-   * Fetches all books from the api endpoint.
+   * Fetches all reservations from the api endpoint.
    */
   getReservations():Observable<ReservationApi[]> {
     return this.http.get<ReservationApi[]>(this.reservationApiUrl);

@@ -13,6 +13,7 @@
         <th scope="col">Status</th>
         <th scope="col">Reserved On</th>
         <th scope="col">Return By</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,11 @@
         </td>
         <td>{{reservation.reservedOn | date}}</td>
         <td>{{reservation.returnBy |date}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary text-white py-0" (click)="handleClick(reservation._id, 'view')">View</button>
+          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="handleClick(reservation._id, 'edit')">Edit</button>
+          <button class="btn btn-sm btn-red text-white py-0" (click)="handleClick(reservation._id, 'delete')">Delete</button>
+        </td>
         }
       </tr>
     </tbody>
