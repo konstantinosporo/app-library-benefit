@@ -17,7 +17,7 @@ export class HomeComponent {
     this.libraryHttpService.getBooks().pipe(map(books => books.filter(book => book.available))).subscribe(availableBooks => {
       this.allBooks = availableBooks;
       this.chunkAvailableBooks();
-      console.log(this.chunkedBooks);
+      //console.log(this.chunkedBooks);
     });
    }
 
@@ -49,7 +49,7 @@ export class HomeComponent {
   chunkAvailableBooks() {
     //console.log('running');
     let availableBooks = this.allBooks.filter(book => book.available);
-    console.log(availableBooks);
+    //console.log(availableBooks);
     for (let i = 0; i < availableBooks.length; i += this.booksPerSlide){
       this.chunkedBooks.push(this.allBooks.slice(i, i + this.booksPerSlide));
     }

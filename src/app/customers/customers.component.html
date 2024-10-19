@@ -1,1 +1,34 @@
-<p>customers works!</p>
+<div class="container p-sm-0">
+  <span class="">
+    <h1 class="fw-light text-primary">Customers Details</h1>
+    <hr class=" text-primary mt-0">
+  </span>
+  <table class="table table-responsive table-striped table-primary">
+    <thead>
+      <tr>
+        <th scope="col">#ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(customer of customerStream$ | async; track customer._id){
+      <tr>
+        <th scope="row">{{customer._id}}</th>
+        <td>{{customer.name}}</td>
+        <td>{{customer.surname}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.phoneNumber}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary text-white py-0" (click)="handleClick(customer._id, 'view')">View</button>
+          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="handleClick(customer._id, 'edit')">Edit</button>
+          <button class="btn btn-sm btn-red text-white py-0" (click)="handleClick(customer._id, 'delete')">Delete</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
