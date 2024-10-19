@@ -60,3 +60,9 @@ Pull Request Steps : 1 - GitHub Pull Requests.
 ## Step 8
 
 Pull Changes Locally after merging to update to the master branch: Run `git checkout master` and update running `git pull origin master`.
+
+## Added commands
+
+## Scenario where you forget to delete branch after Merge
+
+You can delete the online branch from the cli: Run `git push origin --delete branch/name`.
