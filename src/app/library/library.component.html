@@ -1,6 +1,25 @@
 <main>
   <div class="container">
     <app-search-book [filterList]="filterList"></app-search-book>
-    <app-book [bookList]="filteredBookList"></app-book>
+    <!-- <app-book [bookList]="filteredBookList"></app-book> -->
   </div>
 </main>
+
+<div class="container">
+  @for(book of paginatedBooks;track $index){
+  <div class="book-item">
+    <app-book [bookList]="[book]"></app-book>
+  </div>
+  }
+  <div class="d-flex justify-content-center gap-3 my-3">
+    <button class="btn library-gradient text-white border-0 rounded-5" (click)="previousPage()"
+      [disabled]="isPreviousPageDisabled()"><i class="bi bi-chevron-compact-left text-dark"></i></button>
+    @for(pageIndex of [].constructor(totalPages);let i=$index;track i;){
+    <button class="btn text-primary" [class.active]="i === currentPage" (click)="goToPage(i)">
+      {{ i + 1 }}
+    </button>
+    }
+    <button class="btn library-gradient text-white border-0 rounded-5" (click)="nextPage()"
+      [disabled]="isNextPageDisabled()"><i class="bi bi-chevron-compact-right text-dark"></i></button>
+  </div>
+</div>
