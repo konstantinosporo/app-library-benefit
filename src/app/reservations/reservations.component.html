@@ -1,1 +1,38 @@
-<p>reservations works!</p>
+
+<div class="container p-sm-0">
+  <span class="">
+    <h1 class="fw-light text-primary">Book Reservation Details</h1>
+    <hr class=" text-primary mt-0">
+  </span>
+  <table class="table table-responsive table-striped table-primary">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Status</th>
+        <th scope="col">Reserved On</th>
+        <th scope="col">Return By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        @for(reservation of reservationStream$ | async; track reservation._id;let idx =$index){
+        <th scope="row">{{idx + 1}}</th>
+        <td>{{reservation.book.name}}</td>
+        <td>{{reservation.customer.name}}</td>
+        <td>
+          <span class="badge rounded-pill px-2 text-white" [ngClass]="{
+                  'text-bg-green': reservation.status === 'active',
+                  'text-bg-red': reservation.status !== 'active'
+                }">
+            {{ reservation.status | uppercase}}
+          </span>
+        </td>
+        <td>{{reservation.reservedOn | date}}</td>
+        <td>{{reservation.returnBy |date}}</td>
+        }
+      </tr>
+    </tbody>
+  </table>
+</div>
