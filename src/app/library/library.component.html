@@ -1,6 +1,6 @@
 <main>
   <div class="container">
     <app-search-book [filterList]="filterList"></app-search-book>
-    <app-book [bookList]="filteredBookList"></app-book>
+    <app-book [bookList]="filteredBookList" (handleClickEvent)="getAction($event)"></app-book>
   </div>
 </main>

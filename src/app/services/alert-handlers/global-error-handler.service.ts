@@ -1,8 +1,9 @@
 import { ErrorHandler, Injectable } from "@angular/core";
-import { Toast } from 'bootstrap';
+import { AlertService } from "./alert.service";
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
+  constructor(private readonly alertService: AlertService){}
   /**
    * @konstantinosporo
    * @description
@@ -16,19 +17,6 @@ export class GlobalErrorHandler implements ErrorHandler {
    * @param error 
    */  
   handleError(error: any): void {
-    // Get the global-error components toast body div id
-    const errorToastBody = document.getElementById('errorToastBody');
-    // Make the content of the toast equal to the current error
-    if (errorToastBody) {
-      errorToastBody.textContent = error.message || 'Unexpected error occured.' 
-    }
-    // Get the toast div 
-    const toastElement = document.getElementById('errorToast');
-    // Throw the error using the Toasts show() method.
-    if (toastElement) {
-      const errorToast = new Toast(toastElement); 
-      errorToast.show(); 
-    }
-
+    this.alertService.showError(error);
   }
 }

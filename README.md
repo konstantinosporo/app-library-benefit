@@ -1,20 +1,22 @@
-# AppLibraryBenefit - Contributors: Poros K. Ioulios, Klapsis Kyriakos - TeamName: " "
+# AppLibraryBenefit 
+**Contributors:** Poros K. Ioulios, Klapsis Kyriakos  
+**Team Name:** " "
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
 
-## Development server
+## 🚀 Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 📦 Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## 🔨 Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## 🧪 Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
@@ -51,11 +53,12 @@ Now push the new branch online. Run `git push origin feature/feature-name` or `g
 
 ## Step 7 
 
-Pull Request Steps : 1 - GitHub Pull Requests.
-                     2 - Create Pull Request.
-                     3 - Merge Pull Request.
-                     4 - Confirm Merge.
-                     5 - *Optional: Delete Branch after merging.
+Pull Request Steps : <br>
+**1** - GitHub Pull Requests. <br>
+**2** - Create Pull Request. <br>
+**3** - Merge Pull Request. <br>
+**4** - Confirm Merge.<br>
+**5** - *Optional: Delete Branch after merging.
 
 ## Step 8
 
@@ -63,6 +66,13 @@ Pull Changes Locally after merging to update to the master branch: Run `git chec
 
 ## Added commands
 
-## Scenario where you forget to delete branch after Merge
+## 🗑️ Scenario where you forget to delete branch after Merge
 
-You can delete the online branch from the cli: Run `git push origin --delete branch/name`.
+You can delete the online branch from the cli: <br>
+Run `git push origin --delete branch/name`.
+
+## Adding TODO Comment in Files
+
+We can add custom TODO comments in every part of any file inside this application.  
+1. Download <TodoTree> from VS CODE extensions. (Extension ID: `Gruntfuggly.todo-tree`)<br>
+2. After downloading, open your command palette with `Ctrl + Shift + P` and search for "Todo Tree: Show Tree".

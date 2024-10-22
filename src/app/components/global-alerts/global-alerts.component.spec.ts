@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlobalErrorComponent } from './global-error.component';
+import { GlobalAlertsComponent } from './global-alerts.component';
 
-describe('GlobalErrorComponent', () => {
-  let component: GlobalErrorComponent;
-  let fixture: ComponentFixture<GlobalErrorComponent>;
+describe('GlobalAlertsComponent', () => {
+  let component: GlobalAlertsComponent;
+  let fixture: ComponentFixture<GlobalAlertsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GlobalErrorComponent]
+      imports: [GlobalAlertsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GlobalErrorComponent);
+    fixture = TestBed.createComponent(GlobalAlertsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

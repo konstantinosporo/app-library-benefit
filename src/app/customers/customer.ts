@@ -10,7 +10,7 @@ export interface CustomerApi{
   surname: string;
   email: string;
   phoneNumber: string;
-  __v: number;
+  __v?: number;
 }
 
 
