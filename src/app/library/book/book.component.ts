@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book, BookApi } from './book';
 import { DatePipe, NgClass } from '@angular/common';
 
@@ -18,20 +18,15 @@ export class BookComponent {
    */
   @Input() bookList: BookApi[] = [];
   
+  @Output() handleClickEvent: EventEmitter<string[]> = new EventEmitter<string[]>();
+  /**
+   * @konstantinosporo
+   * @description
+   * Emit both id of item clicked AND the preferable action.
+   * @param id: string
+   * @param action: string
+   */
    handleClick(id: string, action: string) {
-    console.log(id);
-    // TODO ADD THE LOGIC FOR BUTTON CLICKS CAN USE SWITCH TO ALSO GET SWITCH FUNCTIONALITIES
-    switch (action) {
-      case 'view':
-        console.log('I have clicked the view button');
-        break;
-      case 'edit':
-        console.log('I have clicked the edit button');
-        break;
-      case 'delete':
-        console.log('I have clicked the delete button');
-        break;
-      default: break;
-    }
+     this.handleClickEvent.emit([id, action]);
   }
 }

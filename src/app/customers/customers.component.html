@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      @for(customer of customerStream$ | async; track customer._id){
+      @for(customer of mockDataStream$ | async; track customer._id){
       <tr>
         <th scope="row">{{customer._id}}</th>
         <td>{{customer.name}}</td>
@@ -23,9 +23,9 @@
         <td>{{customer.email}}</td>
         <td>{{customer.phoneNumber}}</td>
         <td>
-          <button class="btn btn-sm btn-primary text-white py-0" (click)="handleClick(customer._id, 'view')">View</button>
-          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="handleClick(customer._id, 'edit')">Edit</button>
-          <button class="btn btn-sm btn-red text-white py-0" (click)="handleClick(customer._id, 'delete')">Delete</button>
+          <button class="btn btn-sm btn-primary text-white py-0" (click)="view(customer._id)">View</button>
+          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(customer._id)">Edit</button>
+          <button class="btn btn-sm btn-red text-white py-0" (click)="delete(customer._id)">Delete</button>
         </td>
       </tr>
       }

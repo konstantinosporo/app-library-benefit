@@ -1,15 +1,14 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { map } from 'rxjs';
-import { BooksCarouselComponent } from "./books-carousel/books-carousel.component";
 import { BookApi } from '../library/book/book';
 import { LibraryHttpService } from '../services/library/library-http.service';
-import { GlobalErrorComponent } from "../components/global-error/global-error.component";
+import { BooksCarouselComponent } from "./books-carousel/books-carousel.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, BooksCarouselComponent, AsyncPipe, GlobalErrorComponent],
+  imports: [NgClass, BooksCarouselComponent, AsyncPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

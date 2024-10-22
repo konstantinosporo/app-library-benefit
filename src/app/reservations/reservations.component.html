@@ -1,4 +1,3 @@
-
 <div class="container p-sm-0">
   <span class="">
     <h1 class="fw-light text-primary">Book Reservation Details</h1>
@@ -18,7 +17,7 @@
     </thead>
     <tbody>
       <tr>
-        @for(reservation of reservationStream$ | async; track reservation._id;let idx =$index){
+        @for(reservation of dataStream$ | async; track reservation._id;let idx =$index){
         <th scope="row">{{idx + 1}}</th>
         <td>{{reservation.book.name}}</td>
         <td>{{reservation.customer.name}}</td>
@@ -33,9 +32,9 @@
         <td>{{reservation.reservedOn | date}}</td>
         <td>{{reservation.returnBy |date}}</td>
         <td>
-          <button class="btn btn-sm btn-primary text-white py-0" (click)="handleClick(reservation._id, 'view')">View</button>
-          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="handleClick(reservation._id, 'edit')">Edit</button>
-          <button class="btn btn-sm btn-red text-white py-0" (click)="handleClick(reservation._id, 'delete')">Delete</button>
+          <button class="btn btn-sm btn-primary text-white py-0" (click)="view(reservation._id)">View</button>
+          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(reservation._id)">Edit</button>
+          <button class="btn btn-sm btn-red text-white py-0" (click)="delete(reservation._id)">Delete</button>
         </td>
         }
       </tr>
