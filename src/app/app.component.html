@@ -6,6 +6,20 @@
   <router-outlet />
 </main>
 
+<section>
+  <!-- This button should be removed -->
+  <!-- Its here only for testing puproses -->
+  <button type="button" class="btn btn-outline-primary" (click)="handleClick()">
+    Throw new errorToast
+  </button>
+  <!-- This section should stay here -->
+  <!-- Its by default hidden, it only triggers when a throwable error is thrown -->
+  <section>
+    <app-global-error />
+  </section>
+</section>
+
+
 <footer>
   <app-footer></app-footer>
 </footer>
