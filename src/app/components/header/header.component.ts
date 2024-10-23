@@ -26,8 +26,12 @@ export class HeaderComponent {
       link: '/library'
     },
     {
-      title: 'News',
-      link: '/tasks'
+      title: 'Reservations',
+      link: '/reservations'
+    },
+    {
+      title: 'Customers',
+      link: '/customers'
     },
   ]
 }

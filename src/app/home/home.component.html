@@ -1,0 +1,33 @@
+<section>
+  <div class="container">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        @for(carouselItem of carouselItemList; track carouselItem.label; let first =$first){
+        <div class="carousel-item" [ngClass]="{'active': first}">
+          <img [src]="carouselItem.imgSrc" class="d-block w-100" [alt]="carouselItem.label">
+          <div class="carousel-caption bg-black bg-opacity-50 rounded-1">
+            <h4>{{carouselItem.label}}</h4>
+            <p>{{carouselItem.content}}</p>
+            <button class="btn btn-lg btn-blue text-white">{{carouselItem.buttonText}}</button>
+          </div>
+        </div>
+        }
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <hr class="border-primary col-10 col-md-8 col-lg-7 mx-auto">
+    <app-books-carousel [availableBookList]="chunkedBooks"></app-books-carousel>
+  </div>
+</section>
+

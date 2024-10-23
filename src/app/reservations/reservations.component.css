@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+  .card-body {
+    display: block;
+    padding: 1rem;
+  }
+
+  .card-body div {
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.badge{
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}

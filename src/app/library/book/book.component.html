@@ -1,23 +1,23 @@
-@for(bookItem of bookList;track bookItem.title){
+@for(bookItem of bookList;track bookItem._id){
 <div class="container my-4 ">
   <div class="row align-items-center justify-content-center">
     <div class="col-lg-10">
       <div class="card book-card shadow-lg position-relative overflow-hidden border-0">
         <div class="row g-0">
           <div class="col-md-4 image-container">
-            <img [src]="bookItem.imageUrl" class="img-fluid rounded-start" alt="Book" loading="lazy">
+            <img src="/library/book.webp" class="img-fluid rounded-start" [alt]="bookItem.name" loading="lazy">
           </div>
           <div class="col-md-8 my-auto">
             <div class="card-body position-relative ">
               <h5 class="card-title d-flex align-items-center">
-                {{ bookItem.title }}
+                {{ bookItem.name }}
                 <span class="d-md-none ms-auto mini-image">
-                  <img [src]="bookItem.imageUrl" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
+                  <img src="/library/book.webp" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
                 </span>
               </h5>
               <p class="card-text">
                 <small class="text-muted">
-                  <i class="bi bi-calendar-check me-1"></i> Published on {{ bookItem.realeaseDate | date:'longDate' }}
+                  <i class="bi bi-calendar-check me-1"></i> Published on {{ bookItem.createdOn | date:'longDate' }}
                 </small>
               </p>
               <p class="card-text">
@@ -27,23 +27,33 @@
               </p>
               <div class="custom-line mb-3"></div>
               <p class="card-text">
-                {{ bookItem.description }}
+                {{ bookItem.type }}
               </p>
               <ul class="list-inline">
                 <li class="list-inline-item btn btn-sm text-white" [ngClass]="{
-                    'btn-green':  bookItem.availability,
-                    'btn-red': !bookItem.availability
+                    'btn-green':  bookItem.available,
+                    'btn-red': !bookItem.available
                   }">
                   <i class="bi" [ngClass]="{
-                      'bi-check': bookItem.availability,
-                      'bi-x': !bookItem.availability
+                      'bi-check': bookItem.available,
+                      'bi-x': !bookItem.available
                     }"></i>
-                  {{ bookItem.availability ? "Available" : "Not available" }}
+                  {{ bookItem.available ? "Available" : "Not available" }}
                 </li>
                 <li class="list-inline-item">
-                  <a href="#" class="btn btn-primary btn-sm text-white">
-                    <i class="bi bi-book me-1"></i> Rent Book
-                  </a>
+                  <button class="btn btn-sm btn-primary text-white"
+                    (click)="handleClick(bookItem._id,'view')">View</button>
+
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-sm btn-orange text-white"
+                    (click)="handleClick(bookItem._id, 'edit')">Edit</button>
+
+                </li>
+                <li class="list-inline-item">
+                  <button class="btn btn-sm btn-red text-white"
+                    (click)="handleClick(bookItem._id, 'delete')">Delete</button>
+
                 </li>
               </ul>
             </div>

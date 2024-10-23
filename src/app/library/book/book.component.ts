@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Book } from './book';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Book, BookApi } from './book';
 import { DatePipe, NgClass } from '@angular/common';
 
 @Component({
@@ -16,5 +16,17 @@ export class BookComponent {
    * An input binding that accepts a list of Book objects;
    * @type {Book[ ]}
    */
-@Input() bookList: Book[] = [];
+  @Input() bookList: BookApi[] = [];
+  
+  @Output() handleClickEvent: EventEmitter<string[]> = new EventEmitter<string[]>();
+  /**
+   * @konstantinosporo
+   * @description
+   * Emit both id of item clicked AND the preferable action.
+   * @param id: string
+   * @param action: string
+   */
+   handleClick(id: string, action: string) {
+     this.handleClickEvent.emit([id, action]);
+  }
 }
