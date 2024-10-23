@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { CustomerService } from '../services/customers/customer.service';
-import { Observable } from 'rxjs';
-import { CustomerApi } from './customer';
 import { AsyncPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CrudActions } from '../_lib/interfaces';
-import { Router } from '@angular/router';
 import { AlertService } from '../services/alert-handlers/alert.service';
+import { CustomerService } from '../services/customers/customer.service';
+import { CustomerApi } from './customer';
 
 @Component({
   selector: 'app-customers',
@@ -15,7 +14,7 @@ import { AlertService } from '../services/alert-handlers/alert.service';
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements CrudActions {
-
+  //TODO Change the actual data to target the projects api!
   //dataStream$!: Observable<CustomerApi[]>;
   mockDataStream$!: Observable<CustomerApi[]>;
 
@@ -31,11 +30,16 @@ export class CustomersComponent implements CrudActions {
     console.log(id)
   }
   delete(id: string) {
+    //console.log(id);
+    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete record with ID: ${id}`, () => this.confirmDelete(id));
+  }
+
+  confirmDelete(id: string) {
     this.customerHttpService.deleteMockCustomer(id).subscribe({
       next: (user: CustomerApi) => {
         //console.log(`User ${user.name} with id: ${user._id} has been deleted.`);
-        this.alertService.showSuccess('Customer successfully deleted!');
-        this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // Refetch the data stream
+        this.alertService.showSuccess(`Customer with ID: ${user._id} successfully deleted!`);
+        this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // update the data stream!
       },
       error: (err) => {
         if (err instanceof Error) {

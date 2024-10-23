@@ -23,9 +23,16 @@
         <td>{{customer.email}}</td>
         <td>{{customer.phoneNumber}}</td>
         <td>
-          <button class="btn btn-sm btn-primary text-white py-0" (click)="view(customer._id)">View</button>
-          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(customer._id)">Edit</button>
-          <button class="btn btn-sm btn-red text-white py-0" (click)="delete(customer._id)">Delete</button>
+          <button class="btn btn-sm btn-primary text-white py-0" (click)="view(customer._id)" aria-labelledby="View">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(customer._id)"
+            aria-labelledby="Edit">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-red text-white py-0" (click)="delete(customer._id)" aria-labelledby="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
         </td>
       </tr>
       }
