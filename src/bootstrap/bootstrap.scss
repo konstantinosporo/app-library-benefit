@@ -122,6 +122,10 @@ nav {
   background-image: linear-gradient(-30deg, var(--bs-info), transparent 70%);
 }
 
+.gradient-footer {
+  background-image: linear-gradient(-60deg, #c7bb9c, transparent 70%);
+}
+
 .bg-black-subtle {
   background-color: hsl(20, 23%, 21%); /* Black with 10% opacity */
 }
