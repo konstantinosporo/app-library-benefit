@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Toast } from 'bootstrap';
+import { Modal, Toast } from 'bootstrap';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,34 @@ export class AlertService {
     }
   }
 
-   showSuccess(message: string) {
+  private showModal(title: string, message: string, modalId: string, onSave?: () => void) {
+    const modalTitle = document.getElementById(`${modalId}Title`)
+    const modalBody = document.getElementById(`${modalId}Body`);
+    const modalElement = document.getElementById(modalId);
+    const saveButton = document.querySelector(`#${modalId} .btn-danger`) as HTMLElement;
+
+    if (modalTitle) {
+      modalTitle.textContent = title;
+    }
+
+    if (modalBody) {
+      modalBody.textContent = message;
+    }
+
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+      if (onSave && saveButton) {
+        saveButton.onclick = () => {
+          onSave(); 
+          modal.hide(); 
+        };
+      }
+    }
+
+  }
+
+  showSuccess(message: string) {
     this.showToast(message, 'successToast');
   }
 
@@ -29,5 +56,9 @@ export class AlertService {
 
   showInfo(message: string) {
     this.showToast(message, 'infoToast');
+  }
+
+  showVerificationModal(title: string, message: string, onSave?: () => void) {
+    this.showModal(title, message, 'primaryModal', onSave);
   }
 }
