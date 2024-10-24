@@ -1,27 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm fixed-top">
   <div class="container">
     <a class="navbar-brand" [routerLink]="''">AppLibrary</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="!isNavbarCollapsed"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': !isNavbarCollapsed }" id="navbarNav" @toggleNavbar>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngFor="let link of navLinks">
-          <a class="nav-link" [routerLink]="link.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{link.title}}</a>
+          <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">{{link.title}}</a>
         </li>
-        <!-- @konstantinosporo -->
-        <!-- For now the forms are not needed. If the project doesnt contain login/register logic this code WILL be deleted. -->
-        <!-- <li class="nav-item dropdown">
-          <button class="nav-link dropdown-toggle" onKeyPress href="#" data-bs-toggle="dropdown" aria-expanded="false">
-            Forms
-          </button> 
-          <ul class="dropdown-menu border-0">
-            <li><a class="dropdown-item" [routerLink]="'login-form'" routerLinkActive="active">Login Form</a></li>
-            <li><a class="dropdown-item" [routerLink]="'register-form'" routerLinkActive="active">Register Form</a>
-            </li>
-          </ul>
-        </li> -->
       </ul>
     </div>
   </div>

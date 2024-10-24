@@ -27,8 +27,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/bootstrap/bootstrap.scss",
+              "src/styles.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": []
@@ -87,8 +86,7 @@
               }
             ],
              "styles": [
-              "src/styles.css",
-              "src/bootstrap/bootstrap.scss",
+              "src/styles.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": []

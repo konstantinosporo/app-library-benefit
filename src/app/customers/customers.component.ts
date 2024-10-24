@@ -40,6 +40,8 @@ export class CustomersComponent implements CrudActions {
         //console.log(`User ${user.name} with id: ${user._id} has been deleted.`);
         this.alertService.showSuccess(`Customer with ID: ${user._id} successfully deleted!`);
         this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // update the data stream!
+        this.alertService.showSuccess(`Customer with ID: ${user._id} successfully deleted!`);
+        this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // Refetch the data stream
       },
       error: (err) => {
         if (err instanceof Error) {
