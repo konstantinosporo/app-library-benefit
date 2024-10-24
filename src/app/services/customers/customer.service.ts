@@ -10,7 +10,7 @@ export class CustomerService {
   // Available customers endpoint URL.
   private readonly customerApiUrl: string = "https://book-api-bx2r.onrender.com/customers";
   // Mock Api tests
-  private readonly mockCustomerApiUrl: string = "https://66ee7c5b3ed5bb4d0bf10e97.mockapi.io/api/customers";
+  private readonly mockCustomerApiUrl: string = "https://66ee7c5b3ed5bb4d0bf10e97.mockapi.io/api/customers/";
   
   constructor(private readonly http: HttpClient) { }
   
@@ -22,7 +22,6 @@ export class CustomerService {
   getCustomers():Observable<CustomerApi[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl);
   }
-
   // mock api test
   getMockCustomers(): Observable<CustomerApi[]>{
     return this.http.get<CustomerApi[]>(this.mockCustomerApiUrl);
