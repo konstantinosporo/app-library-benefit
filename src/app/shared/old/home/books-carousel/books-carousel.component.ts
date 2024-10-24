@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { BookApi } from '../../library/book/book';
+
 import { DatePipe } from '@angular/common';
+import { BookApi } from '../../../../library/book/book';
 
 @Component({
   selector: 'app-books-carousel',

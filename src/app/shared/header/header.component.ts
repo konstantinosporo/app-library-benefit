@@ -27,22 +27,43 @@ export class HeaderComponent implements OnInit {
 
   isNavbarCollapsed = true;
   isDarkTheme = false;
-
+  
+  // inject rendered which is more of a better practice
   constructor(private readonly renderer: Renderer2) { }
-
+  // load the theme on init to avoid differs with the current theme
   ngOnInit() {
     this.loadThemePreference();
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Custom toggling for Bootstrap 5.3.3 navbar.
+   * Since popper.js bugs with angulars libraries, 
+   * i implemented my own toggler.
+   */
   toggleNavbar() {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Simple toggle theme button.
+   * Also changed the isDarkTheme boolean state.
+   * @type {void}
+   */
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
     this.updateTheme();
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Checks if the theme is dark.
+   * Updates the theme with rendered (could do it with document.body.classlist.toggle).
+   * But this is the angulara way given the docs.
+   * Totally removes .dark css classes.
+   * @type {void}
+   */
   private updateTheme() {
     if (this.isDarkTheme) {
       this.renderer.addClass(document.body, 'dark');
@@ -52,7 +73,13 @@ export class HeaderComponent implements OnInit {
       localStorage.setItem('theme', 'light');
     }
   }
-
+  /**
+   * @konstantinosporo
+   * Gathers the previous Local Storage theme from the disk.
+   * Checks if the theme is dark.
+   * Updates the current theme.
+   * @type {void}
+   */
   private loadThemePreference() {
     const savedTheme = localStorage.getItem('theme');
     this.isDarkTheme = savedTheme === 'dark';

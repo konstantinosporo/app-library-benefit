@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
   constructor(private readonly router: Router) { }
-  
+
   loginImageSrc: string = 'https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
   loginError: string = '';
-  
+
   registeredUser = [
     {
       email: 'konstantinosporo@hotmail.gr',
@@ -26,7 +26,7 @@ export class LoginFormComponent {
 
   loginFormControl = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.minLength(6),Validators.required])
+    password: new FormControl('', [Validators.minLength(6), Validators.required])
   });
 
   handleLoginSubmit() {

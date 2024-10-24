@@ -15,12 +15,12 @@ export class RegisterFormComponent {
   registerImageSrc: string = 'https://images.pexels.com/photos/1106468/pexels-photo-1106468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
   registerFormControl = new FormGroup({
-    fullName: new FormControl('',[Validators.minLength(2),Validators.required]),
+    fullName: new FormControl('', [Validators.minLength(2), Validators.required]),
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.minLength(6),Validators.required])
+    password: new FormControl('', [Validators.minLength(6), Validators.required])
   });
 
   handleRegisterSubmit() {
-      console.table(this.registerFormControl.value);
+    console.table(this.registerFormControl.value);
   }
 }

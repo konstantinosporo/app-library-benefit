@@ -1,59 +1,40 @@
-import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { map } from 'rxjs';
-import { BookApi } from '../library/book/book';
-import { LibraryHttpService } from '../services/library/library-http.service';
-import { BooksCarouselComponent } from "./books-carousel/books-carousel.component";
+import { CommonModule } from '@angular/common';
+import { CarouselComponent } from '../shared/carousel/carousel.component';
+import { CtaButtonComponent } from '../shared/cta-button/cta-button.component';
+import { FeatureItemComponent } from '../shared/feature-item/feature-item.component';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgClass, BooksCarouselComponent, AsyncPipe],
+  imports: [CommonModule, FeatureItemComponent, CtaButtonComponent, CarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private readonly libraryHttpService: LibraryHttpService) {
-    this.libraryHttpService.getBooks().pipe(map(books => books.filter(book => book.available))).subscribe(availableBooks => {
-      this.allBooks = availableBooks;
-      this.chunkAvailableBooks();
-      //console.log(this.chunkedBooks);
-    });
-   }
 
-  allBooks!: BookApi[];
-  chunkedBooks: BookApi[][]=[];
-  booksPerSlide = 3;
-  
-   carouselItemList = [
-    {
-      label: 'First slide label',
-      content: 'Some representative placeholder content for the first slide.',
-      buttonText: 'Browse Library',
-      imgSrc: '/home/home1.jpg'
-    },
-    {
-      label: 'Second slide label',
-      content: 'Some representative placeholder content for the second slide.',
-      buttonText: 'News & Announcements',
-      imgSrc: '/home/home2.jpg'
-    },
-    {
-      label: 'Third slide label',
-      content: 'Some representative placeholder content for the third slide.',
-      buttonText: 'Register',
-      imgSrc: '/home/home3.jpg'
-    }
+  carouselImages = [
+    { src: 'https://images.pexels.com/photos/256450/pexels-photo-256450.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 1' },
+    { src: 'https://images.pexels.com/photos/904620/pexels-photo-904620.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 2' },
+    { src: 'https://images.pexels.com/photos/2090104/pexels-photo-2090104.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 3' }
   ];
 
-  chunkAvailableBooks() {
-    //console.log('running');
-    let availableBooks = this.allBooks.filter(book => book.available);
-    //console.log(availableBooks);
-    for (let i = 0; i < availableBooks.length; i += this.booksPerSlide){
-      this.chunkedBooks.push(this.allBooks.slice(i, i + this.booksPerSlide));
+  features = [
+    {
+      title: 'Online Reservations',
+      description: 'Reserve books online and pick them up at your convenience.',
+      imageSrc: 'https://images.pexels.com/photos/256450/pexels-photo-256450.jpeg?auto=compress&cs=tinysrgb&w=400'
+    },
+    {
+      title: 'Community Events',
+      description: 'Join our reading clubs and author meetups.',
+      imageSrc: 'https://images.pexels.com/photos/2090104/pexels-photo-2090104.jpeg?auto=compress&cs=tinysrgb&w=400'
     }
+  ]
+
+  onExploreClick() {
+    console.log('Explore button clicked')
   }
 
-  
 }

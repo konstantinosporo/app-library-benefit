@@ -3,7 +3,7 @@ import { AlertService } from "./alert.service";
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private readonly alertService: AlertService){}
+  constructor(private readonly alertService: AlertService) { }
   /**
    * @konstantinosporo
    * @description
@@ -15,8 +15,8 @@ export class GlobalErrorHandler implements ErrorHandler {
    * No need to catch them one by one!
    * I could also inject http to send the logs in my db or anything!
    * @param error 
-   */  
+   */
   handleError(error: any): void {
-    this.alertService.showError(error);
+    this.alertService.showError(error.message);
   }
 }
