@@ -19,16 +19,22 @@ $gray-900: #212529 !default;
 $black:    #000 !default;
 
 // Adjusted Bootstrap Colors for Library Theme
-$blue: #6b9bd1 !default; // Softened Bootstrap Blue
-$indigo: #a56cc1 !default; // Softened Indigo
-$purple: #b99bdc !default; // Softened Purple
-$pink: #f1a7c6 !default; // Softened Pink
-$red: #e3656b !default; // Softened Red
-$orange: #f9c67a !default; // Softened Orange
-$yellow: #f5e6b7 !default; // Softened Yellow
-$green: #66c78d !default; // Softened Green
-$teal: #85e3d8 !default; // Softened Teal
-$cyan: #92d8e9 !default; // Softened Cyan
+
+$blue:      #4A708B !default; // Slate Blue (calm, trustworthy)
+$blue-link: #0056b3 !default; // Light Slate Blue (contrasts well in dark mode)
+
+$green:     #6A9D66 !default; // Soft Sage Green (balance, growth)
+$yellow:    #F0DCA0 !default; // Pale Yellow (enlightenment)
+$teal:      #64A3B0 !default; // Soft Teal (peaceful accent)
+
+$red:       #B85450 !default; // Dusty Rose Red (warmth, attention)
+$orange:    #D6A85F !default; // Soft Golden Orange (creativity)
+$purple:    #8F7CA6 !default; // Soft Lavender (wisdom)
+$cyan:      #94B2C7 !default; // Light Aqua Cyan (clarity)
+
+$light:     #F2F2F2 !default; // Soft Light Gray (background)
+$dark:      #001220 !default; // Charcoal Gray (strong accent)
+$white:     #FFFFFF !default; // Clean, neutral
 
 $grays: (
   "100": $gray-100,
@@ -43,14 +49,14 @@ $grays: (
 );
 
 // New Color Palette
-$primary:   #928c47!default; // Soft Olive: Calm and Professional
-$secondary: #c7bb9c !default; // Warm Beige: Friendly and Inviting
-$success:   #66c78d !default; // Olive Green: Stability and Growth
-$info:      #e9ddbf !default; // Light Cream: Informational and Gentle
-$warning:   #f3e7b4 !default; // Soft Yellow: Caution and Attention
-$danger:    #e3656b !default; // Deep Brown: Strong and Serious
-$light:     #f8f9fa !default; // Light Gray: Backgrounds and UI Elements
-$dark:      #343a40 !default; // Dark Gray: Professional and Strong
+$primary:   #5A4636 !default; // Muted Brown (tradition, knowledge)
+$secondary: #D0C6B8 !default; // Warm Beige (inviting, pleasant)
+$success:   $green !default; // Olive Green: Stability and Growth
+$info:      $cyan !default; // Light Cream: Informational and Gentle
+$warning:   $orange !default; // Soft Yellow: Caution and Attention
+$danger:    $red !default; // Deep Brown: Strong and Serious
+$light:     $light !default; // Light Gray: Backgrounds and UI Elements
+$dark:      $dark !default; // Dark Gray: Professional and Strong 
 
 // Color variants (tints and shades)
 // $primary-100: tint-color($primary, 80%) !default;
@@ -86,83 +92,128 @@ $theme-colors: (
   "light":      $light,
   "dark":       $dark,
   "blue":       $blue,
+  "blue-link":  $blue-link,
   "purple":     $purple,
   "red":        $red,
   "yellow":     $yellow,
   "green":      $green,
   "orange":     $orange,
   "teal":       $teal,
-  "black":      $black
+  "black":      $black,
   // Add more Bootstrap colors if needed
 ) !default;
 
-// Custom styles
-
-html{
+html {
   height: 100%;
 }
 
-body{
+body {
   --bs-font-poppins: 'Poppins', sans-serif;
-  font-family: var(--bs-body-font-family, 'Poppins', sans-serif);
+  --bs-body-font-family: 'Poppins', sans-serif;
+  --nav-link-color-light: #001220;
+  --nav-link-color-dark: #F2F2F2;
 
+  font-family: var(--bs-body-font-family, 'Poppins', sans-serif);
+  
   [lang='el'] & {
     --bs-body-font-family: var(--bs-font-poppins);
   }
+
   [lang='en'] & {
     --bs-body-font-family: var(--bs-font-poppins);
   }
 
-}
-main{
-  margin-top: 4rem;
+  display: block;
+  min-height: 100vh;
+  background-image: url('/home/svgs/background-light.svg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  text-size-adjust: 100%;
 }
 
-nav {
-  background-image: linear-gradient(-30deg, var(--bs-info), transparent 70%);
+/* Custom Light/Dark Backgrounds */
+body:not(.dark) {
+  background-image: url('/home/svgs/background-light.svg');
+
+  .navbar-nav .nav-link:active,
+  .navbar-nav .nav-link.active,
+  .navbar-brand {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--bs-blue-link);
+  font-weight: 500;
 }
 
+}
+
+/* Dark mode styles */
+body.dark {
+  background-image: url('/home/svgs/background-dark.svg');
+
+  .navbar-nav .nav-link:active,
+  .navbar-nav .nav-link.active,
+  .navbar-brand {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: var(--bs-yellow, darken 10%);
+  font-weight: 500;
+}
+ .navbar-toggler-icon {
+  color: #F2F2F2;
+}
+label{
+  color: var(--bs-white);
+}
+}
+
+body:not(.dark) .navbar .nav-link {
+  color: var(--nav-link-color-light);
+}
+
+body.dark .navbar .nav-link {
+  color: var(--nav-link-color-dark);
+}
+
+/* Accessibility: form validation */
+.is-invalid {
+  border-color: var(--bs-red) !important;
+}
+
+.is-invalid:focus {
+  box-shadow: 0 0 0.2rem rgba(255, 0, 0, 0.25);
+}
+
+/* Footer */
 .gradient-footer {
   background-image: linear-gradient(-60deg, #c7bb9c, transparent 70%);
 }
 
+/* Custom Backgrounds */
 .bg-black-subtle {
   background-color: hsl(20, 23%, 21%); /* Black with 10% opacity */
 }
 
-//override the nav-links fw
-$navbar-nav-link-font-weight: 400;
-
-.dropdown{
-  $navbar-nav-link-font-weight: 400;
+/* Form Labels */
+label {
+  font-size: 1.2rem;
 }
 
-ul.dropdown-menu {
-  $navbar-nav-link-font-weight: 400;
+main {
+  padding-top: 4rem; /* padding as much as the navbar height  */
 }
 
-.navbar .nav-link {
-  font-weight: $navbar-nav-link-font-weight;
-}
-
+/* Gradient for specific elements */
 .library-gradient {
   color: #fff;
   background-image: linear-gradient(30deg, var(--bs-primary), transparent 85%);
 }
 
-label {
-  font-size: 1.2rem;
-}
-
-/* classes for form accesibility  */
-.is-invalid {
-  border-color: var(--bs-red) !important;
-  /* Change the border color to red */
-}
-
-.is-invalid:focus {
-  box-shadow: 0 0 0.2rem rgba(255, 0, 0, 0.25);
-  /* Optional: Add a shadow to the focus state */
+// container from kyriakos
+.home-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 // Configuration
@@ -187,6 +238,8 @@ label {
 @import '../node_modules/bootstrap/scss/button-group';
 @import '../node_modules/bootstrap/scss/nav';
 @import '../node_modules/bootstrap/scss/navbar';
+
+
 @import '../node_modules/bootstrap/scss/card';
 @import '../node_modules/bootstrap/scss/close';
 @import '../node_modules/bootstrap/scss/toasts';
@@ -211,3 +264,4 @@ label {
 
 // Utilities
 @import '../node_modules/bootstrap/scss/utilities/api';
+
