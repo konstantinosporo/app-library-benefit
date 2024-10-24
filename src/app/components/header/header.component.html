@@ -1,19 +1,30 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm fixed-top">
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
   <div class="container">
     <a class="navbar-brand" [routerLink]="''">AppLibrary</a>
 
-    <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="!isNavbarCollapsed"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler border-0" type="button" (click)="toggleNavbar()"
+      [attr.aria-expanded]="!isNavbarCollapsed" aria-label="Toggle navigation">
+      <span class="toggle-icon" [ngClass]="{'text-white': isDarkTheme, 'text-dark': !isDarkTheme}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+      </span>
     </button>
 
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': !isNavbarCollapsed }" id="navbarNav" @toggleNavbar>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item" *ngFor="let link of navLinks">
+        <li class="nav-item mx-1 mt-1 mt-md-0" *ngFor="let link of navLinks">
           <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">{{link.title}}</a>
         </li>
       </ul>
     </div>
+    <button class="d-none d-md-block btn border-0 rounded-circle ms-1"
+      [ngClass]="{'btn-outline-yellow': isDarkTheme, 'btn-outline-blue-link': !isDarkTheme}" aria-labelledby="Dark Mode"
+      (click)="toggleTheme()">
+      <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>
+    </button>
   </div>
 </nav>

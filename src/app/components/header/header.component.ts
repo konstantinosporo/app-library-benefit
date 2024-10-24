@@ -1,7 +1,7 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Renderer2, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { fadeIn, fadeOut } from './animations';
 
 @Component({
@@ -17,7 +17,7 @@ import { fadeIn, fadeOut } from './animations';
     ]),
   ],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   navLinks = [
     { title: 'Home', link: '/' },
     { title: 'Library', link: '/library' },
@@ -26,10 +26,36 @@ export class HeaderComponent {
   ];
 
   isNavbarCollapsed = true;
-  isNavbarVisible = false;
+  isDarkTheme = false;
+
+  constructor(private readonly renderer: Renderer2) { }
+
+  ngOnInit() {
+    this.loadThemePreference();
+  }
 
   toggleNavbar() {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
-    this.isNavbarVisible = !this.isNavbarCollapsed; // This ensures proper handling for visibility
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.updateTheme();
+  }
+
+  private updateTheme() {
+    if (this.isDarkTheme) {
+      this.renderer.addClass(document.body, 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      this.renderer.removeClass(document.body, 'dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  private loadThemePreference() {
+    const savedTheme = localStorage.getItem('theme');
+    this.isDarkTheme = savedTheme === 'dark';
+    this.updateTheme();
   }
 }
