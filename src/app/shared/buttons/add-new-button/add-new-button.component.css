@@ -30,18 +30,18 @@
 
 .btn-blue:hover .text-value {
   opacity: 1;
-  /* Show text on hover */
   visibility: visible;
   margin-right: 0px;
-  /* Make it visible */
 }
 
 .btn-blue:hover {
   width: 120px;
-  /* Set width to fit text on hover */
 }
 
 .btn-blue:hover i {
   margin-right: 0;
-  /* Remove right margin for icon on hover */
+}
+
+::ng-deep body.dark .btn-blue {
+  background-color: var(--bs-light-dark);
 }

@@ -1,58 +1,59 @@
-@for(bookItem of bookList;track bookItem._id){
+@if(bookList.length){
+@for(book of bookList;track book._id){
 <div class="container my-4 ">
   <div class="row align-items-center justify-content-center">
     <div class="col-lg-10">
       <div class="card book-card shadow-lg position-relative overflow-hidden border-0">
         <div class="row g-0">
           <div class="col-md-4 image-container">
-            <img src="/library/book.webp" class="img-fluid rounded-start" [alt]="bookItem.name" loading="lazy">
+            <img src="/library/book.webp" class="img-fluid rounded-start" [alt]="book.name" loading="lazy">
           </div>
           <div class="col-md-8 my-auto">
             <div class="card-body position-relative ">
               <h5 class="card-title d-flex align-items-center">
-                {{ bookItem.name }}
+                {{ book.name }}
                 <span class="d-md-none ms-auto mini-image">
                   <img src="/library/book.webp" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
                 </span>
               </h5>
               <p class="card-text">
                 <small class="text-muted">
-                  <i class="bi bi-calendar-check me-1"></i> Published on {{ bookItem.createdOn | date:'longDate' }}
+                  <i class="bi bi-calendar-check me-1"></i> Published on {{ book.createdOn | date:'longDate' }}
                 </small>
               </p>
               <p class="card-text">
                 <small class="text-muted">
-                  <i class="bi bi-person-rolodex me-1"></i> Written by <i>{{ bookItem.author }}</i>
+                  <i class="bi bi-person-rolodex me-1"></i> Written by <i>{{ book.author }}</i>
                 </small>
               </p>
               <div class="custom-line mb-3"></div>
               <p class="card-text">
-                {{ bookItem.type }}
+                {{ book.type }}
               </p>
               <ul class="list-inline">
                 <li class="list-inline-item btn btn-sm text-white" [ngClass]="{
-                    'btn-green':  bookItem.available,
-                    'btn-red': !bookItem.available
+                    'btn-green':  book.available,
+                    'btn-red': !book.available
                   }">
                   <i class="bi" [ngClass]="{
-                      'bi-check': bookItem.available,
-                      'bi-x': !bookItem.available
+                      'bi-check': book.available,
+                      'bi-x': !book.available
                     }"></i>
-                  {{ bookItem.available ? "Available" : "Not available" }}
+                  {{ book.available ? "Available" : "Not available" }}
                 </li>
                 <li class="list-inline-item">
                   <button class="btn btn-sm btn-primary text-white"
-                    (click)="handleClick(bookItem._id,'view')">View</button>
+                    (click)="handleClick(book._id ?? '','view')">View</button>
 
                 </li>
                 <li class="list-inline-item">
                   <button class="btn btn-sm btn-orange text-white"
-                    (click)="handleClick(bookItem._id, 'edit')">Edit</button>
+                    (click)="handleClick(book._id ?? '', 'edit')">Edit</button>
 
                 </li>
                 <li class="list-inline-item">
                   <button class="btn btn-sm btn-red text-white"
-                    (click)="handleClick(bookItem._id, 'delete')">Delete</button>
+                    (click)="handleClick(book._id ?? '', 'delete')">Delete</button>
 
                 </li>
               </ul>
@@ -65,4 +66,5 @@
 </div>
 <!-- end of card -->
 <hr class="border-primary col-10 col-md-8 col-lg-7 mx-auto">
+}
 }

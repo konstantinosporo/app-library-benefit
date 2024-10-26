@@ -19,15 +19,15 @@ import { fadeIn, fadeOut } from './animations';
 })
 export class HeaderComponent implements OnInit {
   navLinks = [
-    { title: 'Home', link: '/' },
-    { title: 'Library', link: '/library' },
-    { title: 'Reservations', link: '/reservations' },
-    { title: 'Customers', link: '/customers' },
+    { title: 'Home', link: '/', icon: 'bi bi-house me-1' },
+    { title: 'Library', link: '/library', icon: 'bi bi-collection me-1' },
+    { title: 'Reservations', link: '/reservations', icon: 'bi bi-journal-check me-1' },
+    { title: 'Customers', link: '/customers', icon: 'bi bi-people me-1' },
   ];
 
   isNavbarCollapsed = true;
   isDarkTheme = false;
-  
+
   // inject rendered which is more of a better practice
   constructor(private readonly renderer: Renderer2) { }
   // load the theme on init to avoid differs with the current theme

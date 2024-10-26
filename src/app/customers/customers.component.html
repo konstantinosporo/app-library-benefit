@@ -1,10 +1,11 @@
+@if(mockDataStream$ |async; as mockData){
 <div class="container p-sm-0">
   <div class="home-container">
     <span class="">
-      <h1 class="fw-light text-primary">Customers Details</h1>
-      <hr class=" text-primary mt-0">
+      <h1 class="fw-light">Customers Details</h1>
+      <hr class="text-primary mt-0">
     </span>
-    <table class="table table-responsive table-striped table-secondary">
+    <table class="table table-responsive table-striped table-light">
       <thead>
         <tr>
           <th scope="col">#ID</th>
@@ -16,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(customer of mockDataStream$ | async; track customer._id){
+        @for(customer of mockData; track customer._id){
         <tr>
           <th scope="row">{{customer._id}}</th>
           <td>{{customer.name}}</td>
@@ -41,3 +42,6 @@
     </table>
   </div>
 </div>
+}@else {
+<app-spinner></app-spinner>
+}

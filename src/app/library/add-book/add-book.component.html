@@ -1,5 +1,6 @@
-<div class="container">
-  <app-basic-wrapper [title]="'Add New Book'" [titleFooter]="'Please fill in all the required details.'">
+<div class="container min-vh-75 d-flex justify-content-center align-items-center">
+  <app-basic-wrapper [title]="'Add New Book'" [titleFooter]="'Please fill in all the required details.'"
+    [backButton]="backButton">
     <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
 
       <!-- Book Title with Icon -->
@@ -47,7 +48,8 @@
         <label for="createdOn" class="form-label">Creation Date</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-bookmark"></i></span>
-          <input type="text" class="form-control" id="createdOn" formControlName="createdOn" [ngClass]="{
+          <input type="text" class="form-control" id="createdOn" [value]="formattedDate"
+            (ngModelChange)="onDateChange($event)" formControlName="createdOn" [ngClass]="{
                     'is-invalid': bookFormControl.get('createdOn')?.invalid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty),
                     'is-valid': bookFormControl.get('createdOn')?.valid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty)
                  }" required>
@@ -101,8 +103,9 @@
       </div>
 
       <div class="col-12">
-        <button class="btn btn-primary" type="submit" [disabled]="bookFormControl.invalid" (click)="handleSave()">Submit
-          form</button>
+        <button class="btn btn-primary" type="submit" [disabled]="bookFormControl.invalid" (click)="addBook()">
+
+          <i class="bi bi-file-earmark-plus me-1"></i>Add New Book</button>
       </div>
 
     </form>

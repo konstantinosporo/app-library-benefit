@@ -9,5 +9,9 @@
     }
     }
   </div>
+  @if(filteredBookList){
   <app-book [bookList]="filteredBookList" (handleClickEvent)="getAction($event)"></app-book>
+  }@else {
+  <app-spinner></app-spinner>
+  }
 </div>
