@@ -176,13 +176,24 @@ main {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+// tables
+td {
+  white-space: nowrap;
+  /* Prevents buttons from wrapping */
+}
+
 /* Custom min-vh Utility Classes */
 .min-vh-50 {
   min-height: 50vh !important;
 }
-
 .min-vh-75 {
   min-height: 75vh !important;
+}
+.min-vh-80 {
+  min-height: 80vh !important;
+}
+.min-vh-85 {
+  min-height: 85vh !important;
 }
 
 
