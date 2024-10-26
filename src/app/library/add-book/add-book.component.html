@@ -1,0 +1,110 @@
+<div class="container">
+  <app-basic-wrapper [title]="'Add New Book'" [titleFooter]="'Please fill in all the required details.'">
+    <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
+
+      <!-- Book Title with Icon -->
+      <div class="col-md-5">
+        <label for="name" class="form-label">Book Title</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-book"></i></span>
+          <input type="text" class="form-control" formControlName="name" [ngClass]="{
+                    'is-invalid': bookFormControl.get('name')?.invalid && (bookFormControl.get('name')?.touched || bookFormControl.get('name')?.dirty),
+                    'is-valid': bookFormControl.get('name')?.valid && (bookFormControl.get('name')?.touched || bookFormControl.get('name')?.dirty)
+                 }" required>
+          <div
+            *ngIf="bookFormControl.get('name')?.invalid && (bookFormControl.get('name')?.touched || bookFormControl.get('name')?.dirty)"
+            class="invalid-feedback">
+            <div *ngIf="bookFormControl.get('name')?.errors?.['required']">Book title is required.</div>
+            <div *ngIf="bookFormControl.get('name')?.errors?.['minlength']">Minimum length is
+              {{bookFormControl.get('name')?.errors?.['minlength']?.['actualLength']}}/3.</div>
+            <div *ngIf="bookFormControl.get('name')?.errors?.['maxlength']">Maximum length is
+              {{bookFormControl.get('name')?.errors?.['maxlength']?.['actualLength']}}/15.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Year Published with Icon -->
+      <div class="col-md-3">
+        <label for="year" class="form-label">Year Published</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+          <input type="number" class="form-control" formControlName="year" id="year" placeholder="e.g., 2024" [ngClass]="{
+                    'is-invalid': bookFormControl.get('year')?.invalid && (bookFormControl.get('year')?.touched || bookFormControl.get('year')?.dirty),
+                    'is-valid': bookFormControl.get('year')?.valid && (bookFormControl.get('year')?.touched || bookFormControl.get('year')?.dirty)
+                 }" required>
+          <div
+            *ngIf="bookFormControl.get('year')?.invalid && (bookFormControl.get('year')?.touched || bookFormControl.get('year')?.dirty)"
+            class="invalid-feedback">
+            <div *ngIf="bookFormControl.get('year')?.errors?.['required']">Year is required.</div>
+            <div *ngIf="bookFormControl.get('year')?.errors?.['min']">Year must be at least 1900.</div>
+            <div *ngIf="bookFormControl.get('year')?.errors?.['max']">Year cannot be more than 2024.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type with Icon -->
+      <div class="col-md-4">
+        <label for="createdOn" class="form-label">Creation Date</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-bookmark"></i></span>
+          <input type="text" class="form-control" id="createdOn" formControlName="createdOn" [ngClass]="{
+                    'is-invalid': bookFormControl.get('createdOn')?.invalid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty),
+                    'is-valid': bookFormControl.get('createdOn')?.valid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty)
+                 }" required>
+          <div
+            *ngIf="bookFormControl.get('createdOn')?.invalid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty)"
+            class="invalid-feedback">
+            Setting current time as default.
+          </div>
+        </div>
+      </div>
+
+      <!-- Author with Icon -->
+      <div class="col-md-8">
+        <label for="validationCustom03" class="form-label">Author</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" id="validationCustom03" formControlName="author" [ngClass]="{
+                    'is-invalid': bookFormControl.get('author')?.invalid && (bookFormControl.get('author')?.touched || bookFormControl.get('author')?.dirty),
+                    'is-valid': bookFormControl.get('author')?.valid && (bookFormControl.get('author')?.touched || bookFormControl.get('author')?.dirty)
+                 }" required>
+          <div
+            *ngIf="bookFormControl.get('author')?.invalid && (bookFormControl.get('author')?.touched || bookFormControl.get('author')?.dirty)"
+            class="invalid-feedback">
+            <div *ngIf="bookFormControl.get('author')?.errors?.['required']">Author is required.</div>
+            <div *ngIf="bookFormControl.get('author')?.errors?.['minlength']">Minimum length is
+              {{bookFormControl.get('author')?.errors?.['minlength']?.['actualLength']}}/3.</div>
+            <div *ngIf="bookFormControl.get('author')?.errors?.['maxlength']">Maximum length is
+              {{bookFormControl.get('author')?.errors?.['maxlength']?.['actualLength']}}/15.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category with Icon -->
+      <div class="col-md-4">
+        <label for="type" class="form-label">Type</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-layers"></i></span>
+          <select class="form-select" id="type" formControlName="type" [ngClass]="{
+                    'is-invalid': bookFormControl.get('type')?.invalid && (bookFormControl.get('type')?.touched || bookFormControl.get('type')?.dirty),
+                    'is-valid': bookFormControl.get('type')?.valid && (bookFormControl.get('type')?.touched || bookFormControl.get('type')?.dirty)
+                  }" required>
+            <option selected disabled value="">Category...</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+          <div
+            *ngIf="bookFormControl.get('type')?.invalid && (bookFormControl.get('type')?.touched || bookFormControl.get('type')?.dirty)"
+            class="invalid-feedback">
+            Please select a valid category.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" [disabled]="bookFormControl.invalid" (click)="handleSave()">Submit
+          form</button>
+      </div>
+
+    </form>
+  </app-basic-wrapper>
+</div>

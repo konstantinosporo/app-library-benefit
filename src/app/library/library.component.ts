@@ -1,21 +1,24 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChildren } from '@angular/core';
+import { combineLatest, filter } from 'rxjs';
+import { CrudActions } from '../_lib/interfaces';
+import { LibraryHttpService } from '../services/library/library-http.service';
 import { SearchStateService } from '../services/search-state.service';
+import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { BookApi } from './book/book';
 import { BookComponent } from "./book/book.component";
 import { SearchBookComponent } from "./search-book/search-book.component";
-import { LibraryHttpService } from '../services/library/library-http.service';
-import { combineLatest, filter } from 'rxjs';
-import { CrudActions } from '../_lib/interfaces';
+import { SearchFilterComponent } from "./search-book/search-filter/search-filter.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [SearchBookComponent, BookComponent, AsyncPipe],
+  imports: [SearchBookComponent, BookComponent, AsyncPipe, SearchFilterComponent, AddNewButtonComponent],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })
-export class LibraryComponent implements CrudActions{
+export class LibraryComponent implements CrudActions {
   // Simple array for adding more filters
   filterList: { id: string, title: string }[] = [
     { id: 'all', title: 'All Books' },
@@ -23,10 +26,12 @@ export class LibraryComponent implements CrudActions{
   ];
   // two tables one that holds all the books, and the filtered one
   data: BookApi[] = [];
-  filteredBookList: BookApi[]= [];
+  filteredBookList: BookApi[] = [];
+  // view child add new button
+  @ViewChildren(AddNewButtonComponent) addBookComponent!: AddNewButtonComponent;
 
   // Better practice and more efficient. Using a State Service.
-  constructor(private readonly searchStateService: SearchStateService, private readonly libraryHttpService: LibraryHttpService) {
+  constructor(private readonly searchStateService: SearchStateService, private readonly libraryHttpService: LibraryHttpService, private readonly router: Router) {
     this.libraryHttpService.getBooks().subscribe(books => {
       this.data = books;
       combineLatest([
@@ -86,6 +91,10 @@ export class LibraryComponent implements CrudActions{
         break;
       default: break;
     }
+  }
+
+  add() {
+    this.router.navigate(['library', 'add-book']);
   }
 
   view(id: string) {

@@ -1,4 +1,13 @@
 <div class="home-container"> <!--style="margin-top: 0px; margin-bottom: 0px;-->
-  <app-search-book [filterList]="filterList"></app-search-book>
+  <app-search-book [filterList]="filterList" (clickEvent)="add()"></app-search-book>
+  <div class="col-8 mx-auto">
+    @for(filter of filterList; track filter;let first=$first){
+    @if(first){
+    <app-search-filter [id]="filter.id" [title]="filter.title" [checked]="true" />
+    }@else {
+    <app-search-filter [id]="filter.id" [title]="filter.title" />
+    }
+    }
+  </div>
   <app-book [bookList]="filteredBookList" (handleClickEvent)="getAction($event)"></app-book>
 </div>

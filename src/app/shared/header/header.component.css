@@ -16,21 +16,16 @@ nav {
 
 /* Style for navbar links */
 .navbar-nav .nav-link {
-  background-color: rgba(255, 255, 255, 0.3);
   padding: 0.5rem 1rem;
   border-radius: 0.1rem;
   transition: background-color 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--bs-red);
 }
 
-.navbar-brand {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 0.1rem;
-  transition: background-color 0.3s ease;
-}
 
 .navbar-brand:hover {
   background-color: rgba(255, 255, 255, 0.4);
