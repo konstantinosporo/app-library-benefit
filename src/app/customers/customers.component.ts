@@ -5,11 +5,12 @@ import { CrudActions } from '../_lib/interfaces';
 import { AlertService } from '../services/alert-handlers/alert.service';
 import { CustomerService } from '../services/customers/customer.service';
 import { CustomerApi } from './customer';
+import { SpinnerComponent } from "../shared/spinner/spinner.component";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, SpinnerComponent],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
@@ -31,7 +32,7 @@ export class CustomersComponent implements CrudActions {
   }
   delete(id: string) {
     //console.log(id);
-    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete record with ID: ${id}`, () => this.confirmDelete(id));
+    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete customer with ID: ${id}`, () => this.confirmDelete(id));
   }
 
   confirmDelete(id: string) {

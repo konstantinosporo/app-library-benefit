@@ -1,18 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchStateService } from '../../services/search-state.service';
 import { SearchFilterComponent } from "./search-filter/search-filter.component";
+import { AddNewButtonComponent } from "../../shared/buttons/add-new-button/add-new-button.component";
 
 @Component({
   selector: 'app-search-book',
   standalone: true,
-  imports: [SearchFilterComponent],
+  imports: [SearchFilterComponent, AddNewButtonComponent],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.css'
 })
 export class SearchBookComponent {
   constructor(private readonly searchStateService: SearchStateService) { }
-  @Input() filterList: {id:string, title: string}[] = [];
-  
+  @Input() filterList: { id: string, title: string }[] = [];
+  @Output() clickEvent: EventEmitter<void> = new EventEmitter();
+
   /**
    * @konstantinosporo
    * @description
@@ -22,5 +24,8 @@ export class SearchBookComponent {
   handleStateSearch(searchQuery: string) {
     console.log(`From Search-Book Component: ${searchQuery}`);
     this.searchStateService.updateSearch(searchQuery);
+  }
+  handleClickEvent() {
+    this.clickEvent.emit();
   }
 }

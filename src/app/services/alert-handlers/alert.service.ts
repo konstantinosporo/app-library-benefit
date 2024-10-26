@@ -19,11 +19,11 @@ export class AlertService {
     }
   }
 
-  private showModal(title: string, message: string, modalId: string, onSave?: () => void) {
+  private showModal(title: string, message: string, modalId: string, onSave?: () => void, buttonText?: string) {
     const modalTitle = document.getElementById(`${modalId}Title`)
     const modalBody = document.getElementById(`${modalId}Body`);
     const modalElement = document.getElementById(modalId);
-    const saveButton = document.querySelector(`#${modalId} .btn-danger`) as HTMLElement;
+    const saveButton = document.getElementById(`${modalId}Button`) as HTMLElement;
 
     if (modalTitle) {
       modalTitle.textContent = title;
@@ -32,14 +32,17 @@ export class AlertService {
     if (modalBody) {
       modalBody.textContent = message;
     }
+    if (saveButton && buttonText) {
+      saveButton.textContent = buttonText;
+    }
 
     if (modalElement) {
       const modal = new Modal(modalElement);
       modal.show();
       if (onSave && saveButton) {
         saveButton.onclick = () => {
-          onSave(); 
-          modal.hide(); 
+          onSave();
+          modal.hide();
         };
       }
     }
@@ -60,5 +63,9 @@ export class AlertService {
 
   showVerificationModal(title: string, message: string, onSave?: () => void) {
     this.showModal(title, message, 'primaryModal', onSave);
+  }
+
+  showAddNewModal(title: string, message: string, onSave?: () => void, buttonText?: string) {
+    this.showModal(title, message, 'successModal', onSave, buttonText);
   }
 }

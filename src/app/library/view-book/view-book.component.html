@@ -1,0 +1,58 @@
+@if(bookToView$ | async; as book){
+<div class="container min-vh-75 d-flex justify-content-center align-items-center">
+  <app-basic-wrapper [title]="'Viewing: ' + book.name" [titleFooter]="'Showing result for book ID: ' + bookId"
+    [backButton]="backButton" [showTitleIcon]="false">
+    <form class="row g-3">
+      <!-- Book Title with Icon -->
+      <div class="col-md-5">
+        <label for="name" class="form-label">Book Title</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-book"></i></span>
+          <input type="text" class="form-control" [value]="book.name" disabled>
+        </div>
+      </div>
+
+      <!-- Year Published with Icon -->
+      <div class="col-md-3">
+        <label for="year" class="form-label">Year Published</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+          <input type="number" class="form-control" placeholder="e.g., 2024" [value]="book.year" disabled>
+        </div>
+      </div>
+
+      <!-- Creation Date with Icon -->
+      <div class="col-md-4">
+        <label for="createdOn" class="form-label">Creation Date</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-bookmark"></i></span>
+          <input type="text" class="form-control" [value]="book.createdOn | date" disabled>
+        </div>
+      </div>
+
+      <!-- Author with Icon -->
+      <div class="col-md-8">
+        <label for="author" class="form-label">Author</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" [value]="book.author" disabled>
+        </div>
+      </div>
+
+      <!-- Category with Icon -->
+      <div class="col-md-4">
+        <label for="type" class="form-label">Type</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-layers"></i></span>
+          <select class="form-select" disabled>
+            <option selected disabled>{{book.type}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </app-basic-wrapper>
+</div>
+
+}@else {
+<app-spinner></app-spinner>
+}

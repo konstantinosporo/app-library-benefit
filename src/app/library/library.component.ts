@@ -1,43 +1,53 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { combineLatest, filter, startWith } from 'rxjs';
+import { CrudActions } from '../_lib/interfaces';
+import { AlertService } from '../services/alert-handlers/alert.service';
+import { LibraryHttpService } from '../services/library/library-http.service';
 import { SearchStateService } from '../services/search-state.service';
+import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
+import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { BookApi } from './book/book';
 import { BookComponent } from "./book/book.component";
 import { SearchBookComponent } from "./search-book/search-book.component";
-import { LibraryHttpService } from '../services/library/library-http.service';
-import { combineLatest, filter } from 'rxjs';
-import { CrudActions } from '../_lib/interfaces';
+import { SearchFilterComponent } from "./search-book/search-filter/search-filter.component";
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [SearchBookComponent, BookComponent, AsyncPipe],
+  imports: [SearchBookComponent, BookComponent, AsyncPipe, SearchFilterComponent, AddNewButtonComponent, SpinnerComponent],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })
-export class LibraryComponent implements CrudActions{
+export class LibraryComponent implements CrudActions {
   // Simple array for adding more filters
   filterList: { id: string, title: string }[] = [
     { id: 'all', title: 'All Books' },
     { id: 'available', title: 'Available Books' },
   ];
   // two tables one that holds all the books, and the filtered one
-  data: BookApi[] = [];
-  filteredBookList: BookApi[]= [];
+  data!: BookApi[];
+  filteredBookList!: BookApi[];
 
   // Better practice and more efficient. Using a State Service.
-  constructor(private readonly searchStateService: SearchStateService, private readonly libraryHttpService: LibraryHttpService) {
+  constructor(
+    private readonly searchStateService: SearchStateService,
+    private readonly libraryHttpService: LibraryHttpService,
+    private readonly alertService: AlertService,
+    private readonly router: Router) {
     this.libraryHttpService.getBooks().subscribe(books => {
       this.data = books;
+
       combineLatest([
-        this.searchStateService.filterStream$,
+        this.searchStateService.filterStream$.pipe(startWith('all')), // Provide a default value
       ]).pipe(
         filter(() => !!this.data)
       ).subscribe(([id]) => {
         this.updateFilteredListViaFilter(id);
       });
-    }
-    );
+    });
+
     this.searchStateService.searchStream$.subscribe(search => this.updateFilteredListViaSearch(search));
   }
   /**
@@ -88,14 +98,36 @@ export class LibraryComponent implements CrudActions{
     }
   }
 
-  view(id: string) {
-    console.log('View' + "" + id);
+  add() {
+    this.router.navigate(['library', 'add-book']);
   }
+
+  view(id: string) {
+    this.router.navigate(['library', `view-book`, id]);
+  }
+
   edit(id: string) {
     console.log('Edit' + "" + id);
   }
   delete(id: string) {
-    console.log('Delete' + "" + id);
+    //console.log(id);
+    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete book with ID: ${id}`, () => this.confirmDelete(id));
+  }
+
+  confirmDelete(id: string) {
+    this.libraryHttpService.deleteBook(id).subscribe({
+      next: (user: BookApi) => {
+        this.alertService.showSuccess(`Book with ID: ${user._id} successfully deleted!`);
+      },
+      error: (err) => {
+        console.error('Error deleting book:', err); // Log full error
+        if (err instanceof Error) {
+          throw new Error(`Error deleting book: ${err.message}`);
+        } else {
+          throw new Error('Error deleting book.');
+        }
+      }
+    });
   }
 
 

@@ -1,6 +1,6 @@
 <div class="card mx-auto my-3 library-gradient col-10 col-md-9 border-0" style="border-radius: 10em;">
   <div class="card-body p-2">
-    <div class="input-group ">
+    <div class="input-group gap-1">
       <input type="text" class="form-control rounded bg-transparent text-white" placeholder="Search Library"
         aria-label="Type Keywords" aria-describedby="basic-addon2" #searchQuery />
       <button type="button" class="btn btn-primary rounded-pill text-white"
@@ -8,16 +8,8 @@
         <i class="bi bi-search"></i>
         Search
       </button>
+      <app-add-new-button textValue="Add Book" (clickEvent)="handleClickEvent()"></app-add-new-button>
     </div>
   </div>
 </div>
 
-<div class="col-8 mx-auto">
-  @for(filter of filterList; track filter;let first=$first){
-  @if(first){
-  <app-search-filter [id]="filter.id" [title]="filter.title" [checked]="true" />
-  }@else {
-  <app-search-filter [id]="filter.id" [title]="filter.title" />
-  }
-  }
-</div>

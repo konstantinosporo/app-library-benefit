@@ -1,10 +1,11 @@
-<div class="container p-sm-0">
+@if(dataStream$|async; as dataStream){
+<div class="container min-vh-75 p-sm-0">
   <div class="home-container">
     <span class="">
-      <h1 class="fw-light text-primary">Book Reservation Details</h1>
-      <hr class=" text-primary mt-0">
+      <h1 class="fw-light">Book Reservation Details</h1>
+      <hr class="text-dark mt-0">
     </span>
-    <table class="table table-responsive table-striped table-secondary">
+    <table class="table table-responsive table-striped table-light">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -18,15 +19,15 @@
       </thead>
       <tbody>
         <tr>
-          @for(reservation of dataStream$ | async; track reservation._id;let idx =$index){
+          @for(reservation of dataStream; track reservation._id;let idx =$index){
           <th scope="row">{{idx + 1}}</th>
           <td>{{reservation.book.name}}</td>
           <td>{{reservation.customer.name}}</td>
           <td>
             <span class="badge rounded-pill px-2 text-white" [ngClass]="{
-                    'text-bg-green': reservation.status === 'active',
-                    'text-bg-red': reservation.status !== 'active'
-                  }">
+                      'text-bg-green': reservation.status === 'active',
+                      'text-bg-red': reservation.status !== 'active'
+                    }">
               {{ reservation.status | uppercase}}
             </span>
           </td>
@@ -52,3 +53,6 @@
     </table>
   </div>
 </div>
+}@else {
+<app-spinner></app-spinner>
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardWrapperComponent } from "../../card-wrapper/card-wrapper.component";
+import { CardWrapperComponent } from "../../wrappers/card-wrapper/card-wrapper.component";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 

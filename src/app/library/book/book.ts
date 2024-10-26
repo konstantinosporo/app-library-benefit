@@ -20,12 +20,12 @@ export interface Book {
  * Endpoint URL: "https://book-api-bx2r.onrender.com/books"
  */
 export interface BookApi{
-  _id: string;
+  _id?: string;
   name: string;
   year: number;
   type: string;
   author: string;
-  available: string;
+  available?: string;
   createdOn: Date;
 }
 

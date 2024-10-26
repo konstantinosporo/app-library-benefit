@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary shadow fixed-top">
+<nav class="navbar navbar-expand-lg shadow">
   <div class="container">
     <a class="navbar-brand" [routerLink]="''">AppLibrary</a>
 
@@ -17,12 +17,12 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-1 mt-1 mt-md-0" *ngFor="let link of navLinks">
           <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">{{link.title}}</a>
+            [routerLinkActiveOptions]="{ exact: true }"><i [class]="link.icon"></i>{{link.title}}</a>
         </li>
       </ul>
     </div>
     <button class="d-none d-md-block btn border-0 rounded-circle ms-1"
-      [ngClass]="{'btn-outline-yellow': isDarkTheme, 'btn-outline-blue-link': !isDarkTheme}" aria-labelledby="Dark Mode"
+      [ngClass]="{'btn-outline-light': isDarkTheme, 'btn-outline-dark': !isDarkTheme}" aria-labelledby="Dark Mode"
       (click)="toggleTheme()">
       <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>
     </button>
