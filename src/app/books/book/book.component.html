@@ -1,6 +1,5 @@
-@if(bookList.length){
-@for(book of bookList;track book._id){
-<div class="container my-4 ">
+@if(book){
+<div class="container my-4 p-0">
   <div class="row align-items-center justify-content-center">
     <div class="col-lg-10">
       <div class="card book-card shadow-lg position-relative overflow-hidden border-0">
@@ -31,32 +30,37 @@
                 {{ book.type }}
               </p>
               <ul class="list-inline">
-                <li class="list-inline-item btn btn-link text-decoration-none" [ngClass]="{
-                    'text-green':  book.available,
-                    'text-red': !book.available
-                  }">
-                  <i class="bi" [ngClass]="{
-                      'bi-check': book.available,
-                      'bi-x': !book.available
-                    }"></i>
-                  {{ book.available ? "Available" : "Not available" }}
-                </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-primary text-white" (click)="handleClick(book._id ?? '','view')">
-                    <i class="bi bi-eye me-1"></i>View</button>
+                  <button class="btn btn-sm btn-info text-white" (click)="handleClick(book._id ?? '','view')">
+                    <i class="bi bi-eye me-lg-1"></i><span class="d-none d-lg-inline-block">View</span></button>
 
                 </li>
+
                 <li class="list-inline-item">
                   <button class="btn btn-sm btn-orange text-white" (click)="handleClick(book._id ?? '', 'edit')">
-                    <i class="bi bi-pencil me-1"></i>Edit</button>
-
+                    <i class="bi bi-pencil me-lg-1"></i><span class="d-none d-lg-inline-block">Edit</span></button>
                 </li>
+
                 <li class="list-inline-item">
                   <button class="btn btn-sm btn-red text-white" (click)="handleClick(book._id ?? '', 'delete')">
-                    <i class="bi bi-trash me-1"></i>Delete</button>
-
+                    <i class="bi bi-trash me-lg-1"></i><span class="d-none d-lg-inline-block">Delete</span></button>
                 </li>
+
+
+
               </ul>
+
+              <span class="badge" [ngClass]="{
+                                      'bg-success text-white': book.available,
+                                      'bg-danger text-white': !book.available
+                                    }">
+                <i class="bi me-1" [ngClass]="{
+                                      'bi-check-circle-fill': book.available,
+                                      'bi-x-circle-fill': !book.available
+                                    }"></i>
+                {{ book.available ? "Available" : "Not Available" }}
+              </span>
+
             </div>
           </div>
         </div>
@@ -66,5 +70,4 @@
 </div>
 <!-- end of card -->
 <hr class="border-primary col-10 col-md-8 col-lg-7 mx-auto">
-}
 }

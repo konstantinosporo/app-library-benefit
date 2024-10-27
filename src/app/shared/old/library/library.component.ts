@@ -2,30 +2,27 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, filter, startWith } from 'rxjs';
-import { CrudActions } from '../_lib/interfaces';
-import { AlertService } from '../services/alert-handlers/alert.service';
-import { LibraryHttpService } from '../services/library/library-http.service';
-import { SearchStateService } from '../services/search-state.service';
-import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
-import { SpinnerComponent } from "../shared/spinner/spinner.component";
-import { BookApi } from './book/book';
-import { BookComponent } from "./book/book.component";
-import { SearchBookComponent } from "./search-book/search-book.component";
-import { SearchFilterComponent } from "./search-book/search-filter/search-filter.component";
+import { CrudActions } from '../../../_lib/interfaces';
+import { AlertService } from '../../../services/alert-handlers/alert.service';
+import { LibraryHttpService } from '../../../services/library/library-http.service';
+import { SearchStateService } from '../../../services/search-state.service';
+import { AddNewButtonComponent } from "../../buttons/add-new-button/add-new-button.component";
+import { SpinnerComponent } from "../../spinner/spinner.component";
+import { BookApi } from '../../../books/book/book';
+import { BookComponent } from "../../../books/book/book.component";
+import { SearchComponent } from "../../search/search.component";
+
+
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [SearchBookComponent, BookComponent, AsyncPipe, SearchFilterComponent, AddNewButtonComponent, SpinnerComponent],
+  imports: [SearchComponent, BookComponent, AsyncPipe, AddNewButtonComponent, SpinnerComponent],
   templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })
 export class LibraryComponent implements CrudActions {
-  // Simple array for adding more filters
-  filterList: { id: string, title: string }[] = [
-    { id: 'all', title: 'All Books' },
-    { id: 'available', title: 'Available Books' },
-  ];
+
   // two tables one that holds all the books, and the filtered one
   data!: BookApi[];
   filteredBookList!: BookApi[];

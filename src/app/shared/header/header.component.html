@@ -3,7 +3,7 @@
     <a class="navbar-brand" [routerLink]="''">AppLibrary</a>
 
     <button class="d-block d-lg-none btn border-0 rounded-circle ms-auto btn-sm"
-      [ngClass]="{'btn-light': isDarkTheme, 'btn-outline-dark': !isDarkTheme}" aria-labelledby="Dark Mode"
+      [ngClass]="{'btn-light': isDarkTheme, 'btn-outline-primary': !isDarkTheme}" aria-labelledby="Dark Mode"
       (click)="toggleTheme()">
       <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>
     </button>
@@ -43,7 +43,7 @@
     </div>
 
     <button class="d-none d-lg-block btn border-0 rounded-circle ms-1"
-      [ngClass]="{'btn-outline-light': isDarkTheme, 'btn-outline-dark': !isDarkTheme}" aria-labelledby="Dark Mode"
+      [ngClass]="{'btn-outline-light': isDarkTheme, 'btn-outline-primary': !isDarkTheme}" aria-labelledby="Dark Mode"
       (click)="toggleTheme()">
       <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>
     </button>

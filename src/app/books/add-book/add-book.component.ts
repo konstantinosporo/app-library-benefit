@@ -3,7 +3,7 @@ import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { LibraryHttpService } from '../../services/library/library-http.service';
-import { BookApi } from '../book/book';
+import { BookApi } from '../../books/book/book';
 import { AlertService } from '../../services/alert-handlers/alert.service';
 
 @Component({
@@ -15,9 +15,14 @@ import { AlertService } from '../../services/alert-handlers/alert.service';
 })
 export class AddBookComponent {
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
-  backButton: { title: string, route: string } = { title: 'Back to Library', route: '/library' };
+  backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
   datePipe = new DatePipe('en-US');
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Reactive Form. This variable holds a FormGroup.
+   * Validations are given from the 2nd User Story.
+   */
   bookFormControl = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
@@ -28,12 +33,25 @@ export class AddBookComponent {
 
   constructor(private readonly bookHttpService: LibraryHttpService, private readonly alertService: AlertService) {
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Triggers the alert service to print a success modal.
+   * @type {void}
+   */
   addBook() {
     //console.log(id);
     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmCreation(), "Add Book");
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Triggered after confirming the action modal.
+   * Method to create a new BookApi object, and adding it in the API endpoint.
+   * It also uses alert service and global error service for outputing success and,
+   * error messages.
+   * @type {void}
+   */
   confirmCreation() {
     //console.log(this.bookFormControl.value);
     // console.log(this.bookFormControl.controls['name']);
@@ -60,14 +78,25 @@ export class AddBookComponent {
       });
     }
   }
-
-  // This getter formats the date for the input field
+  /**
+   * @konstantinosporo
+   * @description
+   * Attempt to transform the text inside the Reactive Form input.
+   * For now it does NOT work as expected.
+   * THIS METHOD WILL CHANGE OR GET DELETED!
+   */
   get formattedDate(): string {
     const dateValue = this.bookFormControl.get('createdOn')?.value;
     return dateValue ? this.datePipe.transform(dateValue, 'dd-MM-yyy') || '' : '';
   }
-
-  // This function updates the FormControl when the input changes
+  /**
+   * @konstantinosporo
+   * @description
+   * This method attempts to change the input of the Date.
+   * For now it does NOT work as expected.
+   * THIS METHOD WILL CHANGE OR GET DELETED!
+   * @param event 
+   */
   onDateChange(event: Event): void {
     const inputDate = new Date((event.target as HTMLInputElement).value);
     this.bookFormControl.get('createdOn')?.setValue(inputDate);

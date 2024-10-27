@@ -1,8 +1,8 @@
-import { Component, Renderer2, OnInit, HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { bounceIn, bounceOut, fadeIn, fadeOut, slideInBounceFade, slideOutBounceFade } from './animations';
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { slideInBounceFade, slideOutBounceFade } from './animations';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,8 @@ import { bounceIn, bounceOut, fadeIn, fadeOut, slideInBounceFade, slideOutBounce
 export class HeaderComponent implements OnInit {
   navLinks = [
     { title: 'Home', link: '/', icon: 'bi bi-house me-1' },
-    { title: 'Library', link: '/library', icon: 'bi bi-collection me-1' },
+    //{ title: 'Library', link: '/library', icon: 'bi bi-collection me-1' },
+    { title: 'Books', link: '/books', icon: 'bi bi-collection me-1' },
     { title: 'Reservations', link: '/reservations', icon: 'bi bi-journal-check me-1' },
     { title: 'Customers', link: '/customers', icon: 'bi bi-people me-1' },
   ];

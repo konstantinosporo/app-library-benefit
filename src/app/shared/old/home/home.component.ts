@@ -2,7 +2,7 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { map } from 'rxjs';
 
-import { BookApi } from '../../../library/book/book';
+import { BookApi } from '../../../books/book/book';
 import { LibraryHttpService } from '../../../services/library/library-http.service';
 import { BooksCarouselComponent } from './books-carousel/books-carousel.component';
 

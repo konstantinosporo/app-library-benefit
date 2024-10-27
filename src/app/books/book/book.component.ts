@@ -16,8 +16,8 @@ export class BookComponent {
    * An input binding that accepts a list of Book objects;
    * @type {Book[ ]}
    */
-  @Input() bookList: BookApi[] = [];
-  
+  @Input() book!: BookApi;
+
   @Output() handleClickEvent: EventEmitter<string[]> = new EventEmitter<string[]>();
   /**
    * @konstantinosporo
@@ -26,7 +26,7 @@ export class BookComponent {
    * @param id: string
    * @param action: string
    */
-   handleClick(id: string, action: string) {
-     this.handleClickEvent.emit([id, action]);
+  handleClick(id: string, action: string) {
+    this.handleClickEvent.emit([id, action]);
   }
 }
