@@ -12,19 +12,14 @@ import { DatePipe, NgClass } from '@angular/common';
 export class BookComponent {
   /**
    * @konstantinosporo
-   * @description
-   * An input binding that accepts a list of Book objects;
-   * @type {Book[ ]}
+   * @description An input binding that accepts a list of Book objects;
    */
   @Input() book!: BookApi;
 
   @Output() handleClickEvent: EventEmitter<string[]> = new EventEmitter<string[]>();
   /**
    * @konstantinosporo
-   * @description
-   * Emit both id of item clicked AND the preferable action.
-   * @param id: string
-   * @param action: string
+   * @description Emit both id of item clicked AND the preferable action.
    */
   handleClick(id: string, action: string) {
     this.handleClickEvent.emit([id, action]);

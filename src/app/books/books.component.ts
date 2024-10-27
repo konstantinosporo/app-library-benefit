@@ -7,13 +7,13 @@ import { BookApi } from './book/book';
 import { BookComponent } from "./book/book.component";
 
 import { Router } from '@angular/router';
+import { CrudActions } from '../_lib/interfaces';
+import { AlertService } from '../services/alert-handlers/alert.service';
 import { LibraryHttpService } from '../services/library/library-http.service';
 import { SearchStateService } from '../services/search-state.service';
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
-import { CrudActions } from '../_lib/interfaces';
-import { AlertService } from '../services/alert-handlers/alert.service';
-import { filterList } from '../shared/search/filter/filters';
 import { FilterComponent } from "../shared/search/filter/filter.component";
+import { Filter, filterList, FilterID as ID } from '../shared/search/filter/filters';
 
 @Component({
   selector: 'app-books',
@@ -33,7 +33,7 @@ export class BooksComponent implements CrudActions {
   private readonly allBooks$!: Observable<BookApi[]>;
   searchQueryState$!: Observable<string>;
   // Load the external filterlist
-  filters = filterList;
+  filters: Filter[] = filterList;
   filterState$!: Observable<string>;
   /**
    * @konstantinosporo
@@ -44,10 +44,6 @@ export class BooksComponent implements CrudActions {
    * Assign the search state string to searchQuery$.
    * Filter the books shown to user given the string he types.
    * ***** VARIABLES WITH TRAILING DOLLAR SIGN $ ARE ALWAYS OBSERVABLES *****
-   * @param booksHttpService 
-   * @param searchStateService 
-   * @param alertService 
-   * @param router 
    */
   constructor(
     private readonly booksHttpService: LibraryHttpService,
@@ -64,22 +60,11 @@ export class BooksComponent implements CrudActions {
       .subscribe((data) => {
         this.fetchFilteredBooks(data);
       });
-    this.filterState$.subscribe(data => {
-      console.log(data);
-      if (data === 'all') {
-        this.books$ = this.allBooks$;
-        const allFilter = this.filters.find(filter => filter.title === 'all');
-        if (allFilter) {
-          allFilter.isChecked = true;
-        }
-      } else {
-        const availableFilter = this.filters.find(filter => filter.title === 'available');
-        if (availableFilter) {
-          availableFilter.isChecked = true;
-        }
-        this.fetchAvailableBooks();
-      }
 
+    // subsribe to filter state service observable 
+    this.filterState$.subscribe(data => {
+      //console.log(data);
+      this.applyFilter(data as ID);
     });
 
   }
@@ -88,7 +73,6 @@ export class BooksComponent implements CrudActions {
    * @description
    * Actively filters the api for close mathes of the searched query string.
    * Accepts a text string as a param.
-   * @param text 
    */
   fetchFilteredBooks(text: string) {
     if (text.length === 0) {
@@ -104,7 +88,6 @@ export class BooksComponent implements CrudActions {
    * @konstantinosporo
    * @description
    * Actively filters the api for available books.
-   * @type {void}
    */
   fetchAvailableBooks() {
     // console.log(`FROM THE METHOD fetchdata(): ${text}`);
@@ -118,7 +101,6 @@ export class BooksComponent implements CrudActions {
    * The event is of type string[].
    * Index 0 > book id. 
    * Index 1 > action name (view, edit, delete). 
-   * @param values 
    */
   handleAction(values: string[]) {
     //console.log(`Values got from child ${values[0]} and ${values[1]}`);
@@ -140,7 +122,6 @@ export class BooksComponent implements CrudActions {
    * @description
    * Navigate to the books/add-book route when the add new button is cliked.
    * It gets a route string as a param.
-   * @param route
    */
   addNewBook(route: string) {
     this.router.navigate([route]);
@@ -151,7 +132,6 @@ export class BooksComponent implements CrudActions {
    * This route is dynamic!!! This means that if you refresh the item insists in the page.
    * Also the url can be copy pasted and the page will load with the id specified in the url.
    * It gets a book id as a param.
-   * @param id 
    */
   view(id: string) {
     this.router.navigate(['library/view-book', id]);
@@ -160,7 +140,6 @@ export class BooksComponent implements CrudActions {
    * @konstantinosporo
    * @description
    * NOT IMPLEMENTED YET
-   * @param id 
    */
   edit(id: string) {
     console.log('Edit' + "" + id);
@@ -173,7 +152,6 @@ export class BooksComponent implements CrudActions {
    * It just asks for confirmation. The showDangerModal method, accepts 
    * a custom callback function as a parameter which gets triggered if the 
    * modal is there and if the users clicks accept.
-   * @param id 
    */
   delete(id: string) {
     //console.log(id);
@@ -185,7 +163,6 @@ export class BooksComponent implements CrudActions {
    * Attempt to delete the specified record from the API endpoint.
    * The delete method of the api might not work so i have to ask.
    * This method is subject to change because i get 404 when i try to delete for now.
-   * @param id 
    */
   confirmDelete(id: string) {
     this.booksHttpService.deleteBook(id).subscribe({
@@ -202,5 +179,33 @@ export class BooksComponent implements CrudActions {
       }
     });
   }
+  /**
+   * @konstantinosporo
+   * Applies the specified filter to the book list by updating the relevant observable 
+   * and setting the appropriate filter as checked.
+   * @param filterId - The filter ID to apply (either ID.ALL or ID.AVAILABLE).
+   */
+  applyFilter(filterId: ID) {
+    // reset filters to avoid check radio bugs
+    this.filters.forEach(filter => filter.isChecked = false);
+
+    if (filterId === ID.ALL) {
+      this.books$ = this.allBooks$;
+      // find and mark the 'ALL' filter as checked for UI consistency.
+      const allFilter = this.filters.find(filter => filter.id === ID.ALL);
+      if (allFilter) {
+        allFilter.isChecked = true;
+      }
+    } else if (filterId === ID.AVAILABLE) {
+      // find and mark the 'AVAILABLE' filter as checked.
+      const availableFilter = this.filters.find(filter => filter.id === ID.AVAILABLE);
+      if (availableFilter) {
+        availableFilter.isChecked = true;
+      }
+      // apply the available books filter by fetching only books marked as available.
+      this.fetchAvailableBooks();
+    }
+  }
+
 
 }

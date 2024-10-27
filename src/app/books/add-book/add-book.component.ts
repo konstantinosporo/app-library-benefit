@@ -35,9 +35,7 @@ export class AddBookComponent {
   }
   /**
    * @konstantinosporo
-   * @description
-   * Triggers the alert service to print a success modal.
-   * @type {void}
+   * @description Triggers the alert service to print a success modal.
    */
   addBook() {
     //console.log(id);
@@ -45,12 +43,8 @@ export class AddBookComponent {
   }
   /**
    * @konstantinosporo
-   * @description
-   * Triggered after confirming the action modal.
-   * Method to create a new BookApi object, and adding it in the API endpoint.
-   * It also uses alert service and global error service for outputing success and,
-   * error messages.
-   * @type {void}
+   * @description Triggered after confirming the action modal. Method to create a new BookApi object, and adding it
+   *  in the API endpoint. It also uses alert service and global error service for outputing success and, error messages.
    */
   confirmCreation() {
     //console.log(this.bookFormControl.value);
@@ -80,10 +74,8 @@ export class AddBookComponent {
   }
   /**
    * @konstantinosporo
-   * @description
-   * Attempt to transform the text inside the Reactive Form input.
-   * For now it does NOT work as expected.
-   * THIS METHOD WILL CHANGE OR GET DELETED!
+   * @description Attempt to transform the text inside the Reactive Form input. 
+   * For now it does NOT work as expected. THIS METHOD WILL CHANGE OR GET DELETED!
    */
   get formattedDate(): string {
     const dateValue = this.bookFormControl.get('createdOn')?.value;
@@ -91,11 +83,8 @@ export class AddBookComponent {
   }
   /**
    * @konstantinosporo
-   * @description
-   * This method attempts to change the input of the Date.
-   * For now it does NOT work as expected.
-   * THIS METHOD WILL CHANGE OR GET DELETED!
-   * @param event 
+   * @description This method attempts to change the input of the Date.
+   * For now it does NOT work as expected. THIS METHOD WILL CHANGE OR GET DELETED!
    */
   onDateChange(event: Event): void {
     const inputDate = new Date((event.target as HTMLInputElement).value);
