@@ -2,6 +2,12 @@
   <div class="container">
     <a class="navbar-brand" [routerLink]="''">AppLibrary</a>
 
+    <button class="d-block d-lg-none btn border-0 rounded-circle ms-auto btn-sm"
+      [ngClass]="{'btn-light': isDarkTheme, 'btn-outline-dark': !isDarkTheme}" aria-labelledby="Dark Mode"
+      (click)="toggleTheme()">
+      <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>
+    </button>
+
     <button class="navbar-toggler border-0" type="button" (click)="toggleNavbar()"
       [attr.aria-expanded]="!isNavbarCollapsed" aria-label="Toggle navigation">
       <span class="toggle-icon" [ngClass]="{'text-white': isDarkTheme, 'text-dark': !isDarkTheme}">
@@ -13,15 +19,30 @@
       </span>
     </button>
 
-    <div class="collapse navbar-collapse" [ngClass]="{ 'show': !isNavbarCollapsed }" id="navbarNav" @toggleNavbar>
+    <div class="d-none d-lg-block ms-auto" @toggleNavbar>
+      <ul class="navbar-nav ms-auto" @toggleNavbar>
+        <ng-container *ngFor="let link of navLinks">
+          <li class="nav-item mx-1 mt-1 mt-md-0">
+            <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"><i [class]="link.icon"></i>{{link.title}}</a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': !isNavbarCollapsed }" id="navbarNav"
+      *ngIf="!isNavbarCollapsed" @toggleNavbar>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item mx-1 mt-1 mt-md-0" *ngFor="let link of navLinks">
+        @for(link of navLinks;track link.title){
+        <li class="nav-item mx-1 mt-1 mt-md-0">
           <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"><i [class]="link.icon"></i>{{link.title}}</a>
         </li>
+        }
       </ul>
     </div>
-    <button class="d-none d-md-block btn border-0 rounded-circle ms-1"
+
+    <button class="d-none d-lg-block btn border-0 rounded-circle ms-1"
       [ngClass]="{'btn-outline-light': isDarkTheme, 'btn-outline-dark': !isDarkTheme}" aria-labelledby="Dark Mode"
       (click)="toggleTheme()">
       <i class="bi" [ngClass]="{'bi-brightness-high': isDarkTheme, 'bi-moon-stars': !isDarkTheme}"></i>

@@ -111,13 +111,13 @@ export class LibraryComponent implements CrudActions {
   }
   delete(id: string) {
     //console.log(id);
-    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete book with ID: ${id}`, () => this.confirmDelete(id));
+    this.alertService.showDangerModal('Confirm Deletion', `Are you sure you want to delete book with ID: ${id}`, () => this.confirmDelete(id), 'Delete Book');
   }
 
   confirmDelete(id: string) {
     this.libraryHttpService.deleteBook(id).subscribe({
       next: (user: BookApi) => {
-        this.alertService.showSuccess(`Book with ID: ${user._id} successfully deleted!`);
+        this.alertService.showSuccessToast(`Book with ID: ${user._id} successfully deleted!`);
       },
       error: (err) => {
         console.error('Error deleting book:', err); // Log full error

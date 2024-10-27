@@ -31,9 +31,9 @@
                 {{ book.type }}
               </p>
               <ul class="list-inline">
-                <li class="list-inline-item btn btn-sm text-white" [ngClass]="{
-                    'btn-green':  book.available,
-                    'btn-red': !book.available
+                <li class="list-inline-item btn btn-link text-decoration-none" [ngClass]="{
+                    'text-green':  book.available,
+                    'text-red': !book.available
                   }">
                   <i class="bi" [ngClass]="{
                       'bi-check': book.available,
@@ -42,18 +42,18 @@
                   {{ book.available ? "Available" : "Not available" }}
                 </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-primary text-white"
-                    (click)="handleClick(book._id ?? '','view')">View</button>
+                  <button class="btn btn-sm btn-primary text-white" (click)="handleClick(book._id ?? '','view')">
+                    <i class="bi bi-eye me-1"></i>View</button>
 
                 </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-orange text-white"
-                    (click)="handleClick(book._id ?? '', 'edit')">Edit</button>
+                  <button class="btn btn-sm btn-orange text-white" (click)="handleClick(book._id ?? '', 'edit')">
+                    <i class="bi bi-pencil me-1"></i>Edit</button>
 
                 </li>
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-red text-white"
-                    (click)="handleClick(book._id ?? '', 'delete')">Delete</button>
+                  <button class="btn btn-sm btn-red text-white" (click)="handleClick(book._id ?? '', 'delete')">
+                    <i class="bi bi-trash me-1"></i>Delete</button>
 
                 </li>
               </ul>

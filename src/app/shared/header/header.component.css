@@ -22,8 +22,7 @@ nav {
 
 /* Active link and brand styles */
 .navbar-nav .nav-link:active,
-.navbar-nav .nav-link.active,
-.navbar-brand {
+.navbar-nav .nav-link.active {
   background-color: var(--bs-text);
   color: var(--bs-text-foreground);
 }
@@ -32,3 +31,8 @@ nav {
   background-color: var(--bs-text-foreground);
   color: var(--bs-text);
 }
+
+.navbar-brand {
+  color: var(--bs-text);
+}
+
