@@ -1,12 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-
-body {
-  font-family: 'Baloo 2', cursive;
+h5,p,p>small>i{
+  color: var(--bs-text);
 }
-
+.muted{
+  color: var(--bs-muted);
+}
 .book-card {
-  background-image: linear-gradient(-30deg, var(--bs-secondary), transparent 70%);
+  // background-image: linear-gradient(-30deg, var(--bs-secondary), transparent 70%);
+  background-color: var(--bs-text-foreground);
   border-radius: 10px;
+  transition: background-color .1s, color .2s;
 }
 
 .book-card .custom-line {

@@ -1,3 +1,4 @@
+//TODO Delete this interface
 /**
  * @konstantinosporo
  * @description
@@ -16,8 +17,8 @@ export interface Book {
 /**
  * @konstantinosporo
  * @description
- * The actual projects Endpoint Book Interface
- * Endpoint URL: "https://book-api-bx2r.onrender.com/books"
+ * The actual projects Endpoint Book Interface.
+ * Endpoint URL: https://book-api-bx2r.onrender.com/books
  */
 export interface BookApi{
   _id?: string;

@@ -16,12 +16,12 @@
                 </span>
               </h5>
               <p class="card-text">
-                <small class="text-muted">
+                <small class="muted">
                   <i class="bi bi-calendar-check me-1"></i> Published on {{ book.createdOn | date:'longDate' }}
                 </small>
               </p>
               <p class="card-text">
-                <small class="text-muted">
+                <small class="muted">
                   <i class="bi bi-person-rolodex me-1"></i> Written by <i>{{ book.author }}</i>
                 </small>
               </p>
@@ -31,25 +31,23 @@
               </p>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-info text-white" (click)="handleClick(book._id ?? '','view')">
+                  <button class="btn btn-sm btn-custom" (click)="handleClick(book._id ?? '','view')">
                     <i class="bi bi-eye me-lg-1"></i><span class="d-none d-lg-inline-block">View</span></button>
 
                 </li>
 
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-orange text-white" (click)="handleClick(book._id ?? '', 'edit')">
+                  <button class="btn btn-sm btn-custom" (click)="handleClick(book._id ?? '', 'edit')">
                     <i class="bi bi-pencil me-lg-1"></i><span class="d-none d-lg-inline-block">Edit</span></button>
                 </li>
 
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-red text-white" (click)="handleClick(book._id ?? '', 'delete')">
+                  <button class="btn btn-sm btn-outline-danger "
+                    (click)="handleClick(book._id ?? '', 'delete')">
                     <i class="bi bi-trash me-lg-1"></i><span class="d-none d-lg-inline-block">Delete</span></button>
                 </li>
 
-
-
               </ul>
-
               <span class="badge" [ngClass]="{
                                       'bg-success text-white': book.available,
                                       'bg-danger text-white': !book.available

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { FilterID } from '../shared/search/filter/filters';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class SearchStateService {
    * whenever the state is changed.
    */
   searchSubject = new BehaviorSubject<string>('');
-  filterSubject = new BehaviorSubject<string>('');
+  filterSubject = new BehaviorSubject<FilterID>(FilterID.ALL);
 
 
   // Transforing the subjects into observable streams
@@ -27,7 +28,7 @@ export class SearchStateService {
     this.searchSubject.next(searchQuery);
   }
 
-  updateFilter(filterId: string) {
+  updateFilter(filterId: FilterID) {
     //console.log(filterId);
     this.filterSubject.next(filterId);
   }
