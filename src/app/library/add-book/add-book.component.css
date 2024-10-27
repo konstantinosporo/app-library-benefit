@@ -1,0 +1,4 @@
+::ng-deep body.dark .btn-outline-primary:not(:hover) {
+  border-color: var(--bs-light);
+  color: var(--bs-light);
+}

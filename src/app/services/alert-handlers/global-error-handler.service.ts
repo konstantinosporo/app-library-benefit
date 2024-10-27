@@ -17,6 +17,6 @@ export class GlobalErrorHandler implements ErrorHandler {
    * @param error 
    */
   handleError(error: any): void {
-    this.alertService.showError(error.message);
+    this.alertService.showDangerToast(error.message);
   }
 }

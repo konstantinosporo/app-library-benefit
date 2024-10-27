@@ -50,8 +50,10 @@ $grays: (
 );
 
 // New Color Palette
-$primary:   #5A4636 !default; 
-$secondary: #D0C6B8 !default; 
+// $primary:   #5A4636 !default; 
+$primary:   #00233D !default; 
+// $secondary: #D0C6B8 !default; 
+$secondary: #E0E6F5 !default; 
 $success:   $green !default; 
 $info:      $cyan !default; 
 $warning:   $orange !default; 
@@ -90,6 +92,7 @@ body {
   --bs-body-font-family: var(--bs-font-poppins);
   --bs-dark: #E0E6F5;
   --bs-gray: #42484C;
+  --bs-custom-gray: #7C858D;
   --bs-light: #F5F5F5; 
   --bs-text: #19284D;
   --bs-text-foreground: #F5F5F5;
@@ -119,7 +122,8 @@ body {
 /* Dark Mode Variables */
 body.dark {
   --bs-dark: #0F182E;
-  --bs-gray: #878F97;
+  --bs-gray: #687078;
+  --bs-custom-gray: #9299A0;
   --bs-light: #EBEBEB; 
   --bs-text: #F5F5F5;
   --bs-text-foreground: #19284D;
@@ -196,7 +200,6 @@ td {
   min-height: 85vh !important;
 }
 
-
 // Configuration
 @import '../node_modules/bootstrap/scss/variables';
 @import '../node_modules/bootstrap/scss/variables-dark'; 
@@ -246,3 +249,20 @@ td {
 // Utilities
 @import '../node_modules/bootstrap/scss/utilities/api';
 
+// noticable disabled effect 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.disabled-notice:disabled {
+  background-color: var(--bs-gray-400) !important;
+  color: var(--bs-custom-gray) !important;
+  border: 1px dashed #a1a1a1 !important;
+  cursor: not-allowed !important;
+  animation: pulse 2s ease-in-out infinite; 
+}

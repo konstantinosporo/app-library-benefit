@@ -103,9 +103,12 @@
       </div>
 
       <div class="col-12">
-        <button class="btn btn-primary" type="submit" [disabled]="bookFormControl.invalid" (click)="addBook()">
-
-          <i class="bi bi-file-earmark-plus me-1"></i>Add New Book</button>
+        <button class="btn btn-outline-primary disabled-notice float-end float-md-start" type="submit"
+          [disabled]="bookFormControl.invalid" (click)="addBook()">
+          <i class="me-1"
+            [ngClass]="{'bi bi-file-earmark-check': bookFormControl.valid, 'bi bi-file-earmark-x': bookFormControl.invalid}"></i>Add
+          New
+          Book</button>
       </div>
 
     </form>

@@ -1,8 +1,8 @@
-import { Component, Renderer2, OnInit } from '@angular/core';
+import { Component, Renderer2, OnInit, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { fadeIn, fadeOut } from './animations';
+import { bounceIn, bounceOut, fadeIn, fadeOut, slideInBounceFade, slideOutBounceFade } from './animations';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +12,8 @@ import { fadeIn, fadeOut } from './animations';
   styleUrls: ['./header.component.css'],
   animations: [
     trigger('toggleNavbar', [
-      transition(':enter', [useAnimation(fadeIn, { params: { time: '300ms' } })]),
-      transition(':leave', [useAnimation(fadeOut, { params: { time: '300ms' } })]),
+      transition(':enter', [useAnimation(slideInBounceFade, { params: { time: '220ms' } })]),
+      transition(':leave', [useAnimation(slideOutBounceFade, { params: { time: '250ms' } })]),
     ]),
   ],
 })
@@ -85,4 +85,15 @@ export class HeaderComponent implements OnInit {
     this.isDarkTheme = savedTheme === 'dark';
     this.updateTheme();
   }
+  @HostListener('document:click', ['$event.target'])
+  onClick(target: HTMLElement) {
+    const clickedInsideNavbar = target.closest('.navbar-collapse');
+    const clickedToggleButton = target.closest('.navbar-toggler');
+
+    // Close the navbar only if clicked outside the navbar and not on the toggle button
+    if (!clickedInsideNavbar && !clickedToggleButton && !this.isNavbarCollapsed) {
+      this.isNavbarCollapsed = true;
+    }
+  }
+
 }

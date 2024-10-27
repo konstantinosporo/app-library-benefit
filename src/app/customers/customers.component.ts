@@ -32,16 +32,16 @@ export class CustomersComponent implements CrudActions {
   }
   delete(id: string) {
     //console.log(id);
-    this.alertService.showVerificationModal('Confirm Deletion', `Are you sure you want to delete customer with ID: ${id}`, () => this.confirmDelete(id));
+    this.alertService.showDangerModal('Confirm Deletion', `Are you sure you want to delete customer with ID: ${id}`, () => this.confirmDelete(id), 'Delete Customer');
   }
 
   confirmDelete(id: string) {
     this.customerHttpService.deleteMockCustomer(id).subscribe({
       next: (user: CustomerApi) => {
         //console.log(`User ${user.name} with id: ${user._id} has been deleted.`);
-        this.alertService.showSuccess(`Customer with ID: ${user._id} successfully deleted!`);
+        this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
         this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // update the data stream!
-        this.alertService.showSuccess(`Customer with ID: ${user._id} successfully deleted!`);
+        this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
         this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // Refetch the data stream
       },
       error: (err) => {
