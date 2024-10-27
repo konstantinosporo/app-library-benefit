@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { SearchStateService } from '../../../services/search-state.service';
 
 @Component({
-  selector: 'app-search-filter',
+  selector: 'app-filter',
   standalone: true,
   imports: [],
-  templateUrl: './search-filter.component.html',
-  styleUrl: './search-filter.component.css'
+  templateUrl: './filter.component.html',
+  styleUrl: './filter.component.css'
 })
-export class SearchFilterComponent {
+export class FilterComponent {
   constructor(private readonly searchStateService: SearchStateService) { }
 
   @Input() id: string = '';

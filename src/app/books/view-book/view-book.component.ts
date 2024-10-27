@@ -17,19 +17,22 @@ import { SpinnerComponent } from "../../shared/spinner/spinner.component";
 export class ViewBookComponent {
   bookId: string = '';
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
-  backButton: { title: string, route: string } = { title: 'Back to Library', route: '/library' };
+  backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
   datePipe = new DatePipe('en-US');
   bookToView$!: Observable<BookApi>;
 
   constructor(private readonly libraryHttpService: LibraryHttpService, private readonly route: ActivatedRoute) {
     this.route.params.subscribe(param => this.bookId = param['id'] || '');
     if (this.bookId.length) {
-      console.log(this.bookId);
+      //console.log(this.bookId);
       this.bookToView$ = this.libraryHttpService.getBookById(this.bookId);
     }
   }
 
-  // This getter formats the date for the input field
+  /**
+   * @konstantinosporo
+   * This method will be deprecated, or be remade as a pipe on its own.
+   */
   get formattedDate(): string {
     //const dateValue = this.bookFormControl.get('createdOn')?.value;
     //return dateValue ? this.datePipe.transform(dateValue, 'dd-MM-yyy') || '' : '';

@@ -1,24 +1,24 @@
 import { Routes } from '@angular/router';
+import { AddBookComponent } from './books/add-book/add-book.component';
+import { BooksComponent } from './books/books.component';
 import { CustomersComponent } from './customers/customers.component';
-import { LibraryComponent } from './library/library.component';
-import { ReservationsComponent } from './reservations/reservations.component';
 import { HomeComponent } from './home/home.component';
-import { AddBookComponent } from './library/add-book/add-book.component';
-import { ViewBookComponent } from './library/view-book/view-book.component';
+import { ViewBookComponent } from './books/view-book/view-book.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 export const routes: Routes = [
-
+  // HOME ROUTE
   { path: '', component: HomeComponent, title: 'Home | AppLibrary' },
-  { path: 'library', component: LibraryComponent, title: 'Library | AppLibrary' },
-  { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
-  { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
-
+  // BOOKS ROUTES
+  { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
   { path: 'library/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },
   { path: 'library/view-book/:id', component: ViewBookComponent, title: 'View Book | AppLibrary' },
+  // RESERVATION ROUTES
+  { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
 
-  // <!-- @konstantinosporo -->
-  // <!-- For now the forms are not needed. If the project doesnt contain login/register logic this code WILL be deleted. -->
-  // { path: 'login-form', component: LoginFormComponent, title:'Login | AppLibrary' },
-  // { path: 'register-form', component: RegisterFormComponent, title:'Register | AppLibrary'  },
+
+  // CUSTOMERS ROUTES
+  { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
+
 
 ];

@@ -13,13 +13,13 @@ export class SearchStateService {
    * whenever the state is changed.
    */
   searchSubject = new BehaviorSubject<string>('');
-  filterSubject = new BehaviorSubject<string>('all');
-  
+  filterSubject = new BehaviorSubject<string>('');
+
 
   // Transforing the subjects into observable streams
   searchStream$ = this.searchSubject.asObservable();
   filterStream$ = this.filterSubject.asObservable();
-  
+
 
   // update state methods
   updateSearch(searchQuery: string) {

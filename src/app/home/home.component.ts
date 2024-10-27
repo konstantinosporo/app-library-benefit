@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselComponent } from '../shared/carousel/carousel.component';
-import { CtaButtonComponent } from '../shared/cta-button/cta-button.component';
+import { CtaButtonComponent } from '../shared/buttons/cta-button/cta-button.component';
 import { FeatureItemComponent } from '../shared/feature-item/feature-item.component';
 
 

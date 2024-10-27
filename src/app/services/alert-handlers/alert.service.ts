@@ -95,7 +95,7 @@ export class AlertService {
    * @param title 
    * @param message 
    * @param onSave 
-   * @param buttonText 
+   * @param buttonText? 
    */
   showSuccessModal(title: string, message: string, onSave?: () => void, buttonText?: string) {
     this.showModal(title, message, 'successModal', onSave, buttonText);
@@ -106,6 +106,7 @@ export class AlertService {
    * @param title 
    * @param message 
    * @param onSave 
+   * @param buttonText? 
    */
   showDangerModal(title: string, message: string, onSave?: () => void, buttonText?: string) {
     this.showModal(title, message, 'dangerModal', onSave, buttonText);
@@ -116,6 +117,7 @@ export class AlertService {
    * @param title 
    * @param message 
    * @param onSave 
+   * @param buttonText?
    */
   showInfoModal(title: string, message: string, onSave?: () => void, buttonText?: string) {
     this.showModal(title, message, 'infoModal', onSave, buttonText);
