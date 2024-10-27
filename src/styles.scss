@@ -176,8 +176,8 @@ main {
 }
 
   // Define a transparent background variable that adapts to light and dark modes
-$background-light: rgba($light, 0.4); // Light mode background (whitish with transparency)
-$background-dark: rgba($primary, 0.9);   // Dark mode background (darkish with transparency)
+$background-light: rgba($light, 0.5); // Light mode background (whitish with transparency)
+$background-dark: rgba($primary, 0.5);   // Dark mode background (darkish with transparency)
 
 // Define a function to check for dark mode
 @mixin background-mode {
