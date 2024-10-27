@@ -1,6 +1,6 @@
-footer{
-    background: rgba(255, 255, 255, 0.05) !important;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      /* For Safari support */
+footer {
+  background: rgba(255, 255, 255, 0.05) !important;
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  /* For Safari support */
 }

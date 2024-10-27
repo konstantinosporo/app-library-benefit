@@ -3,48 +3,52 @@
   <app-basic-wrapper [title]="'Viewing: ' + book.name" [titleFooter]="'Showing result for book ID: ' + bookId"
     [backButton]="backButton" [showTitleIcon]="false">
     <form class="row g-3">
-      <!-- Book Title with Icon -->
+      <!-- Book Title -->
       <div class="col-md-5">
         <label for="name" class="form-label">Book Title</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-book"></i></span>
-          <input type="text" class="form-control" [value]="book.name" disabled>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Book Title" autocomplete="name"
+            [value]="book.name" disabled>
         </div>
       </div>
 
-      <!-- Year Published with Icon -->
+      <!-- Year Published -->
       <div class="col-md-3">
         <label for="year" class="form-label">Year Published</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-          <input type="number" class="form-control" placeholder="e.g., 2024" [value]="book.year" disabled>
+          <input type="number" class="form-control" name="year" id="year" placeholder="Year Published"
+            [value]="book.year" disabled>
         </div>
       </div>
 
-      <!-- Creation Date with Icon -->
+      <!-- Creation Date -->
       <div class="col-md-4">
         <label for="createdOn" class="form-label">Creation Date</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-bookmark"></i></span>
-          <input type="text" class="form-control" [value]="book.createdOn | date" disabled>
+          <input type="text" class="form-control" name="createdOn" id="createdOn" placeholder="Created On"
+            [value]="book.createdOn | date" disabled>
         </div>
       </div>
 
-      <!-- Author with Icon -->
+      <!-- Author -->
       <div class="col-md-8">
         <label for="author" class="form-label">Author</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" [value]="book.author" disabled>
+          <input type="text" class="form-control" name="author" id="author" placeholder="Author" [value]="book.author"
+            disabled>
         </div>
       </div>
 
-      <!-- Category with Icon -->
+      <!-- Category -->
       <div class="col-md-4">
         <label for="type" class="form-label">Type</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-layers"></i></span>
-          <select class="form-select" disabled>
+          <select class="form-select" title="Type" name="title" id="type" disabled>
             <option selected disabled>{{book.type}}</option>
           </select>
         </div>
