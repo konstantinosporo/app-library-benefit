@@ -8,7 +8,7 @@
         <label for="name" class="form-label">Book Title</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-book"></i></span>
-          <input type="text" class="form-control" formControlName="name" [ngClass]="{
+          <input type="text" class="form-control" formControlName="name" id="name" autocomplete="name" [ngClass]="{
                     'is-invalid': bookFormControl.get('name')?.invalid && (bookFormControl.get('name')?.touched || bookFormControl.get('name')?.dirty),
                     'is-valid': bookFormControl.get('name')?.valid && (bookFormControl.get('name')?.touched || bookFormControl.get('name')?.dirty)
                  }" required>
@@ -63,10 +63,10 @@
 
       <!-- Author with Icon -->
       <div class="col-md-8">
-        <label for="validationCustom03" class="form-label">Author</label>
+        <label for="author" class="form-label">Author</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="validationCustom03" formControlName="author" [ngClass]="{
+          <input type="text" class="form-control" id="author" formControlName="author" [ngClass]="{
                     'is-invalid': bookFormControl.get('author')?.invalid && (bookFormControl.get('author')?.touched || bookFormControl.get('author')?.dirty),
                     'is-valid': bookFormControl.get('author')?.valid && (bookFormControl.get('author')?.touched || bookFormControl.get('author')?.dirty)
                  }" required>

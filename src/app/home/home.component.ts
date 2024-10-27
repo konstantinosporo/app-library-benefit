@@ -15,9 +15,9 @@ import { FeatureItemComponent } from '../shared/feature-item/feature-item.compon
 export class HomeComponent {
 
   carouselImages = [
-    { src: 'https://images.pexels.com/photos/256450/pexels-photo-256450.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 1' },
-    { src: 'https://images.pexels.com/photos/904620/pexels-photo-904620.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 2' },
-    { src: 'https://images.pexels.com/photos/2090104/pexels-photo-2090104.jpeg?auto=compress&cs=tinysrgb&w=350', alt: 'Library Image 3' }
+    { src: '/home/carousel/home-carousel1.webp', alt: 'Library Image 1' },
+    { src: '/home/carousel/home-carousel2.jpeg', alt: 'Library Image 2' },
+    { src: '/home/carousel/home-carousel3.webp', alt: 'Library Image 3' }
   ];
 
   features = [
