@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,14 +18,14 @@ import { Subject } from 'rxjs';
 export class EditBookComponent implements OnDestroy {
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
   backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
-  bookId: string = '';
   bookFormControl = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
-    createdOn: new FormControl(new Date(), Validators.required),
+    createdOn: new FormControl('', Validators.required),
     author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     type: new FormControl('', Validators.required),
   });
+  private readonly datePipe = new DatePipe('en-US');
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -33,20 +33,11 @@ export class EditBookComponent implements OnDestroy {
     private readonly alertService: AlertService,
     private readonly route: ActivatedRoute,
   ) {
-    this.route.params.subscribe(param => this.bookId = param['id'] || '');
-    if (this.bookId.length) {
-      //console.log(this.bookId);
-      this.bookHttpService.getBookById(this.bookId).subscribe((book) => {
-        this.bookFormControl.patchValue({
-          name: book.name,
-          year: book.year,
-          createdOn: book.createdOn,
-          author: book.author,
-          type: book.type,
-        });
+    this.route.params.subscribe(param => {
+      this.bookHttpService.getBookById(param['id']).subscribe((book) => {
+        this.patchForm(book);
       });
-
-    }
+    });
   }
   /**
    * @konstantinosporo
@@ -54,7 +45,7 @@ export class EditBookComponent implements OnDestroy {
    */
   editBook() {
     //console.log(id);
-    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmEdit(), "Add Book");
+    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmEdit(), "Edit Book");
   }
   /**
    * @konstantinosporo
@@ -68,10 +59,13 @@ export class EditBookComponent implements OnDestroy {
       const newBook: BookApi = {
         name: this.bookFormControl.controls['name'].value as string,
         year: this.bookFormControl.controls['year'].value as number,
-        createdOn: this.bookFormControl.controls['createdOn'].value as Date,
+        createdOn: this.bookFormControl.controls['createdOn'].value
+          ? new Date(this.bookFormControl.controls['createdOn'].value)
+          : new Date(),
         author: this.bookFormControl.controls['author'].value as string,
         type: this.bookFormControl.controls['type'].value as string,
       };
+      //console.table(newBook);
       this.bookHttpService.editBook(newBook).subscribe({
         next: (book: BookApi) => {
           this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully edited!`);
@@ -87,6 +81,51 @@ export class EditBookComponent implements OnDestroy {
       });
     }
   }
+  /**
+   * @konstantinosporo
+   * Method to update the value of the form when the data get fetched.
+   * @param book 
+   */
+  patchForm(book: BookApi) {
+    this.bookFormControl.patchValue({
+      name: book.name,
+      year: book.year,
+      createdOn: this.datePipe.transform(book.createdOn, 'yyyy-MM-dd'),
+      author: book.author,
+      type: book.type,
+    });
+  }
+  /**
+ * @konstantinosporo
+ * @description Sets the 'createdOn' date to NOW.
+*/
+  setTodayDate() {
+    this.bookFormControl.controls['createdOn'].patchValue(this.formattedDateNow());
+  }
+  /**
+   * @konstantinosporo
+   * @description Format date for date inputs 'yyyy-MM-dd'
+   */
+  formattedDateNow(): string {
+    return new Date().toISOString().split('T')[0];
+  }
+  /**
+   * @konstantinosporo
+   * @description Checks if the passed date string is equal to today. (NOT COMPARING HOURS);
+   * @param dateString 
+   * @returns 
+   */
+  isDateToday(dateString: string): boolean {
+    const selectedDate = new Date(dateString);
+    const today = new Date();
+
+    // i dont need to compare hours
+    selectedDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDate.getTime() === today.getTime();
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
