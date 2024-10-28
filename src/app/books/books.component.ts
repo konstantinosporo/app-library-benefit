@@ -9,7 +9,7 @@ import { BookComponent } from "./book/book.component";
 import { Router } from '@angular/router';
 import { CrudActions } from '../_lib/interfaces';
 import { AlertService } from '../services/alert-handlers/alert.service';
-import { LibraryHttpService } from '../services/library/library-http.service';
+import { BookHttpService } from '../services/book/book-http.service';
 import { SearchStateService } from '../services/search-state.service';
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { FilterComponent } from "../shared/search/filter/filter.component";
@@ -46,7 +46,7 @@ export class BooksComponent implements CrudActions {
    * ***** VARIABLES WITH TRAILING DOLLAR SIGN $ ARE ALWAYS OBSERVABLES *****
    */
   constructor(
-    private readonly booksHttpService: LibraryHttpService,
+    private readonly booksHttpService: BookHttpService,
     private readonly searchStateService: SearchStateService,
     private readonly alertService: AlertService,
     private readonly router: Router,
@@ -165,7 +165,7 @@ export class BooksComponent implements CrudActions {
    * This method is subject to change because i get 404 when i try to delete for now.
    */
   confirmDelete(id: string) {
-    this.booksHttpService.deleteBook(id).subscribe({
+    this.booksHttpService.deleteBookById(id).subscribe({
       next: (user: BookApi) => {
         this.alertService.showSuccessToast(`Book with ID: ${user._id} successfully deleted!`);
       },

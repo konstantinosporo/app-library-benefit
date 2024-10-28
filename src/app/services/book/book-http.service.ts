@@ -6,7 +6,7 @@ import { BookApi } from '../../books/book/book';
 @Injectable({
   providedIn: 'root'
 })
-export class LibraryHttpService {
+export class BookHttpService {
   // Available books endpoint URL.
   private readonly bookApiUrl: string = "https://book-api-bx2r.onrender.com/books";
 
@@ -29,8 +29,8 @@ export class LibraryHttpService {
   editBook(newBook: BookApi): Observable<BookApi> {
     return this.http.put<BookApi>(this.bookApiUrl, newBook);
   }
-  deleteBook(id: string): Observable<any> {
-    console.log(`Deleting book with URL: ${this.bookApiUrl}/${id}`); // Log the URL
+  deleteBookById(id: string): Observable<any> {
+    //console.log(`Deleting book with URL: ${this.bookApiUrl}/${id}`); // Log the URL
     return this.http.delete(`${this.bookApiUrl}/${id}`);
   }
 

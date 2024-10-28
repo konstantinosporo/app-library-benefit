@@ -12,6 +12,11 @@
               <h5 class="card-title d-flex align-items-center">
                 {{ book.name }}
                 <span class="d-md-none ms-auto mini-image">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-compact-up bounce text-info mx-auto" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z" />
+                  </svg>
                   <img src="/library/book.webp" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
                 </span>
               </h5>
@@ -42,8 +47,7 @@
                 </li>
 
                 <li class="list-inline-item">
-                  <button class="btn btn-sm btn-outline-danger "
-                    (click)="handleClick(book._id ?? '', 'delete')">
+                  <button class="btn btn-sm btn-outline-danger " (click)="handleClick(book._id ?? '', 'delete')">
                     <i class="bi bi-trash me-lg-1"></i><span class="d-none d-lg-inline-block">Delete</span></button>
                 </li>
 

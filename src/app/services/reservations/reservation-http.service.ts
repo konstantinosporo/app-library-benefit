@@ -6,7 +6,7 @@ import { ReservationApi } from '../../reservations/reservation';
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
+export class ReservationHttpService {
     // Available reservations endpoint URL.
   private readonly reservationApiUrl: string = "https://book-api-bx2r.onrender.com/reservations";
   

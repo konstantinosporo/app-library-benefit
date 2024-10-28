@@ -1,0 +1,107 @@
+<div class="container min-vh-75 d-flex justify-content-center align-items-center">
+  <app-basic-wrapper title="Add Customer" [titleFooter]="'Please fill in all the required details.'"
+    iconClass="bi bi-database-add" [backButton]="backButton">
+    <form [formGroup]="customerFormControl" class="row g-3 needs-validation" novalidate>
+
+      <!-- Customer Name-->
+      <div class="col-md-6">
+        <label for="name" class="form-label">Customer Name</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" formControlName="name" id="name" autocomplete="name" [ngClass]="{
+                    'is-invalid': customerFormControl.get('name')?.invalid && (customerFormControl.get('name')?.touched || customerFormControl.get('name')?.dirty),
+                    'is-valid': customerFormControl.get('name')?.valid && (customerFormControl.get('name')?.touched || customerFormControl.get('name')?.dirty)
+                 }" required>
+
+          @if(customerFormControl.get('name')?.invalid && (customerFormControl.get('name')?.touched ||
+          customerFormControl.get('name')?.dirty)){
+          <div class="invalid-feedback">
+            @if(customerFormControl.get('name')?.errors?.['required']){<div>Customer name is required.</div>}
+            @if(customerFormControl.get('name')?.errors?.['minlength']){<div>Minimum length is
+              {{customerFormControl.get('name')?.errors?.['minlength']?.['actualLength']}}/3.</div>}
+            @if(customerFormControl.get('name')?.errors?.['maxlength']){<div>Maximum length is
+              {{customerFormControl.get('name')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
+          </div>
+          }
+
+        </div>
+      </div>
+
+      <!-- Customer Surname-->
+      <div class="col-md-6">
+        <label for="surname" class="form-label">Customer Surname</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" formControlName="surname" id="surname" autocomplete="family-name"
+            [ngClass]="{
+                    'is-invalid': customerFormControl.get('surname')?.invalid && (customerFormControl.get('surname')?.touched || customerFormControl.get('surname')?.dirty),
+                    'is-valid': customerFormControl.get('surname')?.valid && (customerFormControl.get('surname')?.touched || customerFormControl.get('surname')?.dirty)
+                 }" required>
+
+          @if(customerFormControl.get('surname')?.invalid && (customerFormControl.get('surname')?.touched ||
+          customerFormControl.get('surname')?.dirty)){
+          <div class="invalid-feedback">
+            @if(customerFormControl.get('surname')?.errors?.['required']){<div>Customer surname is required.</div>}
+            @if(customerFormControl.get('surname')?.errors?.['minlength']){<div>Minimum length is
+              {{customerFormControl.get('surname')?.errors?.['minlength']?.['actualLength']}}/3.</div>}
+            @if(customerFormControl.get('surname')?.errors?.['maxlength']){<div>Maximum length is
+              {{customerFormControl.get('surname')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
+          </div>
+          }
+
+        </div>
+      </div>
+
+
+      <!-- Customer Email-->
+      <div class="col-md-12 col-lg-6">
+        <label for="email" class="form-label">Customer Email</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{
+                    'is-invalid': customerFormControl.get('email')?.invalid && (customerFormControl.get('email')?.touched || customerFormControl.get('email')?.dirty),
+                    'is-valid': customerFormControl.get('email')?.valid && (customerFormControl.get('email')?.touched || customerFormControl.get('email')?.dirty)
+                 }" required>
+
+          @if(customerFormControl.get('email')?.invalid && (customerFormControl.get('email')?.touched ||
+          customerFormControl.get('email')?.dirty)){
+          <div class="invalid-feedback">
+            @if(customerFormControl.get('email')?.errors?.['required']){<div>Customer Email is required.</div>}
+            @if(customerFormControl.get('email')?.errors?.['email']){<div>Customer email must be valid.</div>}
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Customer PhoneNumber-->
+      <div class="col-md-12 col-lg-6">
+        <label for="phoneNumber" class="form-label">Customer PhoneNumber</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-phone"></i></span>
+          <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [ngClass]="{
+                    'is-invalid': customerFormControl.get('phoneNumber')?.invalid && (customerFormControl.get('phoneNumber')?.touched || customerFormControl.get('phoneNumber')?.dirty),
+                    'is-valid': customerFormControl.get('phoneNumber')?.valid && (customerFormControl.get('phoneNumber')?.touched || customerFormControl.get('phoneNumber')?.dirty)
+                 }" required>
+
+          @if(customerFormControl.get('phoneNumber')?.invalid && (customerFormControl.get('phoneNumber')?.touched ||
+          customerFormControl.get('phoneNumber')?.dirty)){
+          <div class="invalid-feedback">
+            @if(customerFormControl.get('phoneNumber')?.errors?.['required']){<div>PhoneNumber is required.</div>}
+            @if(customerFormControl.get('phoneNumber')?.errors?.['minlength']){<div>Minimum length is
+              {{customerFormControl.get('phoneNumber')?.errors?.['minlength']?.['actualLength']}}/8.</div>}
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
+          [disabled]="customerFormControl.invalid" (click)="addCustomer()">
+          <i class="me-1"
+            [ngClass]="{'bi bi-person-fill-add': customerFormControl.valid, 'bi bi-person-fill-slash': customerFormControl.invalid}"></i>Add
+          Customer</button>
+      </div>
+
+    </form>
+  </app-basic-wrapper>
+</div>

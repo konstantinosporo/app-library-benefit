@@ -1,31 +1,19 @@
 .btn-blue {
   width: 40px;
-  /* Set initial width for the button (only icon visible) */
   transition: width 0.3s ease;
-  /* Smooth transition for width */
   overflow: hidden;
-  /* Hide overflow to prevent text from showing initially */
   display: flex;
-  /* Use flexbox for layout */
   align-items: center;
-  /* Center items vertically */
   justify-content: flex-start;
-  /* Align items to the left */
 }
 
 .text-value {
   opacity: 0;
-  /* Hide the text initially */
   visibility: hidden;
-  /* Prevent it from taking up space */
   white-space: nowrap;
-  /* Prevent text from wrapping */
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  /* Smooth transition */
   margin-left: 8px;
-  /* Space between icon and text */
   margin-right: 10px;
-  /* Space to the right of the text */
 }
 
 .btn-blue:hover .text-value {

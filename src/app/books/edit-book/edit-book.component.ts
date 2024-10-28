@@ -2,11 +2,11 @@ import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert-handlers/alert.service';
-import { LibraryHttpService } from '../../services/library/library-http.service';
+import { BookHttpService } from '../../services/book/book-http.service';
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { BookApi } from '../book/book';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-edit-book',
@@ -29,7 +29,7 @@ export class EditBookComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private readonly bookHttpService: LibraryHttpService,
+    private readonly bookHttpService: BookHttpService,
     private readonly alertService: AlertService,
     private readonly route: ActivatedRoute,
   ) {

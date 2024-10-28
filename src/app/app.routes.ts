@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ViewBookComponent } from './books/view-book/view-book.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
+import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
 
 export const routes: Routes = [
   // HOME ROUTE
@@ -21,6 +22,7 @@ export const routes: Routes = [
 
   // CUSTOMERS ROUTES
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
-
+  { path: 'customers/add-customer', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
+  
 
 ];

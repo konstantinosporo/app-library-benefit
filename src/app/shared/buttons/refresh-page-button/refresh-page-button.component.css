@@ -1,0 +1,16 @@
+.btn-refresh {
+  transition: width 0.3s ease, background-color 0.3s ease;
+  color: var(--bs-text);
+}
+
+.btn-refresh:hover {
+  background-color: var(--bs-secondary);
+}
+
+.btn-refresh:active {
+  transform: scale(0.95);
+}
+
+::ng-deep body.dark .btn-refresh {
+  background-color: var(--bs-light-dark);
+}
