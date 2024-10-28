@@ -19,11 +19,11 @@
           </tr>
         </thead>
         <tbody>
+          @for(reservation of dataStream; track reservation._id;let idx =$index){
           <tr>
-            @for(reservation of dataStream; track reservation._id;let idx =$index){
             <th scope="row">{{idx + 1}}</th>
             <td>{{reservation.book.name}}</td>
-            <td>{{reservation.customer.name}}</td>
+            <td>{{reservation.customer?.name ?? 'Guest'}}</td>
             <td>
               <span class="badge rounded-pill px-2 text-white" [ngClass]="{
                       'text-bg-green': reservation.status === 'active',
@@ -48,8 +48,8 @@
                 <i class="bi bi-trash"></i>
               </button>
             </td>
-            }
           </tr>
+          }
         </tbody>
       </table>
     </div>

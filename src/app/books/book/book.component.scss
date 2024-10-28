@@ -53,18 +53,35 @@ h5,p,p>small>i{
   z-index: 1; 
 }
 
-// image css for sm screens
-.mini-image {
-  position: absolute;
-  right: 10%;
-  top: 15%;
-  transform: translateY(-50%);
-  width: 7rem;
-  height: auto; 
-}
-
-
-// Animations Beutification
+// Animations Beutification - Mini Image - Small Screens
 .book-card:hover .custom-line {
   width: 100px;
+}
+
+.mini-image {
+  position: absolute;
+  right: 5%;
+  bottom: calc(-26% - 1rem);
+  width: 7rem;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.mini-image:hover {
+  transform: translateY(-40%); /* Moves the image up by 10% */
+}
+
+/* Bouncing animation */
+.bounce {
+  display: inline-block;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px); /* Adjust the height of the bounce as desired */
+  }
 }

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs';
 
 import { BookApi } from '../../../books/book/book';
-import { LibraryHttpService } from '../../../services/library/library-http.service';
+import { BookHttpService } from '../../../services/book/book-http.service';
 import { BooksCarouselComponent } from './books-carousel/books-carousel.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { BooksCarouselComponent } from './books-carousel/books-carousel.componen
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private readonly libraryHttpService: LibraryHttpService) {
+  constructor(private readonly libraryHttpService: BookHttpService) {
     this.libraryHttpService.getBooks().pipe(map(books => books.filter(book => book.available))).subscribe(availableBooks => {
       this.allBooks = availableBooks;
       this.chunkAvailableBooks();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReservationService } from '../services/reservations/reservation.service';
+import { ReservationHttpService } from '../services/reservations/reservation-http.service';
 import { Observable } from 'rxjs';
 import { ReservationApi } from './reservation';
 import { AsyncPipe, DatePipe, NgClass, UpperCasePipe } from '@angular/common';
@@ -17,7 +17,7 @@ export class ReservationsComponent implements CrudActions {
 
   dataStream$!: Observable<ReservationApi[]>;
 
-  constructor(private readonly reservationHttpService: ReservationService) {
+  constructor(private readonly reservationHttpService: ReservationHttpService) {
     this.dataStream$ = this.reservationHttpService.getReservations();
   }
 

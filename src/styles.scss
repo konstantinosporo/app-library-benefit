@@ -1,12 +1,10 @@
 // THIS FILE OVERWRITES THE DEFAULT VALUES OF BOOTRSTRAP
 // Custom Bootstrap SCSS imports
-@import '../node_modules/bootstrap/scss/functions';  
+@import '../node_modules/bootstrap/scss/functions';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;800&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-// @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 // Color system
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -16,26 +14,22 @@ $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
 // Adjusted Bootstrap Colors for Library Theme
-
-$blue:      #4A708B !default; // Slate Blue (calm, trustworthy)
+$blue: #4A708B !default; // Slate Blue (calm, trustworthy)
 $blue-link: #0056b3 !default; // Light Slate Blue (contrasts well in dark mode)
-
-$green:     #6A9D66 !default; // Soft Sage Green (balance, growth)
-$yellow:    #F0DCA0 !default; // Pale Yellow (enlightenment)
-$teal:      #64A3B0 !default; // Soft Teal (peaceful accent)
-
-$red:       #B85450 !default; // Dusty Rose Red (warmth, attention)
-$orange:    #D6A85F !default; // Soft Golden Orange (creativity)
-$purple:    #8F7CA6 !default; // Soft Lavender (wisdom)
-$cyan:      #94B2C7 !default; // Light Aqua Cyan (clarity)
-
-$light:     #F2F2F2 !default; // Soft Light Gray (background)
-$dark:      #001220 !default; // Charcoal Gray (strong accent)
-$light-dark:#00233D !default; // Charcoal Gray (strong accent)
-$white:     #FFFFFF !default; // Clean, neutral
+$green: #6A9D66 !default; // Soft Sage Green (balance, growth)
+$yellow: #F0DCA0 !default; // Pale Yellow (enlightenment)
+$teal: #64A3B0 !default; // Soft Teal (peaceful accent)
+$red: #B85450 !default; // Dusty Rose Red (warmth, attention)
+$orange: #D6A85F !default; // Soft Golden Orange (creativity)
+$purple: #8F7CA6 !default; // Soft Lavender (wisdom)
+$cyan: #94B2C7 !default; // Light Aqua Cyan (clarity)
+$light: #F2F2F2 !default; // Soft Light Gray (background)
+$dark: #001220 !default; // Charcoal Gray (strong accent)
+$light-dark: #00233D !default; // Charcoal Gray (strong accent)
+$white: #FFFFFF !default; // Clean, neutral
 
 $grays: (
   "100": $gray-100,
@@ -51,76 +45,71 @@ $grays: (
 
 // New Color Palette
 // $primary:   #5A4636 !default; 
-$primary:   #00233D !default; 
+$primary: #00233D !default;
 // $secondary: #D0C6B8 !default; 
-$secondary: #E0E6F5 !default; 
-$success:   $green !default; 
-$info:      $cyan !default; 
-$warning:   $orange !default; 
-$danger:    $red !default;
-$light:     $light !default; 
-$dark:      $dark !default; 
+$secondary: #E0E6F5 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $orange !default;
+$danger: $red !default;
+$light: $light !default;
+$dark: $dark !default;
 
 // Theme colors map
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
   "light-dark": $light-dark,
-  "blue":       $blue,
-  "blue-link":  $blue-link,
-  "purple":     $purple,
-  "red":        $red,
-  "yellow":     $yellow,
-  "green":      $green,
-  "orange":     $orange,
-  "teal":       $teal,
-  "black":      $black,
-) !default;
+  "blue": $blue,
+  "blue-link": $blue-link,
+  "red": $red,
+  "yellow": $yellow,
+  "green": $green,
+  "orange": $orange,
+  "teal": $teal,
+  "black": $black,
+  ) !default;
+
+/* Custom Variables */
+$transition-duration: 0.3s;
+
 /* Global Styles */
 html {
   height: 100%;
 }
 
+/* Light Mode Variables */
 body {
-  --bs-font-poppins: 'Poppins', sans-serif;
-  --bs-body-font-family: var(--bs-font-poppins);
-  --bs-dark: #E0E6F5;
-  --bs-gray: #42484C;
-  --bs-muted: #7C858D;
-  --bs-custom-gray: #7C858D;
-  --bs-light: #F5F5F5; 
-  --bs-text: #002E52;
-  --bs-btn-card: #002E52;
-  --bs-text-foreground: #F5F5F5;
-  --bs-btn-foreground: #4A708B;
-  
+  --bs-font-poppins: 'Poppins',
+    sans-serif;
+  --bs-body-font-family: var(--bs-font-poppins
+  );
+--bs-dark: #E0E6F5;
+--bs-gray: #42484C;
+--bs-muted: #7C858D;
+--bs-custom-gray: #7C858D;
+--bs-light: #F5F5F5;
+--bs-text: #002E52;
+--bs-btn-card: #002E52;
+--bs-text-foreground: #F5F5F5;
+--bs-btn-foreground: #4A708B;
 
-
-  font-family: var(--bs-body-font-family);
-  display: block;
-  min-height: 100vh;
-  background-image: url('/home/svgs/background-light.svg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  text-size-adjust: 100%;
-  text-align: match-parent;
-  transition: background-image 0.3s ease;
-
-  /* Language-specific styles */
-  [lang='el'] & {
-    --bs-body-font-family: var(--bs-font-poppins);
-  }
-  
-  [lang='en'] & {
-    --bs-body-font-family: var(--bs-font-poppins);
-  }
+font-family: var(--bs-body-font-family);
+display: block;
+min-height: 100vh;
+background-image: url('/home/svgs/background-light.svg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+text-size-adjust: 100%;
+text-align: match-parent;
+transition: background-image 0.3s ease;
 
 }
 
@@ -129,21 +118,27 @@ body.dark {
   --bs-dark: #0F182E;
   --bs-gray: #687078;
   --bs-custom-gray: #9299A0;
-  --bs-light: #EBEBEB; 
+  --bs-light: #EBEBEB;
   --bs-text: #F5F5F5;
   --bs-btn-card: #F5F5F5;
   --bs-text-foreground: #14203E;
   --bs-btn-foreground: #14203E;
-    background-image: url('/home/svgs/background-dark.svg');
-    ::-webkit-calendar-picker-indicator {
+  background-image: url('/home/svgs/background-dark.svg');
+
+  ::-webkit-calendar-picker-indicator {
     filter: invert(1);
-}
+  }
 
 }
 
+/* Main Layout */
+main {
+  padding-top: 4rem;
+}
 
 /* Labels */
-label, small {
+label,
+small {
   color: var(--bs-text);
 }
 
@@ -170,27 +165,22 @@ span h1 {
   background-color: hsl(20, 23%, 21%);
 }
 
-/* Main Layout */
-main {
-  padding-top: 4rem; /* padding as much as the navbar height */
-}
-
 /* Library Gradient */
 .library-gradient {
   color: #fff;
   background-image: linear-gradient(30deg, var(--bs-primary), transparent 85%);
 }
 
-  // Define a transparent background variable that adapts to light and dark modes
-$background-light: rgba($light, 0.5); // Light mode background (whitish with transparency)
-$background-dark: rgba($primary, 0.5);   // Dark mode background (darkish with transparency)
+/* Custom mixin for cards */
+$background-light: rgba($light, 0.5); 
+$background-dark: rgba($primary, 0.5); 
 
-// Define a function to check for dark mode
+/* Define a function to check for dark mode*/
 @mixin background-mode {
-  background-color: $background-light; // Default to light mode background
+  background-color: $background-light; 
   transition: background-color 0.2s ease;
 
-  // Adjust for dark mode when .dark class is present on the parent
+  /* Adjust for dark mode when .dark class is present on the parent */
   .dark & {
     background-color: $background-dark;
   }
@@ -205,33 +195,34 @@ $background-dark: rgba($primary, 0.5);   // Dark mode background (darkish with t
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-// tables
+/* Tables */
 td {
   white-space: nowrap;
-  /* Prevents buttons from wrapping */
 }
 
-/* Custom min-vh Utility Classes */
+/* Utility Classes */
 .min-vh-50 {
   min-height: 50vh !important;
 }
+
 .min-vh-75 {
   min-height: 75vh !important;
 }
+
 .min-vh-80 {
   min-height: 80vh !important;
 }
+
 .min-vh-85 {
   min-height: 85vh !important;
 }
 
 // Configuration
 @import '../node_modules/bootstrap/scss/variables';
-@import '../node_modules/bootstrap/scss/variables-dark'; 
-@import '../node_modules/bootstrap/scss/maps'; 
+@import '../node_modules/bootstrap/scss/variables-dark';
+@import '../node_modules/bootstrap/scss/maps';
 @import '../node_modules/bootstrap/scss/mixins';
 @import '../node_modules/bootstrap/scss/utilities';
-
 // Layout & Components
 @import '../node_modules/bootstrap/scss/root';
 @import '../node_modules/bootstrap/scss/reboot';
@@ -247,8 +238,6 @@ td {
 @import '../node_modules/bootstrap/scss/button-group';
 @import '../node_modules/bootstrap/scss/nav';
 @import '../node_modules/bootstrap/scss/navbar';
-
-
 @import '../node_modules/bootstrap/scss/card';
 @import '../node_modules/bootstrap/scss/close';
 @import '../node_modules/bootstrap/scss/toasts';
@@ -267,18 +256,19 @@ td {
 //@import '../node_modules/bootstrap/scss/popover';
 //@import '../node_modules/bootstrap/scss/offcanvas';
 //@import '../node_modules/bootstrap/scss/placeholders';
-
 // Helpers
 @import '../node_modules/bootstrap/scss/helpers';
-
 // Utilities
 @import '../node_modules/bootstrap/scss/utilities/api';
 
-// noticable disabled effect 
+/* Noticable disabled effect */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 0.8;
   }
@@ -289,35 +279,31 @@ td {
   color: var(--bs-custom-gray) !important;
   border: 1px dashed #a1a1a1 !important;
   cursor: not-allowed !important;
-  animation: pulse 2s ease-in-out infinite; 
+  animation: pulse 2s ease-in-out infinite;
 }
 
-$black: #000;
-$white: #fff;
-$transition-duration: 0.3s; 
-
+/* Custom reusable buttons */
 .btn-custom {
-  background-color: var(--bs-text); 
+  background-color: var(--bs-text);
   color: var(--bs-text-foreground);
-  border: 1px solid $black; 
+  border: 1px solid $black;
   transition: background-color $transition-duration, color $transition-duration;
 
   &:hover {
     background-color: var(--bs-text-foreground);
-    color: var(--bs-text); 
+    color: var(--bs-text);
     border: 1px solid var(--bs-text);
   }
 
 }
 
 .btn-toggle {
-  background-color: var(--bs-text); 
+  background-color: var(--bs-text);
   color: var(--bs-text-foreground);
-  border: 1px solid $black; 
+  border: 1px solid $black;
   transition: background-color $transition-duration;
 
   &:hover {
     color: var(--bs-text, darken, 10%)
   }
 }
-

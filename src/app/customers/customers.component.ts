@@ -3,25 +3,32 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CrudActions } from '../_lib/interfaces';
 import { AlertService } from '../services/alert-handlers/alert.service';
-import { CustomerService } from '../services/customers/customer.service';
+import { CustomerHttpService } from '../services/customers/customer-http.service';
 import { CustomerApi } from './customer';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
+import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
+import { Router } from '@angular/router';
+import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [AsyncPipe, SpinnerComponent],
+  imports: [AsyncPipe, SpinnerComponent, AddNewButtonComponent, RefreshPageButtonComponent],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements CrudActions {
   //TODO Change the actual data to target the projects api!
-  //dataStream$!: Observable<CustomerApi[]>;
-  mockDataStream$!: Observable<CustomerApi[]>;
+  dataStream$!: Observable<CustomerApi[]>;
+  //mockDataStream$!: Observable<CustomerApi[]>;
 
-  constructor(private readonly customerHttpService: CustomerService, private readonly alertService: AlertService) {
-    //this.dataStream$ = this.customerHttpService.getCustomers();
-    this.mockDataStream$ = this.customerHttpService.getMockCustomers();
+  constructor(
+    private readonly customerHttpService: CustomerHttpService,
+    private readonly alertService: AlertService,
+    private readonly router: Router,
+  ) {
+    this.dataStream$ = this.customerHttpService.getCustomers();
+    //this.mockDataStream$ = this.customerHttpService.getCustomers();
   }
 
   view(id: string) {
@@ -36,13 +43,13 @@ export class CustomersComponent implements CrudActions {
   }
 
   confirmDelete(id: string) {
-    this.customerHttpService.deleteMockCustomer(id).subscribe({
+    this.customerHttpService.deleteCustomerById(id).subscribe({
       next: (user: CustomerApi) => {
         //console.log(`User ${user.name} with id: ${user._id} has been deleted.`);
         this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
-        this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // update the data stream!
-        this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
-        this.mockDataStream$ = this.customerHttpService.getMockCustomers(); // Refetch the data stream
+        this.dataStream$ = this.customerHttpService.getCustomers(); // update the data stream!
+        // this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
+        // this.mockDataStream$ = this.customerHttpService.getCustomers(); // Refetch the data stream
       },
       error: (err) => {
         if (err instanceof Error) {
@@ -50,6 +57,14 @@ export class CustomersComponent implements CrudActions {
         } else throw new Error('Error deleting user.');
       }
     });
+  }
+
+  addNewCustomer(route: string) {
+    this.router.navigate([route]);
+  }
+
+  refreshCustomers() {
+    this.dataStream$ = this.customerHttpService.getCustomers();
   }
 
 }

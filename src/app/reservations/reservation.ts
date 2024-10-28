@@ -8,7 +8,7 @@ import { BookApi } from "../books/book/book";
  */
 export interface ReservationApi {
   _id: string;
-  customer: CustomerApi;
+  customer?: CustomerApi;
   book: BookApi;
   returnBy: Date;
   status: Status;

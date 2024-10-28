@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
-import { LibraryHttpService } from '../../services/library/library-http.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BookApi } from '../../books/book/book';
 import { AlertService } from '../../services/alert-handlers/alert.service';
+import { BookHttpService } from '../../services/book/book-http.service';
+import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -31,7 +32,10 @@ export class AddBookComponent {
     type: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly bookHttpService: LibraryHttpService, private readonly alertService: AlertService) {
+  constructor(
+    private readonly bookHttpService: BookHttpService,
+    private readonly alertService: AlertService,
+    private readonly router: Router) {
   }
   /**
    * @konstantinosporo
@@ -63,9 +67,12 @@ export class AddBookComponent {
       this.bookHttpService.addBook(newBook).subscribe({
         next: (book: BookApi) => {
           this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully created!`);
+          setTimeout(() => {
+            this.router.navigate(['books']);
+          }, 1000);
         },
         error: (err) => {
-          console.error('Error creating book:', err); // Log full error
+          console.error('Error creating book:', err);
           if (err instanceof Error) {
             throw new Error(`Error creating book: ${err.message}`);
           } else {

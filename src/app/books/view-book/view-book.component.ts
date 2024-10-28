@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
-import { LibraryHttpService } from '../../services/library/library-http.service';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BookApi } from '../book/book';
+import { BookHttpService } from '../../services/book/book-http.service';
 import { SpinnerComponent } from "../../shared/spinner/spinner.component";
+import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
+import { BookApi } from '../book/book';
 
 @Component({
   selector: 'app-view-book',
@@ -21,7 +21,7 @@ export class ViewBookComponent {
   datePipe = new DatePipe('en-US');
   bookToView$!: Observable<BookApi>;
 
-  constructor(private readonly bookHttpService: LibraryHttpService, private readonly route: ActivatedRoute) {
+  constructor(private readonly bookHttpService: BookHttpService, private readonly route: ActivatedRoute) {
     this.route.params.subscribe(param => this.bookId = param['id'] || '');
     if (this.bookId.length) {
       //console.log(this.bookId);

@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, filter, startWith } from 'rxjs';
 import { CrudActions } from '../../../_lib/interfaces';
-import { AlertService } from '../../../services/alert-handlers/alert.service';
-import { LibraryHttpService } from '../../../services/library/library-http.service';
-import { SearchStateService } from '../../../services/search-state.service';
-import { AddNewButtonComponent } from "../../buttons/add-new-button/add-new-button.component";
-import { SpinnerComponent } from "../../spinner/spinner.component";
 import { BookApi } from '../../../books/book/book';
 import { BookComponent } from "../../../books/book/book.component";
+import { AlertService } from '../../../services/alert-handlers/alert.service';
+import { BookHttpService } from '../../../services/book/book-http.service';
+import { SearchStateService } from '../../../services/search-state.service';
+import { AddNewButtonComponent } from "../../buttons/add-new-button/add-new-button.component";
 import { SearchComponent } from "../../search/search.component";
+import { SpinnerComponent } from "../../spinner/spinner.component";
 
 
 
@@ -30,7 +30,7 @@ export class LibraryComponent implements CrudActions {
   // Better practice and more efficient. Using a State Service.
   constructor(
     private readonly searchStateService: SearchStateService,
-    private readonly libraryHttpService: LibraryHttpService,
+    private readonly libraryHttpService: BookHttpService,
     private readonly alertService: AlertService,
     private readonly router: Router) {
     this.libraryHttpService.getBooks().subscribe(books => {
@@ -112,7 +112,7 @@ export class LibraryComponent implements CrudActions {
   }
 
   confirmDelete(id: string) {
-    this.libraryHttpService.deleteBook(id).subscribe({
+    this.libraryHttpService.deleteBookById(id).subscribe({
       next: (user: BookApi) => {
         this.alertService.showSuccessToast(`Book with ID: ${user._id} successfully deleted!`);
       },
