@@ -96,6 +96,7 @@ body {
   --bs-custom-gray: #7C858D;
   --bs-light: #F5F5F5; 
   --bs-text: #002E52;
+  --bs-btn-card: #002E52;
   --bs-text-foreground: #F5F5F5;
   --bs-btn-foreground: #4A708B;
   
@@ -130,11 +131,16 @@ body.dark {
   --bs-custom-gray: #9299A0;
   --bs-light: #EBEBEB; 
   --bs-text: #F5F5F5;
+  --bs-btn-card: #F5F5F5;
   --bs-text-foreground: #14203E;
   --bs-btn-foreground: #14203E;
     background-image: url('/home/svgs/background-dark.svg');
+    ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
 
 }
+
 
 /* Labels */
 label, small {
@@ -303,3 +309,15 @@ $transition-duration: 0.3s;
   }
 
 }
+
+.btn-toggle {
+  background-color: var(--bs-text); 
+  color: var(--bs-text-foreground);
+  border: 1px solid $black; 
+  transition: background-color $transition-duration;
+
+  &:hover {
+    color: var(--bs-text, darken, 10%)
+  }
+}
+

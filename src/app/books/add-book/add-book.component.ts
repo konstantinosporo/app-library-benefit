@@ -26,7 +26,7 @@ export class AddBookComponent {
   bookFormControl = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
-    createdOn: new FormControl(new Date(), [Validators.required]),
+    createdOn: new FormControl(this.formattedDateNow(), [Validators.required]),
     author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     type: new FormControl('', Validators.required),
   });
@@ -53,10 +53,13 @@ export class AddBookComponent {
       const newBook: BookApi = {
         name: this.bookFormControl.controls['name'].value as string,
         year: this.bookFormControl.controls['year'].value as number,
-        createdOn: this.bookFormControl.controls['createdOn'].value as Date,
+        createdOn: this.bookFormControl.controls['createdOn'].value
+          ? new Date(this.bookFormControl.controls['createdOn'].value)
+          : new Date(),
         author: this.bookFormControl.controls['author'].value as string,
         type: this.bookFormControl.controls['type'].value as string,
       };
+      //console.table(newBook);
       this.bookHttpService.addBook(newBook).subscribe({
         next: (book: BookApi) => {
           this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully created!`);
@@ -74,21 +77,33 @@ export class AddBookComponent {
   }
   /**
    * @konstantinosporo
-   * @description Attempt to transform the text inside the Reactive Form input. 
-   * For now it does NOT work as expected. THIS METHOD WILL CHANGE OR GET DELETED!
-   */
-  get formattedDate(): string {
-    const dateValue = this.bookFormControl.get('createdOn')?.value;
-    return dateValue ? this.datePipe.transform(dateValue, 'dd-MM-yyy') || '' : '';
+   * @description Sets the 'createdOn' date to NOW.
+  */
+  setTodayDate() {
+    this.bookFormControl.controls['createdOn'].patchValue(this.formattedDateNow());
   }
   /**
    * @konstantinosporo
-   * @description This method attempts to change the input of the Date.
-   * For now it does NOT work as expected. THIS METHOD WILL CHANGE OR GET DELETED!
+   * @description Format date for date inputs 'yyyy-MM-dd'
    */
-  onDateChange(event: Event): void {
-    const inputDate = new Date((event.target as HTMLInputElement).value);
-    this.bookFormControl.get('createdOn')?.setValue(inputDate);
+  formattedDateNow(): string {
+    return new Date().toISOString().split('T')[0];
+  }
+  /**
+   * @konstantinosporo
+   * @description Checks if the passed date string is equal to today. (NOT COMPARING HOURS);
+   * @param dateString 
+   * @returns 
+   */
+  isDateToday(dateString: string): boolean {
+    const selectedDate = new Date(dateString);
+    const today = new Date();
+
+    // i dont need to compare hours
+    selectedDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return selectedDate.getTime() === today.getTime();
   }
 
 }

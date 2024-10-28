@@ -1,6 +1,6 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Add Book'" [titleFooter]="'Please fill in all the required details.'" iconClass="bi bi-database-add"
-    [backButton]="backButton">
+  <app-basic-wrapper [title]="'Add Book'" [titleFooter]="'Please fill in all the required details.'"
+    iconClass="bi bi-database-add" [backButton]="backButton">
     <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
 
       <!-- Book Title-->
@@ -49,10 +49,22 @@
 
       <!-- Created On-->
       <div class="col-md-4">
-        <label for="createdOn" class="form-label">Created On</label>
+        <div class="d-flex align-items-center">
+          <label for="createdOn" class="form-label">Created On</label>
+          @if(!isDateToday(bookFormControl.controls['createdOn'].value ?? '')){
+          <ng-container>
+            <span class="d-block ms-auto">
+              <button class="btn btn-sm btn-toggle shadow-sm py-0" (click)="setTodayDate()">
+                <i class="bi bi-clock-history"></i>
+                Set Today
+              </button>
+            </span>
+          </ng-container>
+          }
+        </div>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-bookmark"></i></span>
-          <input type="text" class="form-control" id="createdOn" formControlName="createdOn" [ngClass]="{
+          <input type="date" class="form-control" id="createdOn" formControlName="createdOn" [ngClass]="{
                     'is-invalid': bookFormControl.get('createdOn')?.invalid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty),
                     'is-valid': bookFormControl.get('createdOn')?.valid && (bookFormControl.get('createdOn')?.touched || bookFormControl.get('createdOn')?.dirty)
                  }" required>
@@ -60,7 +72,7 @@
           @if(bookFormControl.get('createdOn')?.invalid && (bookFormControl.get('createdOn')?.touched ||
           bookFormControl.get('createdOn')?.dirty)){
           <div class="invalid-feedback">
-            Setting current time as default
+            Date is not valid. Click 'Set Today'.
           </div>
           }
         </div>
@@ -105,7 +117,7 @@
           @if(bookFormControl.get('type')?.invalid && (bookFormControl.get('type')?.touched ||
           bookFormControl.get('type')?.dirty)){
           <div class="invalid-feedback">
-            Please select a valid category
+            Please select a valid category.
           </div>
           }
         </div>
