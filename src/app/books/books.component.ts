@@ -80,7 +80,7 @@ export class BooksComponent implements CrudActions {
     } else {
       // console.log(`FROM THE METHOD fetchdata(): ${text}`);
       this.books$ = this.allBooks$.pipe(map((books) => books.filter((book) => {
-        return book.name.toLowerCase().includes(text) || book.author.toLowerCase().includes(text);
+        return book.name.toLowerCase().includes(text.toLowerCase()) || book.author.toLowerCase().includes(text.toLowerCase());
       })));
     }
   }
