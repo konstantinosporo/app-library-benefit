@@ -26,7 +26,7 @@ export class AddBookComponent {
   bookFormControl = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
-    createdOn: new FormControl(new Date(), Validators.required),
+    createdOn: new FormControl(new Date(), [Validators.required]),
     author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     type: new FormControl('', Validators.required),
   });

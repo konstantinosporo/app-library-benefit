@@ -26,6 +26,9 @@ export class LibraryHttpService {
   addBook(newBook: BookApi): Observable<BookApi> {
     return this.http.post<BookApi>(this.bookApiUrl, newBook);
   }
+  editBook(newBook: BookApi): Observable<BookApi> {
+    return this.http.put<BookApi>(this.bookApiUrl, newBook);
+  }
   deleteBook(id: string): Observable<any> {
     console.log(`Deleting book with URL: ${this.bookApiUrl}/${id}`); // Log the URL
     return this.http.delete(`${this.bookApiUrl}/${id}`);

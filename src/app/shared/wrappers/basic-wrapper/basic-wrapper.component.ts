@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BasicWrapperComponent {
   @Input() title?: string = '';
+  @Input() iconClass?: string = '';
   @Input() showTitleIcon?: boolean = true;
   @Input() titleFooter?: string = '';
   @Input() footer?: string = '';

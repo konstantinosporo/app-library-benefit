@@ -5,14 +5,16 @@ import { CustomersComponent } from './customers/customers.component';
 import { HomeComponent } from './home/home.component';
 import { ViewBookComponent } from './books/view-book/view-book.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { EditBookComponent } from './books/edit-book/edit-book.component';
 
 export const routes: Routes = [
   // HOME ROUTE
   { path: '', component: HomeComponent, title: 'Home | AppLibrary' },
   // BOOKS ROUTES
   { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
-  { path: 'library/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },
-  { path: 'library/view-book/:id', component: ViewBookComponent, title: 'View Book | AppLibrary' },
+  { path: 'books/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },
+  { path: 'books/edit-book/:id', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
+  { path: 'books/view-book/:id', component: ViewBookComponent, title: 'View Book | AppLibrary' },
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
 
