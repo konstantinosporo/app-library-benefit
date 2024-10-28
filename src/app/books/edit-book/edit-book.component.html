@@ -1,5 +1,5 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Add Book'" [titleFooter]="'Please fill in all the required details.'" iconClass="bi bi-database-add"
+  <app-basic-wrapper [title]="'Edit Book'" [titleFooter]="'Please fill in all the required details.'" iconClass="bi bi-database-up"
     [backButton]="backButton">
     <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
 
@@ -113,9 +113,9 @@
 
       <div class="col-12">
         <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
-          [disabled]="bookFormControl.invalid" (click)="addBook()">
+          [disabled]="bookFormControl.invalid" (click)="editBook()">
           <i class="me-1"
-            [ngClass]="{'bi bi-file-earmark-check': bookFormControl.valid, 'bi bi-file-earmark-x': bookFormControl.invalid}"></i>Add
+            [ngClass]="{'bi bi-pencil': bookFormControl.valid, 'bi bi-file-earmark-x': bookFormControl.invalid}"></i>Edit
           Book</button>
       </div>
 
