@@ -1,8 +1,4 @@
-<!-- <div class="carousel">
-  <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt">
-  <button (click)="prevSlide()">Previous</button>
-  <button (click)="nextSlide()">Next</button>
-</div> -->
+
 <div class="carousel" aria-label="Image Carousel">
   <div class="carousel-container">
     <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt" class="carousel-image">
@@ -12,22 +8,6 @@
     <button (click)="nextSlide()" class="carousel-control carousel-control-next" aria-label="Next Slide">
       &gt;
     </button>
-  </div>
-  <!-- <div class="carousel-indicators">
-    <button *ngFor="let image of images; let i = index" 
-            [class.active]="i === currentIndex"
-            (click)="goToSlide(i)"
-            [attr.aria-label]="'Go to slide ' + (i + 1)">
-    </button>
-  </div> -->
+  </div> 
 </div>
-<!-- <p>test works!</p>
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-    </p>
-  </div>
-  <img src="/heroPhoto.jpg" class="carousel img" alt="...">
-  <a href="#" class="btn btn-primary">Go somewhere</a>
-</div> -->
+

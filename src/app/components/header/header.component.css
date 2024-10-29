@@ -1,0 +1,8 @@
+.navbar {
+    position: fixed;     /* Fixes the navbar in place */
+    top: 0;              /* Positions it at the top of the viewport */
+    left: 0;             /* Aligns it to the left */
+    width: 100%;         /* Makes it span the full width of the page */
+    z-index: 1000;       /* Ensures it stays above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow */
+  }

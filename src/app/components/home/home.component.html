@@ -111,12 +111,15 @@
         <app-feature-item 
           [title]="feature.title" 
           [description]="feature.description"
-          [imageSrc]="feature.imageSrc">
+          [imageSrc]="feature.imageSrc"
+          [ngStyle]="{
+            'height': '60%',
+            'alignItems': 'center',
+            'justifyContent': 'center',
+          }">
         </app-feature-item>
       }
     </div>
   </section>
-
-  <!-- Add other sections as needed -->
 </div>
 
