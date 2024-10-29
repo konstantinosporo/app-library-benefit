@@ -67,9 +67,7 @@ export class AddBookComponent {
       this.bookHttpService.addBook(newBook).subscribe({
         next: (book: BookApi) => {
           this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully created!`);
-          setTimeout(() => {
-            this.router.navigate(['books']);
-          }, 1000);
+          this.router.navigate(['books']);
         },
         error: (err) => {
           console.error('Error creating book:', err);

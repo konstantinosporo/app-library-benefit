@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 
 @Injectable({
@@ -22,6 +22,15 @@ export class BookHttpService {
   }
   getBookById(id: string): Observable<BookApi> {
     return this.http.get<BookApi>(`${this.bookApiUrl}/${id}`);
+  }
+  getBookNameById(id: string): Observable<(BookApi["name"] | undefined)> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(map(books => {
+      const book = books.find(book => book._id === id);
+      return book ? book.name : undefined;
+    }));
+  }
+  getAllBookIds(): Observable<(BookApi["_id"] | undefined)[]> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(map(books => books.map(book => book._id)));
   }
   addBook(newBook: BookApi): Observable<BookApi> {
     return this.http.post<BookApi>(this.bookApiUrl, newBook);
