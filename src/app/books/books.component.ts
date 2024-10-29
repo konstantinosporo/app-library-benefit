@@ -134,7 +134,7 @@ export class BooksComponent implements CrudActions {
    * It gets a book id as a param.
    */
   view(id: string) {
-    this.router.navigate(['books/view-book', id]);
+    this.router.navigate([`book/${id}/view-book`]);
   }
   /**
    * @konstantinosporo
@@ -142,7 +142,7 @@ export class BooksComponent implements CrudActions {
    * NOT IMPLEMENTED YET
    */
   edit(id: string) {
-    this.router.navigate(['books/edit-book', id]);
+    this.router.navigate([`book/${id}/edit-book`]);
   }
   /**
    * @konstantinosporo
