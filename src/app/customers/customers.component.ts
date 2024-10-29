@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CrudActions } from '../_lib/interfaces';
@@ -9,23 +9,27 @@ import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { Router } from '@angular/router';
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [AsyncPipe, SpinnerComponent, AddNewButtonComponent, RefreshPageButtonComponent],
+  imports: [AsyncPipe, SpinnerComponent, AddNewButtonComponent, RefreshPageButtonComponent, NgClass],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements CrudActions {
   dataStream$!: Observable<CustomerApi[]>;
-  
+  isDarkTheme!: boolean;
   constructor(
     private readonly customerHttpService: CustomerHttpService,
     private readonly alertService: AlertService,
     private readonly router: Router,
+    private readonly themeService: ThemeService,
+
   ) {
     this.dataStream$ = this.customerHttpService.getCustomers();
+    this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
   }
   // TODO IMPLEMENT CUSTOMERS VIEW AND EDIT 
   view(id: string) {
