@@ -38,6 +38,7 @@ export class EditBookComponent implements OnDestroy {
         this.patchForm(book);
       });
     });
+    
   }
   /**
    * @konstantinosporo

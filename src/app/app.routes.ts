@@ -15,8 +15,8 @@ export const routes: Routes = [
   // BOOKS ROUTES
   { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
   { path: 'books/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },
-  { path: 'books/edit-book/:id', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
-  { path: 'books/view-book/:id', component: ViewBookComponent, title: 'View Book | AppLibrary' },
+  { path: 'book/:id/edit-book', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
+  { path: 'book/:id/view-book', component: ViewBookComponent, title: 'View Book | AppLibrary' },
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
   { path: 'reservations/add-reservation', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
