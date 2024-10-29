@@ -9,6 +9,7 @@ import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ReservationApi, Status } from './reservation';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-reservations',
@@ -20,14 +21,17 @@ import { ReservationApi, Status } from './reservation';
 export class ReservationsComponent implements CrudActions {
   status!: Status;
   dataStream$!: Observable<ReservationApi[]>;
+  isDarkTheme!: boolean;
 
   constructor(
     private readonly reservationHttpService: ReservationHttpService,
     private readonly alertService: AlertService,
+    private readonly themeService: ThemeService,
     private readonly router: Router,
 
   ) {
     this.dataStream$ = this.reservationHttpService.getReservations();
+    this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
   }
   // TODO IMPLEMENT RESERVATIONS ADD REFRESH AND ADD NEW BUTTONS
   view(id: string) {
