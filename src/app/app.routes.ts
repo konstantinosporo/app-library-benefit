@@ -7,6 +7,7 @@ import { ViewBookComponent } from './books/view-book/view-book.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
+import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
 
 export const routes: Routes = [
   // HOME ROUTE
@@ -18,11 +19,12 @@ export const routes: Routes = [
   { path: 'books/view-book/:id', component: ViewBookComponent, title: 'View Book | AppLibrary' },
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
+  { path: 'reservations/add-reservation', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
 
 
   // CUSTOMERS ROUTES
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
   { path: 'customers/add-customer', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
-  
+
 
 ];

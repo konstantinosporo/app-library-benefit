@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomerApi } from '../../customers/customer';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,9 @@ export class CustomerHttpService {
   */
   getCustomers(): Observable<CustomerApi[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl);
+  }
+  getAllCustomerIds(): Observable<(CustomerApi["_id"] | undefined)[]> {
+    return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(map(customers => customers.map(customer => customer._id)));
   }
   addCustomer(newCustomer: CustomerApi): Observable<CustomerApi> {
     return this.http.post<CustomerApi>(this.customerApiUrl, newCustomer);

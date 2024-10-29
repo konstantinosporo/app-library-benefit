@@ -7,17 +7,19 @@ import { BookApi } from "../books/book/book";
  * Endpoint URL: "https://book-api-bx2r.onrender.com/reservations"
  */
 export interface ReservationApi {
-  _id: string;
+  _id?: string;
+  book?: BookApi;
+  bookId: BookApi["_id"];
   customer?: CustomerApi;
-  book: BookApi;
-  returnBy: Date;
-  status: Status;
-  reservedOn: Date;
-  __v: number;
+  customerId: CustomerApi["_id"];
+  returnBy: string;
+  status?: Status;
+  reservedOn?: Date;
+  __v?: number;
 
 }
 export enum Status {
   ACTIVE = "active",
-  INACTIVE = "inactive"
+  COMPLETED = "completed"
 }
 

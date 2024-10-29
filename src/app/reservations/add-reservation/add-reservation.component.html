@@ -1,0 +1,100 @@
+@if((bookIds$|async) && (customerIds$ |async)){
+<div class="container min-vh-75 d-flex justify-content-center align-items-center">
+  <app-basic-wrapper title="Add Reservation" titleFooter="Please fill in all the required details."
+    iconClass="bi bi-database-add" [backButton]="backButton">
+    <form [formGroup]="reservationFormControl" class="row g-3 needs-validation" novalidate>
+
+      <!-- Book ID-->
+      <div class="col-md-6">
+        <label for="bookId" class="form-label">Book ID</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-book"></i></span>
+          <select class="form-select" id="bookId" formControlName="bookId" [ngClass]="{
+                              'is-invalid': reservationFormControl.get('bookId')?.invalid && (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty),
+                              'is-valid': reservationFormControl.get('bookId')?.valid && (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty)
+                            }" required (change)="handleSelectedBook()">
+            <option selected disabled value="">Select book ID</option>
+            @for(bookId of bookIds$|async; track bookId){<option [value]="bookId">{{ bookId }}</option>}
+          </select>
+          @if(reservationFormControl.get('bookId')?.invalid && (reservationFormControl.get('bookId')?.touched ||
+          reservationFormControl.get('bookId')?.dirty)){
+          <div class="invalid-feedback">
+            @if(reservationFormControl.get('bookId')?.errors?.['required']){<div>Book ID is required.</div>}
+          </div>
+          }
+
+        </div>
+      </div>
+      <!-- Book Title Description-->
+      <div class="col-md-6">
+        <span class="form-label">Selected Book</span>
+        <div class="input-group has-validation mt-2">
+          <span class="input-group-text"><i class="bi bi-info-square"></i></span>
+          <div class="form-control" [ngClass]="{
+                'is-invalid': reservationFormControl.get('bookId')?.invalid && 
+                              (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty),
+                'is-valid': reservationFormControl.get('bookId')?.valid && 
+                             (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty)
+              }">
+            {{ (selectedBookTitle$ | async) || 'No book selected.' }} <!-- Update this dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer ID-->
+      <div class="col-12">
+        <label for="customerId" class="form-label">Customer ID</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <select class="form-select" id="customerId" formControlName="customerId" [ngClass]="{
+                                        'is-invalid': reservationFormControl.get('customerId')?.invalid && (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty),
+                                        'is-valid': reservationFormControl.get('customerId')?.valid && (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty)
+                                      }" required>
+            <option selected disabled value="">Select customer ID</option>
+            @for(customerId of customerIds$|async; track customerId){<option [value]="customerId">{{ customerId }}
+            </option>}
+          </select>
+          @if(reservationFormControl.get('customerId')?.invalid && (reservationFormControl.get('customerId')?.touched ||
+          reservationFormControl.get('customerId')?.dirty)){
+          <div class="invalid-feedback">
+            @if(reservationFormControl.get('customerId')?.errors?.['required']){<div>Customer ID is required.</div>}
+          </div>
+          }
+
+        </div>
+      </div>
+
+
+      <!-- Return By-->
+      <div class="col-12">
+        <label for="returnBy" class="form-label">Return By</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
+          <input type="date" class="form-control" id="returnBy" formControlName="returnBy" [ngClass]="{
+                    'is-invalid': reservationFormControl.get('returnBy')?.invalid && (reservationFormControl.get('returnBy')?.touched || reservationFormControl.get('returnBy')?.dirty),
+                    'is-valid': reservationFormControl.get('returnBy')?.valid && (reservationFormControl.get('returnBy')?.touched || reservationFormControl.get('returnBy')?.dirty)
+                 }" required>
+
+          @if(reservationFormControl.get('returnBy')?.invalid && (reservationFormControl.get('returnBy')?.touched ||
+          reservationFormControl.get('returnBy')?.dirty)){
+          <div class="invalid-feedback">
+            @if(reservationFormControl.get('returnBy')?.errors?.['required']){<div>Book return date required.</div>}
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
+          [disabled]="reservationFormControl.invalid" (click)="addReservation()">
+          <i class="me-1"
+            [ngClass]="{'bi bi-person-fill-add': reservationFormControl.valid, 'bi bi-person-fill-slash': reservationFormControl.invalid}"></i>Add
+          Reservation</button>
+      </div>
+
+    </form>
+  </app-basic-wrapper>
+</div>
+}@else {
+<app-spinner />
+}

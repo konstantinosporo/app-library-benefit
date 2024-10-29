@@ -6,9 +6,9 @@
         class="d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-start align-items-md-center">
         <h1 class="fw-light">Customers Details</h1>
         <div class="d-flex my-1 align-items-center gap-1">
-          <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshCustomers()"></app-refresh-page-button>
+          <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshCustomers()" />
           <app-add-new-button textValue="Add new" route="customers/add-customer" [rounded]="true"
-            (clickEvent)="addNewCustomer($event)"></app-add-new-button>
+            (clickEvent)="addNewCustomer($event)" />
         </div>
       </div>
       <hr class="text-primary mt-0">
@@ -34,16 +34,16 @@
             <td>{{ customer.email }}</td>
             <td>{{ customer.phoneNumber }}</td>
             <td>
-              <button class="btn btn-sm btn-primary text-white py-0" (click)="view(customer._id ?? 'No ID')"
-                aria-labelledby="View">
+              <button class="btn btn-sm btn-primary text-white " (click)="view(customer._id ?? 'No ID')"
+                aria-labelledby="View" title="View">
                 <i class="bi bi-eye"></i>
               </button>
-              <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(customer._id?? 'No ID')"
-                aria-labelledby="Edit">
+              <button class="btn btn-sm btn-orange text-white mx-1 " (click)="edit(customer._id?? 'No ID')"
+                aria-labelledby="Edit" title="Edit">
                 <i class="bi bi-pencil"></i>
               </button>
-              <button class="btn btn-sm btn-red text-white py-0" (click)="delete(customer._id?? 'No ID')"
-                aria-labelledby="Delete">
+              <button class="btn btn-sm btn-red text-white " (click)="delete(customer._id?? 'No ID')"
+                aria-labelledby="Delete" title="Delete">
                 <i class="bi bi-trash"></i>
               </button>
             </td>

@@ -2,7 +2,15 @@
 <div class="container min-vh-75 p-sm-0">
   <div class="home-container">
     <span class="">
-      <h1 class="fw-light">Book Reservation Details</h1>
+      <div
+        class="d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-start align-items-md-center">
+        <h1 class="fw-light">Reservations Details</h1>
+        <div class="d-flex my-1 align-items-center gap-1">
+          <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshCustomers()" />
+          <app-add-new-button textValue="Add new" route="reservations/add-reservation" [rounded]="true"
+            (clickEvent)="addNewCustomer($event)" />
+        </div>
+      </div>
       <hr class="text-dark mt-0">
     </span>
     <div class="table-responsive">
@@ -22,7 +30,7 @@
           @for(reservation of dataStream; track reservation._id;let idx =$index){
           <tr>
             <th scope="row">{{idx + 1}}</th>
-            <td>{{reservation.book.name}}</td>
+            <td>{{reservation.book?.name ?? 'Unspecified'}}</td>
             <td>{{reservation.customer?.name ?? 'Guest'}}</td>
             <td>
               <span class="badge rounded-pill px-2 text-white" [ngClass]="{
@@ -35,18 +43,33 @@
             <td>{{reservation.reservedOn | date}}</td>
             <td>{{reservation.returnBy |date}}</td>
             <td>
-              <button class="btn btn-sm btn-primary text-white py-0" (click)="view(reservation._id)"
-                aria-labelledby="View">
+              <button class="btn btn-sm btn-primary text-white" (click)="view(reservation._id ?? 'NO ID')"
+                aria-labelledby="View" title="View">
+                <span class="visually-hidden">View Button</span>
                 <i class="bi bi-eye"></i>
               </button>
-              <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(reservation._id)"
-                aria-labelledby="Edit">
+              <button class="btn btn-sm btn-orange text-white mx-1" (click)="edit(reservation._id ?? 'NO ID')"
+                aria-labelledby="Edit" title="Edit">
+                <span class="visually-hidden">Edit Button</span>
                 <i class="bi bi-pencil"></i>
               </button>
-              <button class="btn btn-sm btn-red text-white py-0" (click)="delete(reservation._id)"
-                aria-labelledby="Delete">
+              <button class="btn btn-sm btn-red text-white" (click)="delete(reservation._id ?? 'NO ID')"
+                aria-labelledby="Delete" title="Delete">
+                <span class="visually-hidden">Delete Button</span>
                 <i class="bi bi-trash"></i>
               </button>
+              <div [title]="reservation?.status === 'completed' ? 'Completed' : 'Complete'" class="d-inline-block ">
+                <button class="btn btn-sm text-white ms-1  rounded-circle"
+                  [ngClass]="reservation?.status === 'completed' ? 'btn-secondary' : 'btn-success'"
+                  (click)="complete(reservation._id ?? 'NO ID')" [disabled]="reservation?.status === 'completed'"
+                  aria-labelledby="Complete">
+
+                  <span class="visually-hidden">Complete Button</span>
+                  <i class="bi"
+                    [ngClass]="reservation?.status === 'completed' ? 'bi-check-circle-fill text-danger' : 'bi-clipboard-check'">
+                  </i>
+                </button>
+              </div>
             </td>
           </tr>
           }

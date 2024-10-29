@@ -1,3 +1,4 @@
+/* Base button styles */
 .btn-blue {
   width: 40px;
   transition: width 0.3s ease;
@@ -7,6 +8,7 @@
   justify-content: flex-start;
 }
 
+/* Text styles for smooth fade-in/fade-out on larger screens */
 .text-value {
   opacity: 0;
   visibility: hidden;
@@ -16,20 +18,39 @@
   margin-right: 10px;
 }
 
-.btn-blue:hover .text-value {
-  opacity: 1;
-  visibility: visible;
-  margin-right: 0px;
+/* Hover effect only on medium and larger screens */
+@media (min-width: 768px) {
+  .btn-blue:hover .text-value {
+    opacity: 1;
+    visibility: visible;
+    margin-right: 0;
+  }
+
+  .btn-blue:hover {
+    width: 120px;
+  }
+
+  .btn-blue:hover i {
+    margin-right: 0;
+  }
 }
 
-.btn-blue:hover {
-  width: 120px;
+/* Small screens: display the text by default */
+@media (max-width: 767.98px) {
+  .btn-blue {
+    width: 120px;
+    justify-content: center;
+  }
+
+  .text-value {
+    opacity: 1;
+    visibility: visible;
+    margin-left: 8px;
+    margin-right: 10px;
+  }
 }
 
-.btn-blue:hover i {
-  margin-right: 0;
-}
-
+/* Dark mode support */
 ::ng-deep body.dark .btn-blue {
   background-color: var(--bs-light-dark);
 }

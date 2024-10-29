@@ -18,19 +18,16 @@ import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-butto
   styleUrl: './customers.component.css'
 })
 export class CustomersComponent implements CrudActions {
-  //TODO Change the actual data to target the projects api!
   dataStream$!: Observable<CustomerApi[]>;
-  //mockDataStream$!: Observable<CustomerApi[]>;
-
+  
   constructor(
     private readonly customerHttpService: CustomerHttpService,
     private readonly alertService: AlertService,
     private readonly router: Router,
   ) {
     this.dataStream$ = this.customerHttpService.getCustomers();
-    //this.mockDataStream$ = this.customerHttpService.getCustomers();
   }
-
+  // TODO IMPLEMENT CUSTOMERS VIEW AND EDIT 
   view(id: string) {
     console.log(id)
   }
