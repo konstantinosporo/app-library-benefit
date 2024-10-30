@@ -1,4 +1,4 @@
-@if(dataStream$|async; as dataStream){
+@if(dataStream$|async; as reservations){
 <div class="container min-vh-75 p-sm-0">
   <div class="home-container">
     <span class="">
@@ -20,61 +20,61 @@
             <th scope="col">#</th>
             <th scope="col">Book Name</th>
             <th scope="col">Customer</th>
-            <th scope="col">Status</th>
             <th scope="col" class="text-truncate">Reserved On</th>
             <th scope="col" class="text-truncate">Return By</th>
+            <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-          @for(reservation of dataStream; track reservation._id;let idx =$index){
+          @for(reservation of reservations; track reservation._id;let idx =$index){
           <tr>
             <th scope="row">{{idx + 1}}</th>
-            <td>{{reservation.book?.name ?? 'Unspecified'}}</td>
+            <td>{{reservation.book?.name}}</td>
             <td>{{reservation.customer?.name ?? 'Guest'}}</td>
-            <td>
-              <span class="badge rounded-pill px-2 text-white" [ngClass]="{
-                      'text-bg-green': reservation.status === 'active',
-                      'text-bg-red': reservation.status !== 'active'
-                    }">
-                {{ reservation.status | uppercase}}
-              </span>
-            </td>
             <td>{{reservation.reservedOn | date}}</td>
             <td>{{reservation.returnBy |date}}</td>
             <td>
-              <button class="btn btn-sm btn-primary text-white" (click)="view(reservation._id ?? 'NO ID')"
-                aria-labelledby="View" title="View">
-                <span class="visually-hidden">View Button</span>
+              <span class="rounded-pill px-2" [ngClass]="{
+                      'text-bg-green': reservation.status === 'active',
+                      'text-bg-red': reservation.status !== 'active'
+                    }" [title]="reservation.status === 'active'?'Complete Reservation': 'Completed'">
+                <button class="btn btn-link btn-sm text-decoration-none text-white custom-width  text-showdowed "
+                  (click)="complete(reservation._id ?? 'NO ID')" [disabled]="reservation?.status === 'completed'"
+                  onkeypress>{{ reservation.status | uppercase}}</button>
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-primary text-white py-0" (click)="view(reservation._id ?? 'NO ID')"
+                aria-labelledby="View">
                 <i class="bi bi-eye"></i>
               </button>
-              <button class="btn btn-sm btn-orange text-white mx-1" (click)="edit(reservation._id ?? 'NO ID')"
-                aria-labelledby="Edit" title="Edit">
-                <span class="visually-hidden">Edit Button</span>
+              <button class="btn btn-sm btn-orange text-white mx-1 py-0" (click)="edit(reservation._id ?? 'NO ID')"
+                aria-labelledby="Edit">
                 <i class="bi bi-pencil"></i>
               </button>
-              <button class="btn btn-sm btn-red text-white" (click)="delete(reservation._id ?? 'NO ID')"
-                aria-labelledby="Delete" title="Delete">
-                <span class="visually-hidden">Delete Button</span>
+              <button class="btn btn-sm btn-red text-white py-0" (click)="delete(reservation._id ?? 'NO ID')"
+                aria-labelledby="Delete">
                 <i class="bi bi-trash"></i>
               </button>
-              <div [title]="reservation?.status === 'completed' ? 'Completed' : 'Complete'" class="d-inline-block ">
-                <button class="btn btn-sm text-white ms-1  rounded-circle"
-                  [ngClass]="reservation?.status === 'completed' ? 'btn-secondary' : 'btn-success'"
-                  (click)="complete(reservation._id ?? 'NO ID')" [disabled]="reservation?.status === 'completed'"
-                  aria-labelledby="Complete">
-
-                  <span class="visually-hidden">Complete Button</span>
-                  <i class="bi"
-                    [ngClass]="reservation?.status === 'completed' ? 'bi-check-circle-fill text-danger' : 'bi-clipboard-check'">
-                  </i>
-                </button>
-              </div>
             </td>
+
           </tr>
           }
         </tbody>
       </table>
+    </div>
+    <div class="container" title="Number of Books Found">
+      @if(reservations.length>0){
+      <ng-container>
+        <small>Total Results: {{reservations.length}}</small>
+      </ng-container>
+      }@else{
+      <ng-container>
+        <hr class="text-primary">
+        <small>No results found.</small>
+      </ng-container>
+      }
     </div>
   </div>
 </div>
