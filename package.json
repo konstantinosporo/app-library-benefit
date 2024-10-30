@@ -22,6 +22,8 @@
     "app-library-benefit": "file:",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "echarts": "^5.5.1",
+    "ngx-echarts": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

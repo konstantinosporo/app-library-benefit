@@ -10,11 +10,18 @@ import { AddCustomerComponent } from './customers/add-customer/add-customer.comp
 import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
 import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
 import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
-
+import { TestChartComponent } from './home/charts/test-chart/test-chart.component';
+import { TestChart2Component } from './home/charts/test-chart2/test-chart2.component';
 
 export const routes: Routes = [
   // HOME ROUTE
-  { path: '', component: HomeComponent, title: 'Home | AppLibrary' },
+  {
+    path: '', component: HomeComponent, title: 'Home | AppLibrary', children: [
+      { path: 'chart1', component: TestChartComponent, title: 'Chart1 | AppLibary' },
+      { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibary' },
+
+    ]
+  },
   // BOOKS ROUTES
   { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
   { path: 'books/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },

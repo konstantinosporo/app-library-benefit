@@ -2,7 +2,6 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ThemeService } from '../../services/theme.service';
 import { slideInBounceFade, slideOutBounceFade } from './animations';
 
@@ -21,7 +20,7 @@ import { slideInBounceFade, slideOutBounceFade } from './animations';
 })
 export class HeaderComponent {
   navLinks = [
-    { title: 'Home', link: '/', icon: 'bi bi-house me-1' },
+    { title: 'Dashboard', link: '/', icon: 'bi bi-activity me-1' },
     { title: 'Books', link: '/books', icon: 'bi bi-collection me-1' },
     { title: 'Reservations', link: '/reservations', icon: 'bi bi-journal-check me-1' },
     { title: 'Customers', link: '/customers', icon: 'bi bi-people me-1' },
