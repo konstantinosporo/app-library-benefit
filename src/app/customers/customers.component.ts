@@ -33,7 +33,7 @@ export class CustomersComponent implements CrudActions {
   }
   // TODO IMPLEMENT CUSTOMERS VIEW AND EDIT 
   view(id: string) {
-    console.log(id)
+    this.router.navigate([`customer/${id}/view`]);
   }
   edit(id: string) {
     this.router.navigate([`customer/${id}/edit`]);

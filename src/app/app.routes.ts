@@ -9,6 +9,7 @@ import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
 import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
 import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
+import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
 
 
 export const routes: Routes = [
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
   { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
   { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Edit Customer | AppLibrary' },
+  { path: 'customer/:id/view', component: ViewCustomerComponent, title: 'View Customer | AppLibrary' },
 
 
 

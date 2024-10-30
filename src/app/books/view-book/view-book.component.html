@@ -1,6 +1,6 @@
 @if(bookToView$ | async; as book){
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Viewing: ' + book.name" [titleFooter]="'Showing result for book ID: ' + bookId"
+  <app-basic-wrapper [title]="book.name" [docId]="book._id" [titleFooter]="'Showing result for book ID:'"
     [backButton]="backButton" [showTitleIcon]="false">
     <form class="row g-3">
       <!-- Book Title -->
