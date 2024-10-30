@@ -13,9 +13,11 @@
   }
 }
 
-.badge {
+.text-showdowed {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
 }
 
-
-
+.custom-width {
+  width: 113.86px;
+}
