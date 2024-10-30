@@ -8,6 +8,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
 import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
+import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
+
 
 export const routes: Routes = [
   // HOME ROUTE
@@ -24,7 +26,13 @@ export const routes: Routes = [
 
   // CUSTOMERS ROUTES
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
-  { path: 'customers/add-customer', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
+  { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
+  { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Edit Customer | AppLibrary' },
+
+
+
+
+
 
 
 ];

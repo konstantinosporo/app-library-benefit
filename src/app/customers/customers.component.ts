@@ -36,7 +36,7 @@ export class CustomersComponent implements CrudActions {
     console.log(id)
   }
   edit(id: string) {
-    console.log(id)
+    this.router.navigate([`customer/${id}/edit`]);
   }
   delete(id: string) {
     //console.log(id);

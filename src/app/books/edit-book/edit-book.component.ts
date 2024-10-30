@@ -1,7 +1,7 @@
 import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AlertService } from '../../services/alert-handlers/alert.service';
 import { BookHttpService } from '../../services/book/book-http.service';
@@ -18,13 +18,8 @@ import { BookApi } from '../book/book';
 export class EditBookComponent implements OnDestroy {
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
   backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
-  bookFormControl = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
-    createdOn: new FormControl('', Validators.required),
-    author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    type: new FormControl('', Validators.required),
-  });
+  bookFormControl!: FormGroup;
+  paramId!: string;
   private readonly datePipe = new DatePipe('en-US');
   private readonly destroy$ = new Subject<void>();
 
@@ -32,13 +27,22 @@ export class EditBookComponent implements OnDestroy {
     private readonly bookHttpService: BookHttpService,
     private readonly alertService: AlertService,
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
   ) {
+    this.bookFormControl = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
+      createdOn: new FormControl('', Validators.required),
+      author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      type: new FormControl('', Validators.required),
+    });
     this.route.params.subscribe(param => {
       this.bookHttpService.getBookById(param['id']).subscribe((book) => {
         this.patchForm(book);
       });
+      this.paramId = param['id'];
     });
-    
+
   }
   /**
    * @konstantinosporo
@@ -57,7 +61,8 @@ export class EditBookComponent implements OnDestroy {
     //console.log(this.bookFormControl.value);
     // console.log(this.bookFormControl.controls['name']);
     if (this.bookFormControl.valid) {
-      const newBook: BookApi = {
+      const editedBook: BookApi = {
+        _id: this.paramId,
         name: this.bookFormControl.controls['name'].value as string,
         year: this.bookFormControl.controls['year'].value as number,
         createdOn: this.bookFormControl.controls['createdOn'].value
@@ -67,9 +72,10 @@ export class EditBookComponent implements OnDestroy {
         type: this.bookFormControl.controls['type'].value as string,
       };
       //console.table(newBook);
-      this.bookHttpService.editBook(newBook).subscribe({
+      this.bookHttpService.editBook(editedBook).subscribe({
         next: (book: BookApi) => {
           this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully edited!`);
+          this.router.navigate(['books']);
         },
         error: (err) => {
           //console.error('Error editing book:', err); 

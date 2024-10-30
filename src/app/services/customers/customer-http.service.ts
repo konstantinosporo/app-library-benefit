@@ -22,11 +22,18 @@ export class CustomerHttpService {
   getCustomers(): Observable<CustomerApi[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl);
   }
+  getCustomerById(id: string): Observable<CustomerApi> {
+    return this.http.get<CustomerApi>(`${this.customerApiUrl}/${id}`);
+  }
   getAllCustomerIds(): Observable<(CustomerApi["_id"] | undefined)[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(map(customers => customers.map(customer => customer._id)));
   }
   addCustomer(newCustomer: CustomerApi): Observable<CustomerApi> {
     return this.http.post<CustomerApi>(this.customerApiUrl, newCustomer);
+  }
+  editCustomer(editedCustomer: CustomerApi): Observable<CustomerApi> {
+    //console.log(editedCustomer)
+    return this.http.put<CustomerApi>(`${this.customerApiUrl}/${editedCustomer._id}`, editedCustomer);
   }
   deleteCustomerById(id: string): Observable<any> {
     return this.http.delete(`${this.customerApiUrl}/${id}`);
