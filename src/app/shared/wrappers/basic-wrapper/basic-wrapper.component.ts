@@ -13,6 +13,7 @@ export class BasicWrapperComponent {
   @Input() iconClass?: string = '';
   @Input() showTitleIcon?: boolean = true;
   @Input() titleFooter?: string = '';
+  @Input() docId?: string;
   @Input() footer?: string = '';
   @Input() backButton?: { title: string, route: string }
 

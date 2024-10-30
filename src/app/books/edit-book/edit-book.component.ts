@@ -20,6 +20,7 @@ export class EditBookComponent implements OnDestroy {
   backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
   bookFormControl!: FormGroup;
   paramId!: string;
+  titleFooter!: string;
   private readonly datePipe = new DatePipe('en-US');
   private readonly destroy$ = new Subject<void>();
 
@@ -41,6 +42,7 @@ export class EditBookComponent implements OnDestroy {
         this.patchForm(book);
       });
       this.paramId = param['id'];
+      this.titleFooter = 'Editing Book with ID:';
     });
 
   }

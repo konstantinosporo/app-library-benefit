@@ -1,5 +1,5 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Edit Customer'" [titleFooter]="'Please fill in all the required details.'"
+  <app-basic-wrapper [title]="'Edit Customer'" [titleFooter]="titleFooter" [docId]="paramId"
     iconClass="bi bi-database-up" [backButton]="backButton">
     <form [formGroup]="customerFormControl" class="row g-3 needs-validation" novalidate>
 
@@ -57,7 +57,7 @@
       <div class="col-md-12 col-lg-6">
         <label for="email" class="form-label">Customer Email</label>
         <div class="input-group has-validation">
-          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <span class="input-group-text"><i class="bi bi-envelope-at"></i></span>
           <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{
                         'is-invalid': customerFormControl.get('email')?.invalid && (customerFormControl.get('email')?.touched || customerFormControl.get('email')?.dirty),
                         'is-valid': customerFormControl.get('email')?.valid && (customerFormControl.get('email')?.touched || customerFormControl.get('email')?.dirty)

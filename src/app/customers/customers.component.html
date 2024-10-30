@@ -1,4 +1,3 @@
-@if(dataStream$ | async; as customers) {
 <div class="container p-sm-0 min-vh-80">
   <div class="home-container">
     <span class="">
@@ -13,6 +12,7 @@
       </div>
       <hr class="text-primary mt-0">
     </span>
+    @if(dataStream$ | async; as customers) {
     <div class="table-responsive">
       <table class="table table-striped" [ngClass]="isDarkTheme ? 'table-dark' : 'table-light'">
         <thead>
@@ -64,8 +64,8 @@
       </ng-container>
       }
     </div>
+    } @else {
+    <app-spinner></app-spinner>
+    }
   </div>
 </div>
-} @else {
-<app-spinner></app-spinner>
-}

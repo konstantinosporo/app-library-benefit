@@ -18,6 +18,7 @@ export class EditCustomerComponent {
   backButton: { title: string, route: string } = { title: 'Back to Customers', route: '/customers' };
   customerFormControl!: FormGroup;
   paramId!: string;
+  titleFooter!: string;
   constructor(
     private readonly customerHttpService: CustomerHttpService,
     private readonly alertService: AlertService,
@@ -37,6 +38,7 @@ export class EditCustomerComponent {
         this.patchForm(customer);
       });
       this.paramId = param['id'];
+      this.titleFooter = `Editing customer with ID:`;
     });
   }
 

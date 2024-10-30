@@ -14,7 +14,8 @@
     @if(titleFooter){
     <div class="d-flex align-items-baseline">
       <div class="vr" style="height: 1em;"></div>
-      <p class="card-header-pills text-muted small mb-0 ms-2">{{ titleFooter }}</p>
+      <p class="card-header-pills text-muted small mb-0 ms-2">{{ titleFooter }} @if(docId?.length){<b
+          class="text-orange">{{docId}}</b>}</p>
     </div>
     <hr class="text-dark">}
 

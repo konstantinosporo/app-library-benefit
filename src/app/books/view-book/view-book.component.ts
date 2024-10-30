@@ -21,7 +21,10 @@ export class ViewBookComponent {
   datePipe = new DatePipe('en-US');
   bookToView$!: Observable<BookApi>;
 
-  constructor(private readonly bookHttpService: BookHttpService, private readonly route: ActivatedRoute) {
+  constructor(
+    private readonly bookHttpService: BookHttpService,
+    private readonly route: ActivatedRoute
+  ) {
     this.route.params.subscribe(param => this.bookId = param['id'] || '');
     if (this.bookId.length) {
       //console.log(this.bookId);
