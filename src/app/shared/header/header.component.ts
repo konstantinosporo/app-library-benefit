@@ -2,7 +2,6 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Observable } from 'rxjs';
 import { ThemeService } from '../../services/theme.service';
 import { slideInBounceFade, slideOutBounceFade } from './animations';
 

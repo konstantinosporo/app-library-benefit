@@ -8,6 +8,10 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { EditBookComponent } from './books/edit-book/edit-book.component';
 import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
 import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
+import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
+import { ViewCustomerComponent } from './customers/view-customer/view-customer.component';
+import { TestChartComponent } from './home/charts/test-chart/test-chart.component';
+import { TestChart2Component } from './home/charts/test-chart2/test-chart2.component';
 
 export const routes: Routes = [
   // HOME ROUTE
