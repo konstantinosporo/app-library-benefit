@@ -1,6 +1,6 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Edit Book'" [titleFooter]="'Please fill in all the required details.'"
-    iconClass="bi bi-database-up" [backButton]="backButton">
+  <app-basic-wrapper [title]="'Edit Book'" [titleFooter]="titleFooter" [docId]="paramId" [backButton]="backButton"
+    iconClass="bi bi-database-up">
     <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
 
       <!-- Book Title-->
