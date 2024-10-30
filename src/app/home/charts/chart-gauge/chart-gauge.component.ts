@@ -38,7 +38,7 @@ export class ChartGaugeComponent implements OnInit, OnChanges {
         top: '5%',
         left: 'center'
       },
-      backgroundColor: this.theme ? '#00233D' : '#F2F2F2',
+      backgroundColor: 'transparent',
       series: [
         {
           name: this.seriesName || 'Gauge',

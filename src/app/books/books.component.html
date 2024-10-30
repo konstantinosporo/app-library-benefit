@@ -1,5 +1,4 @@
 <div class="container min-vh-100">
-  @if(books$ | async; as books){
   <div class="home-container">
     <div class="col-12 mx-auto">
       <app-search-book [showContent]="true">
@@ -15,6 +14,7 @@
       </div>
     </div>
 
+    @if(books$ | async; as books){
     <div class="container">
       @for(book of books; track book._id){
       <app-book [book]="book" (handleClickEvent)="handleAction($event)" />
@@ -34,8 +34,8 @@
       }
     </div>
 
+    }@else{
+    <app-spinner />
+    }
   </div>
-  }@else{
-  <app-spinner />
-  }
 </div>
