@@ -1,4 +1,3 @@
-@if(dataStream$|async; as reservations){
 <div class="container min-vh-75 p-sm-0">
   <div class="home-container">
     <span class="">
@@ -13,6 +12,7 @@
       </div>
       <hr class="text-dark mt-0">
     </span>
+    @if(dataStream$|async; as reservations){
     <div class="table-responsive">
       <table class="table table-striped" [ngClass]="isDarkTheme ? 'table-dark' : 'table-light'">
         <thead>
@@ -76,8 +76,8 @@
       </ng-container>
       }
     </div>
+    }@else {
+    <app-spinner minVh=" min-vh-75" />
+    }
   </div>
 </div>
-}@else {
-<app-spinner></app-spinner>
-}

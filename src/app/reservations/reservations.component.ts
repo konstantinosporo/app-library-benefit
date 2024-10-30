@@ -14,7 +14,7 @@ import { ThemeService } from '../services/theme.service';
 @Component({
   selector: 'app-reservations',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, NgClass, UpperCasePipe, SpinnerComponent, RefreshPageButtonComponent, AddNewButtonComponent],
+  imports: [AsyncPipe, DatePipe, NgClass, UpperCasePipe, SpinnerComponent, RefreshPageButtonComponent, AddNewButtonComponent,],
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.css'
 })
