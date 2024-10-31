@@ -48,9 +48,9 @@ export class BookHttpService {
     //console.log(editedBook);
     return this.http.put<BookApi>(`${this.bookApiUrl}/${editedBook._id}`, editedBook);
   }
-  deleteBookById(id: string): Observable<any> {
+  deleteBookById(id: string): Observable<BookApi> {
     //console.log(`Deleting book with URL: ${this.bookApiUrl}/${id}`); // Log the URL
-    return this.http.delete(`${this.bookApiUrl}/${id}`);
+    return this.http.delete<BookApi>(`${this.bookApiUrl}/${id}`);
   }
 
 }
