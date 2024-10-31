@@ -20,6 +20,9 @@ export class ReservationHttpService {
   getReservations(): Observable<ReservationApi[]> {
     return this.http.get<ReservationApi[]>(this.reservationApiUrl);
   }
+  getReservationById(id: string): Observable<ReservationApi> {
+    return this.http.get<ReservationApi>(`${this.reservationApiUrl}/${id}`);
+  }
   addReservation(newReservation: ReservationApi): Observable<ReservationApi> {
     return this.http.post<ReservationApi>(this.reservationApiUrl, newReservation);
   }

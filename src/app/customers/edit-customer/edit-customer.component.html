@@ -5,7 +5,7 @@
 
       <!-- Customer Name-->
       <div class="col-md-6">
-        <label for="name" class="form-label">Customer Name</label>
+        <label for="name" class="form-label">Customer Name*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-person"></i></span>
           <input type="text" class="form-control" formControlName="name" id="name" autocomplete="name" [ngClass]="{
@@ -22,14 +22,14 @@
             @if(customerFormControl.get('name')?.errors?.['maxlength']){<div>Maximum length is
               {{customerFormControl.get('name')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
 
         </div>
       </div>
 
       <!-- Customer Surname-->
       <div class="col-md-6">
-        <label for="surname" class="form-label">Customer Surname</label>
+        <label for="surname" class="form-label">Customer Surname*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-person"></i></span>
           <input type="text" class="form-control" formControlName="surname" id="surname" autocomplete="family-name"
@@ -47,7 +47,7 @@
             @if(customerFormControl.get('surname')?.errors?.['maxlength']){<div>Maximum length is
               {{customerFormControl.get('surname')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
 
         </div>
       </div>
@@ -55,7 +55,7 @@
 
       <!-- Customer Email-->
       <div class="col-md-12 col-lg-6">
-        <label for="email" class="form-label">Customer Email</label>
+        <label for="email" class="form-label">Customer Email*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-envelope-at"></i></span>
           <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{
@@ -69,13 +69,13 @@
             @if(customerFormControl.get('email')?.errors?.['required']){<div>Customer Email is required.</div>}
             @if(customerFormControl.get('email')?.errors?.['email']){<div>Customer email must be valid.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
       <!-- Customer PhoneNumber-->
       <div class="col-md-12 col-lg-6">
-        <label for="phoneNumber" class="form-label">Customer PhoneNumber</label>
+        <label for="phoneNumber" class="form-label">Customer Phone Number*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-phone"></i></span>
           <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [ngClass]="{
@@ -90,7 +90,7 @@
             @if(customerFormControl.get('phoneNumber')?.errors?.['minlength']){<div>Minimum length is
               {{customerFormControl.get('phoneNumber')?.errors?.['minlength']?.['actualLength']}}/8.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 

@@ -22,7 +22,7 @@
             @if(bookFormControl.get('name')?.errors?.['maxlength']){<div>Maximum length is
               {{bookFormControl.get('name')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
 
         </div>
       </div>
@@ -43,7 +43,7 @@
             @if(bookFormControl.get('year')?.errors?.['min']){<div>Year must be at least 1900.</div>}
             @if(bookFormControl.get('year')?.errors?.['max']){<div>Year cannot be more than 2024.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
@@ -74,7 +74,7 @@
           <div class="invalid-feedback">
             Date is not valid. You can select 'Now'.
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
@@ -97,7 +97,7 @@
             @if(bookFormControl.get('author')?.errors?.['maxlength']){<div>Maximum length is
               {{bookFormControl.get('author')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
@@ -119,7 +119,7 @@
           <div class="invalid-feedback">
             Please select a valid category.
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
