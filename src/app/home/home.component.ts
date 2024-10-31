@@ -34,7 +34,6 @@ export class HomeComponent {
     private readonly reservationService: ReservationHttpService,
     private readonly themeService: ThemeService,
 
-
   ) {
     this.reservations$ = this.reservationService.getReservations();
     this.customers$ = this.customerService.getCustomers();
