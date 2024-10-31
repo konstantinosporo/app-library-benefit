@@ -25,6 +25,14 @@ export class CustomerHttpService {
   getCustomerById(id: string): Observable<CustomerApi> {
     return this.http.get<CustomerApi>(`${this.customerApiUrl}/${id}`);
   }
+  getCustomerNameById(id: string): Observable<string | undefined> {
+    return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(
+      map(customers => {
+        const customer = customers.find(customer => customer._id === id);
+        return customer ? `${customer.name} ${customer.surname}` : undefined;
+      })
+    );
+  }
   getAllCustomerIds(): Observable<(CustomerApi["_id"] | undefined)[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(map(customers => customers.map(customer => customer._id)));
   }

@@ -26,7 +26,7 @@ export interface BookApi{
   year: number;
   type: string;
   author: string;
-  available?: string;
+  available?: boolean;
   createdOn: Date;
 }
 

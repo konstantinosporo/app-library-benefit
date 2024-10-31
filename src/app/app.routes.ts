@@ -30,8 +30,6 @@ export const routes: Routes = [
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
   { path: 'reservation/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
-
-
   // CUSTOMERS ROUTES
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
   { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },

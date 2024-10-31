@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
@@ -12,11 +12,18 @@ import { ReservationHttpService } from '../../services/reservations/reservation-
 import { SpinnerComponent } from "../../shared/spinner/spinner.component";
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { ReservationApi } from '../reservation';
+import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { futureDateValidator } from './custom-validation';
 
 @Component({
   selector: 'app-add-reservation',
   standalone: true,
-  imports: [ReactiveFormsModule, BasicWrapperComponent, NgClass, AsyncPipe, JsonPipe, SpinnerComponent],
+  imports: [
+    ReactiveFormsModule, FormsModule,
+    NgClass, AsyncPipe, JsonPipe,
+    BasicWrapperComponent,
+    SpinnerComponent,
+    NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent,],
   templateUrl: './add-reservation.component.html',
   styleUrl: './add-reservation.component.css'
 })
@@ -26,6 +33,7 @@ export class AddReservationComponent implements OnDestroy {
   bookIds$!: Observable<(BookApi["_id"] | undefined)[]>;
   customerIds$!: Observable<(CustomerApi["_id"] | undefined)[]>;
   selectedBookTitle$!: Observable<(BookApi["name"] | undefined)>;
+  selectedCustomerName$!: Observable<(string | undefined)>;
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -39,9 +47,9 @@ export class AddReservationComponent implements OnDestroy {
     this.reservationFormControl = new FormGroup({
       bookId: new FormControl('', Validators.required),
       customerId: new FormControl('', Validators.required),
-      returnBy: new FormControl('', Validators.required),
+      returnBy: new FormControl('', [Validators.required, futureDateValidator()]),
     });
-    this.bookIds$ = this.bookHttpService.getAllBookIds();
+    this.bookIds$ = this.bookHttpService.getAvailableBookIds();
     this.customerIds$ = this.customerHttpService.getAllCustomerIds();
   }
   addReservation() {
@@ -57,6 +65,13 @@ export class AddReservationComponent implements OnDestroy {
     const selectedBookId: string = this.reservationFormControl.controls['bookId'].value;
     if (this.reservationFormControl.controls['bookId'].value) {
       this.selectedBookTitle$ = this.bookHttpService.getBookNameById(selectedBookId);
+    }
+  }
+  handleSelectedCustomer() {
+    //console.log('clicked');
+    const selectedCustomerId: string = this.reservationFormControl.controls['customerId'].value;
+    if (this.reservationFormControl.controls['bookId'].value) {
+      this.selectedCustomerName$ = this.customerHttpService.getCustomerNameById(selectedCustomerId);
     }
   }
   /**
@@ -75,7 +90,9 @@ export class AddReservationComponent implements OnDestroy {
           ? new Date(this.reservationFormControl.controls['returnBy'].value).toISOString()
           : new Date().toISOString(),
       };
-      //console.table(newBook);
+      //console.table(newReservation);
+      // Also catching the scenario where a book was available when the reservation started but was 
+      // reserved before clicking the reserve button, as i only fetch available books.
       this.bookHttpService.getBookById(newReservation.bookId as string)
         .pipe(
           tap(book => {
@@ -101,7 +118,6 @@ export class AddReservationComponent implements OnDestroy {
             }
           }
         });
-
 
     }
   }

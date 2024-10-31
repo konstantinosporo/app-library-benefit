@@ -32,6 +32,15 @@ export class BookHttpService {
   getAllBookIds(): Observable<(BookApi["_id"] | undefined)[]> {
     return this.http.get<BookApi[]>(this.bookApiUrl).pipe(map(books => books.map(book => book._id)));
   }
+  getAvailableBookIds(): Observable<(BookApi["_id"] | undefined)[]> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(
+      map(books =>
+        books
+          .filter(book => book.available !== false) // Filter out unavailable books
+          .map(book => book._id)
+      )
+    );
+  }
   addBook(newBook: BookApi): Observable<BookApi> {
     return this.http.post<BookApi>(this.bookApiUrl, newBook);
   }

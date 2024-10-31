@@ -26,7 +26,7 @@ export class AddBookComponent {
    */
   bookFormControl = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    year: new FormControl(2024, [Validators.required, Validators.min(1900), Validators.max(2024)]),
+    year: new FormControl(null, [Validators.required, Validators.min(1900), Validators.max(2024)]),
     createdOn: new FormControl(this.formattedDateNow(), [Validators.required]),
     author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     type: new FormControl('', Validators.required),
@@ -56,7 +56,10 @@ export class AddBookComponent {
     if (this.bookFormControl.valid) {
       const newBook: BookApi = {
         name: this.bookFormControl.controls['name'].value as string,
-        year: this.bookFormControl.controls['year'].value as number,
+        year: this.bookFormControl.controls['year'].value
+          ? this.bookFormControl.controls['year'].value as number
+          : 0
+        ,
         createdOn: this.bookFormControl.controls['createdOn'].value
           ? new Date(this.bookFormControl.controls['createdOn'].value)
           : new Date(),
