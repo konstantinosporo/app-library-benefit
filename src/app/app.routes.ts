@@ -16,20 +16,20 @@ import { TestChart2Component } from './home/charts/test-chart2/test-chart2.compo
 export const routes: Routes = [
   // HOME ROUTE
   {
-    path: '', component: HomeComponent, title: 'Home | AppLibrary', children: [
-      { path: 'chart1', component: TestChartComponent, title: 'Chart1 | AppLibary' },
-      { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibary' },
-
-    ]
+    path: '', component: HomeComponent, title: 'Home | AppLibrary', children:
+      [
+        { path: 'chart1', component: TestChartComponent, title: 'Chart1 | AppLibary' },
+        { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibary' },
+      ],
   },
   // BOOKS ROUTES
   { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
-  { path: 'books/add-book', component: AddBookComponent, title: 'Add Book | AppLibrary' },
-  { path: 'book/:id/edit-book', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
-  { path: 'book/:id/view-book', component: ViewBookComponent, title: 'View Book | AppLibrary' },
+  { path: 'book/add', component: AddBookComponent, title: 'Add Book | AppLibrary' },
+  { path: 'book/:id/edit', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
+  { path: 'book/:id/view', component: ViewBookComponent, title: 'View Book | AppLibrary' },
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
-  { path: 'reservations/add-reservation', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
+  { path: 'reservation/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
 
 
   // CUSTOMERS ROUTES
