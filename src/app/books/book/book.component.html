@@ -9,20 +9,33 @@
           </div>
           <div class="col-md-8 my-auto">
             <div class="card-body position-relative ">
-              <h5 class="card-title d-flex align-items-center">
-                {{ book.name }}
-                <span class="d-md-none ms-auto mini-image">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-chevron-compact-up bounce text-info mx-auto" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                      d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z" />
-                  </svg>
-                  <img src="/library/book.webp" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h5 class="card-title d-flex align-items-center">
+                  {{ book.name }}
+                  <span class="d-md-none ms-auto mini-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-chevron-compact-up bounce text-info mx-auto" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                        d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z" />
+                    </svg>
+                    <img src="/library/book.webp" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
+                  </span>
+                </h5>
+                <span class="badge" [ngClass]="{
+                                                  'bg-success text-white': book.available,
+                                                  'bg-danger text-white': !book.available
+                }">
+                  <i class="bi me" [ngClass]="{
+                                                  'bi-check-circle-fill': book.available,
+                                                  'bi-x-circle-fill': !book.available
+                                                }">
+                  </i>
+                  {{ book.available ? "Available" : "Not Available" }}
                 </span>
-              </h5>
+              </div>
               <p class="card-text">
                 <small class="muted">
-                  <i class="bi bi-calendar-check me-1"></i> Published on {{ book.createdOn | date:'longDate' }}
+                  <i class="bi bi-calendar-check me-1"></i> Published on {{ book.year }}
                 </small>
               </p>
               <p class="card-text">
@@ -52,15 +65,11 @@
                 </li>
 
               </ul>
-              <span class="badge" [ngClass]="{
-                                      'bg-success text-white': book.available,
-                                      'bg-danger text-white': !book.available
-                                    }">
-                <i class="bi me-1" [ngClass]="{
-                                      'bi-check-circle-fill': book.available,
-                                      'bi-x-circle-fill': !book.available
-                                    }"></i>
-                {{ book.available ? "Available" : "Not Available" }}
+
+              <span class="badge m-0 p-0">
+                <small class="muted">
+                  <i class="bi bi-globe me-1"></i> Created on {{ book.createdOn | date:'longDate' }}
+                </small>
               </span>
 
             </div>
