@@ -60,8 +60,4 @@ export class HomeComponent {
     }
   ]
 
-  onExploreClick() {
-    console.log('Explore button clicked')
-  }
-
 }

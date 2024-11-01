@@ -11,13 +11,15 @@ import { HeatmapComponent } from './home/dashboard/heatmap/heatmap.component';
 import { HomeComponent } from './home/home.component';
 import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { QuickSettingsComponent } from './home/dashboard/quick-settings/quick-settings.component';
 
 export const routes: Routes = [
   // HOME ROUTE
   {
     path: '', component: HomeComponent, title: 'Home | AppLibrary', children:
       [
-        { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Chart1 | AppLibary' },
+        { path: 'dashboard/quick-settings', component: QuickSettingsComponent, title: 'Quick Settings | AppLibary' },
+        { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Week Sales HeatMap | AppLibary' },
         // { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibary' },
       ],
   },

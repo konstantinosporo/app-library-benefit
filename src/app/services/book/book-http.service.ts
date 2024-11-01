@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 
 @Injectable({
@@ -41,6 +41,35 @@ export class BookHttpService {
       )
     );
   }
+  /**
+   * @konstantinosporo
+   * @description
+   * Returns the count of available books grouped by type.
+   */
+  getAvailableBooksCountByType(): Observable<{ value: number, type: string }[]> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(
+      map(books => {
+        const bookTypeCounts: { [key: string]: number } = {};
+
+        books.forEach(book => {
+          if (book.available !== false && book.type) {
+            bookTypeCounts[book.type] = (bookTypeCounts[book.type] || 0) + 1;
+          }
+        });
+
+        const result = Object.entries(bookTypeCounts).map(([type, value]) => ({ value, type }));
+        console.log("Mapped result:", result);  // This should log the transformed result
+        return result;
+      }),
+      // Log any errors that occur
+      catchError(err => {
+        console.error("Error in getAvailableBooksCountByType:", err);
+        return of([]);  // Return an empty array on error
+      })
+    );
+  }
+
+
   addBook(newBook: BookApi): Observable<BookApi> {
     return this.http.post<BookApi>(this.bookApiUrl, newBook);
   }
