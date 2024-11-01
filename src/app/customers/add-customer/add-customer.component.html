@@ -22,7 +22,7 @@
             @if(customerFormControl.get('name')?.errors?.['maxlength']){<div>Maximum length is
               {{customerFormControl.get('name')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
 
         </div>
       </div>
@@ -47,7 +47,7 @@
             @if(customerFormControl.get('surname')?.errors?.['maxlength']){<div>Maximum length is
               {{customerFormControl.get('surname')?.errors?.['maxlength']?.['actualLength']}}/15.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
 
         </div>
       </div>
@@ -69,7 +69,7 @@
             @if(customerFormControl.get('email')?.errors?.['required']){<div>Customer Email is required.</div>}
             @if(customerFormControl.get('email')?.errors?.['email']){<div>Customer email must be valid.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 
@@ -90,7 +90,7 @@
             @if(customerFormControl.get('phoneNumber')?.errors?.['minlength']){<div>Minimum length is
               {{customerFormControl.get('phoneNumber')?.errors?.['minlength']?.['actualLength']}}/8.</div>}
           </div>
-          }
+          }@else{<div class="w-100">&nbsp;</div>}
         </div>
       </div>
 

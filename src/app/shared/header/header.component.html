@@ -36,7 +36,8 @@
         @for(link of navLinks;track link.title){
         <li class="nav-item mx-1 mt-1 mt-md-0">
           <a class="nav-link" [routerLink]="link.link" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"><i [class]="link.icon"></i>{{link.title}}</a>
+            [routerLinkActiveOptions]="{ exact: true }" (click)="toggleNavbar()" onkeypress><i
+              [class]="link.icon"></i>{{link.title}}</a>
         </li>
         }
       </ul>

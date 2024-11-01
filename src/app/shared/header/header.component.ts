@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
-import { slideInBounceFade, slideOutBounceFade } from './animations';
+import { fadeIn, fadeOut } from './animations';
 
 @Component({
   selector: 'app-header',
@@ -13,8 +13,8 @@ import { slideInBounceFade, slideOutBounceFade } from './animations';
   styleUrls: ['./header.component.css'],
   animations: [
     trigger('toggleNavbar', [
-      transition(':enter', [useAnimation(slideInBounceFade, { params: { time: '220ms' } })]),
-      transition(':leave', [useAnimation(slideOutBounceFade, { params: { time: '250ms' } })]),
+      transition(':enter', [useAnimation(fadeIn, { params: { time: '220ms' } })]),
+      transition(':leave', [useAnimation(fadeOut, { params: { time: '150ms' } })]),
     ]),
   ],
 })
