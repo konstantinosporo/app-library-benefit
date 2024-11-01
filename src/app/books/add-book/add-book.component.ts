@@ -24,18 +24,19 @@ export class AddBookComponent {
    * Reactive Form. This variable holds a FormGroup.
    * Validations are given from the 2nd User Story.
    */
-  bookFormControl = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    year: new FormControl(null, [Validators.required, Validators.min(1900), Validators.max(2024)]),
-    createdOn: new FormControl(this.formattedDateNow(), [Validators.required]),
-    author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-    type: new FormControl('', Validators.required),
-  });
+  bookFormControl!: FormGroup;
 
   constructor(
     private readonly bookHttpService: BookHttpService,
     private readonly alertService: AlertService,
     private readonly router: Router) {
+    this.bookFormControl = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      year: new FormControl(null, [Validators.required, Validators.min(1900), Validators.max(2024)]),
+      createdOn: new FormControl(this.formattedDateNow(), [Validators.required]),
+      author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      type: new FormControl('', Validators.required),
+    });
   }
   /**
    * @konstantinosporo

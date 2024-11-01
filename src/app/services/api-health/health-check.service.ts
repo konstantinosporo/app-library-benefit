@@ -12,15 +12,21 @@ export interface ApiStatus {
   providedIn: 'root',
 })
 export class HealthCheckService {
+  private readonly apiUrl: string = 'https://book-api-bx2r.onrender.com';
   private readonly endpoints = [
-    { title: 'Books API', endpoint: 'https://book-api-bx2r.onrender.com/books' },
-    { title: 'Customers API', endpoint: 'https://book-api-bx2r.onrender.com/customers' },
-    { title: 'Reservations API', endpoint: 'https://book-api-bx2r.onrender.com/reservations' }
+    { title: 'Books API', endpoint: `${this.apiUrl}/books` },
+    { title: 'Customers API', endpoint: `${this.apiUrl}/customers` },
+    { title: 'Reservations API', endpoint: `${this.apiUrl}/reservations` }
   ];
 
   constructor(private readonly http: HttpClient) { }
-
-  // Check the status of each API endpoint
+  /**
+   * @konstantinosporo
+   * @description
+   * Method that sends request to the api endpoints, and depending on the 
+   * status (200,404) returns checks for each individual one.
+   * @returns 
+   */
   checkApiStatus(): Observable<ApiStatus[]> {
     const checks = this.endpoints.map(api =>
       this.http.get(api.endpoint, { observe: 'response' }).pipe(
