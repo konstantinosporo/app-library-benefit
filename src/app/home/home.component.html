@@ -38,13 +38,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          @if(customers$ | async; as customers){<app-chart-gauge [data]="customers" seriesName="Total Customers"
-            dataChartName="Registered Users" [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
+          @if(customers$ | async; as customers){<app-chart-gauge [data]="customers" seriesName="Registered Customers"
+            dataChartName="Users" [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
         </div>
 
         <div class="col-md-6">
           @if(reservations$ | async; as reservations){<app-chart-gauge [data]="reservations"
-            seriesName="Total Reservations" dataChartName="Total Reservations" color="#f16821"
+            seriesName="Total Reservations" dataChartName="Reservations" color="#f16821"
             [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
         </div>
       </div>
