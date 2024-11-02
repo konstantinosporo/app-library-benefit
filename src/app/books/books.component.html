@@ -2,8 +2,7 @@
   <div class="home-container">
     <div class="col-12 mx-auto">
       <app-search-book [showContent]="true">
-        <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add"
-          (clickEvent)="add($event)" />
+        <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add" (clickEvent)="add($event)" />
       </app-search-book>
       <div class="container">
         <div class="col-10 col-lg-8 mx-auto">
@@ -17,8 +16,8 @@
     @if(books$ | async; as books){
     <div class="container">
       @for(book of books; track book._id){
-        <!-- [imgUrl]="`${book.type}`" TODO -->
-      <app-book [book]="book" (handleClickEvent)="handleAction($event)" />
+      <!-- [imgUrl]="`${book.type}`" TODO -->
+      <app-book [book]="book" [imgUrl]="createImgUrls(book)" (handleClickEvent)="handleAction($event)" />
       }
     </div>
 

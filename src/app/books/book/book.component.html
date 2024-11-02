@@ -5,15 +5,7 @@
       <div class="card book-card shadow-lg position-relative overflow-hidden border-0">
         <div class="row g-0">
           <div class="col-md-4 image-container">
-            @if (book.type === 'Non-Fiction') {
-              <img src="/bookCovers/nonFiction.jpg" class="img-fluid rounded-start" [alt]="book.name" loading="lazy" [src]="imgUrl">
-            }@else if (book.type === 'Sci-Fi') {
-              <img src="/bookCovers/sciFiPic.jpg" class="img-fluid rounded-start" [alt]="book.name" loading="lazy">
-            }@else if (book.type === 'Fiction') {
-              <img src="/bookCovers/fictionPic.jpg" class="img-fluid rounded-start" [alt]="book.name" loading="lazy">
-            }@else if (book.type === 'Biography') {
-              <img src="/bookCovers/bioPic.png" class="img-fluid rounded-start" [alt]="book.name" loading="lazy">
-            }
+            <img [src]="imgUrl" class="img-fluid rounded-start" [alt]="book.name" loading="lazy">
           </div>
           <div class="col-md-8 my-auto">
             <div class="card-body position-relative ">
@@ -26,15 +18,7 @@
                       <path fill-rule="evenodd"
                         d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z" />
                     </svg>
-                    @if (book.type === 'Non-Fiction') {
-                      <img src="/bookCovers/nonFiction.jpg" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
-                    }@else if (book.type === 'Sci-Fi') {
-                      <img src="/bookCovers/sciFiPic.jpg" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
-                    }@else if (book.type === 'Fiction') {
-                      <img src="/bookCovers/fictionPic.jpg" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
-                    }@else if (book.type === 'Biography') {
-                      <img src="/bookCovers/bioPic.jpg" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
-                    }
+                    <img [src]="imgUrl" class="img-fluid rounded" alt="Mini Book Cover" loading="lazy">
                   </span>
                 </h5>
                 <span class="badge" [ngClass]="{

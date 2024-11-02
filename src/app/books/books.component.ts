@@ -209,6 +209,19 @@ export class BooksComponent implements CrudActions {
       this.fetchAvailableBooks();
     }
   }
+  createImgUrls(book: BookApi): string {
+    switch (book.type) {
+      case ('Non-Fiction'):
+        return `/bookCovers/nonFiction.jpg`
+      case ('Fiction'):
+        return `/bookCovers/fiction.jpg`
+      case ('Biography'):
+        return `/bookCovers/bio.png`
+      case ('Sci-Fi'):
+        return `/bookCovers/sciFi.jpg`
+      default: return `/library/book.webp`;
+    }
+  }
   /**
  * @konstantinosporo
  * @description Catching the ng destroy hook to terminate subsriptions on destroy.
