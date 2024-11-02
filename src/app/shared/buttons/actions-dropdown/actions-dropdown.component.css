@@ -1,0 +1,89 @@
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  padding: 0;
+  margin: 0;
+  border-radius: 0.2rem;
+  background-color: transparent;
+  /* Keep the menu's background transparent */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  list-style: none;
+  min-width: 200px;
+}
+
+.custom-dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.custom-dropdown-item {
+  position: relative;
+  /* Establish a positioning context for the pseudo-element */
+  padding: 0.75rem 1.5rem;
+  color: var(--bs-text);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  display: block;
+  border-radius: 0.01rem;
+  /* Maintain border radius for the item */
+  overflow: hidden;
+  /* Ensure any overflow from the pseudo-element is hidden */
+}
+
+.custom-dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bs-text-foreground);
+  /* Background for the item */
+  border-radius: inherit;
+  /* Use the same border radius */
+  z-index: -1;
+  /* Place behind the text */
+  transition: background-color 0.2s ease;
+  /* Smooth transition for hover */
+}
+
+.custom-dropdown-item:not(:last-child) {
+  margin-bottom: 0.5rem;
+  /* Vertical spacing between items */
+}
+
+.custom-dropdown-item:hover::before {
+  background-color: rgba(0, 123, 255, 0.3);
+  /* Change background on hover */
+}
+
+.custom-dropdown-divider {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 1px;
+  margin: 0.5rem 0;
+}
+
+.btn-refresh {
+  transition: width 0.3s ease, background-color 0.3s ease;
+  color: var(--bs-text);
+}
+
+.btn-refresh:hover {
+  background-color: var(--bs-gray-500);
+}
+
+.btn-refresh:active {
+  transform: scale(0.95);
+}

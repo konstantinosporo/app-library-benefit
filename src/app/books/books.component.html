@@ -1,9 +1,11 @@
 <div class="container min-vh-100">
   <div class="home-container">
     <div class="col-12 mx-auto">
-      <app-search-book [showContent]="true">
-        <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add" (clickEvent)="add($event)" />
-      </app-search-book>
+      <div class="col-10 col-md-9 mx-auto">
+        <app-search [showContent]="true" searchPlaceholder="Search Books...">
+          <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add" (clickEvent)="add($event)" />
+        </app-search>
+      </div>
       <div class="container">
         <div class="col-10 col-lg-8 mx-auto">
           @for(filter of filters; track filter.id){

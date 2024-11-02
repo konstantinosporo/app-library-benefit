@@ -3,7 +3,7 @@ import { SearchStateService } from '../../services/search-state.service';
 import { AddNewButtonComponent } from "../buttons/add-new-button/add-new-button.component";
 
 @Component({
-  selector: 'app-search-book',
+  selector: 'app-search',
   standalone: true,
   imports: [AddNewButtonComponent],
   templateUrl: './search.component.html',
@@ -12,6 +12,9 @@ import { AddNewButtonComponent } from "../buttons/add-new-button/add-new-button.
 export class SearchComponent {
   constructor(private readonly searchStateService: SearchStateService) { }
   @Input() showContent: boolean = false;
+  @Input() searchPlaceholder: string = 'Default';
+  // transform the icon depending of the focus state of the input
+  isFocused = false;
   /**
    * @konstantinosporo
    * @description
