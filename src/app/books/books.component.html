@@ -17,6 +17,7 @@
     @if(books$ | async; as books){
     <div class="container">
       @for(book of books; track book._id){
+        <!-- [imgUrl]="`${book.type}`" TODO -->
       <app-book [book]="book" (handleClickEvent)="handleAction($event)" />
       }
     </div>

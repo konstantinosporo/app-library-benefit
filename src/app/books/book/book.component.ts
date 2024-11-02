@@ -15,6 +15,7 @@ export class BookComponent {
    * @description An input binding that accepts a list of Book objects;
    */
   @Input() book!: BookApi;
+  @Input() imgUrl!: string;
 
   @Output() handleClickEvent: EventEmitter<string[]> = new EventEmitter<string[]>();
   /**

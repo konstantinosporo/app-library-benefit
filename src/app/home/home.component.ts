@@ -11,12 +11,13 @@ import { ThemeService } from '../services/theme/theme.service';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ChartGaugeComponent } from "./charts/chart-gauge/chart-gauge.component";
 import { ApiStatus } from '../services/api-health/api';
+import { ChartBarComponent } from "./charts/chart-bar/chart-bar.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ChartGaugeComponent, AsyncPipe, SpinnerComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ChartGaugeComponent, AsyncPipe, SpinnerComponent, ChartBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
