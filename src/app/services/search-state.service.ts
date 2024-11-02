@@ -16,11 +16,9 @@ export class SearchStateService {
   searchSubject = new BehaviorSubject<string>('');
   filterSubject = new BehaviorSubject<FilterID>(FilterID.ALL);
 
-
   // Transforing the subjects into observable streams
   searchStream$ = this.searchSubject.asObservable();
   filterStream$ = this.filterSubject.asObservable();
-
 
   // update state methods
   updateSearch(searchQuery: string) {

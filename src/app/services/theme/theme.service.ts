@@ -5,10 +5,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ThemeService {
-  private readonly renderer: Renderer2;
+  public readonly renderer: Renderer2;
 
   // BehaviorSubject to hold the current theme state
-  private readonly isDarkThemeSubject = new BehaviorSubject<boolean>(this.getStoredTheme());
+  public readonly isDarkThemeSubject = new BehaviorSubject<boolean>(this.getStoredTheme());
   isDarkThemeStream$: Observable<boolean> = this.isDarkThemeSubject.asObservable();
 
   constructor(rendererFactory: RendererFactory2) {
@@ -19,7 +19,7 @@ export class ThemeService {
    * @konstantinosporo
    * @description Applies the saved theme preference or defaults to light theme.
    */
-  private applyInitialTheme(): void {
+  public applyInitialTheme(): void {
     const isDark = this.isDarkThemeSubject.value;
     isDark ? this.setDark() : this.setLight();
   }
@@ -37,14 +37,14 @@ export class ThemeService {
    * @description Retrieves the saved theme from localStorage or defaults to light.
    * @returns boolean indicating if dark theme is stored
    */
-  private getStoredTheme(): boolean {
+  public getStoredTheme(): boolean {
     return localStorage.getItem('theme') === 'dark';
   }
   /**
    * @konstantinosporo
    * @description Applies the dark theme by adding the 'dark' class and updating localStorage.
    */
-  private setDark(): void {
+  public setDark(): void {
     this.renderer.addClass(document.body, 'dark');
     localStorage.setItem('theme', 'dark');
   }
@@ -52,7 +52,7 @@ export class ThemeService {
    * @konstantinosporo
    * @description Applies the light theme by removing the 'dark' class and updating localStorage.
    */
-  private setLight(): void {
+  public setLight(): void {
     this.renderer.removeClass(document.body, 'dark');
     localStorage.setItem('theme', 'light');
   }

@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of, forkJoin } from 'rxjs';
-
-export interface ApiStatus {
-  title: string;
-  endpoint: string;
-  status: boolean;
-}
+import { ApiStatus, endpoints } from './api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HealthCheckService {
-  private readonly apiUrl: string = 'https://book-api-bx2r.onrender.com';
-  private readonly endpoints = [
-    { title: 'Books API', endpoint: `${this.apiUrl}/books` },
-    { title: 'Customers API', endpoint: `${this.apiUrl}/customers` },
-    { title: 'Reservations API', endpoint: `${this.apiUrl}/reservations` }
-  ];
+  endpoints = endpoints;
 
   constructor(private readonly http: HttpClient) { }
   /**
