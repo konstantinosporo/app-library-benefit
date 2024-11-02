@@ -14,8 +14,8 @@
   visibility: hidden;
   white-space: nowrap;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  margin-left: 8px;
-  margin-right: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 /* Hover effect only on medium and larger screens */
@@ -45,8 +45,8 @@
   .text-value {
     opacity: 1;
     visibility: visible;
-    margin-left: 8px;
-    margin-right: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 }
 

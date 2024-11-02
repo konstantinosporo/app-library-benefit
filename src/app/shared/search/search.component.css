@@ -14,3 +14,14 @@
 .btn-library:hover {
   background-image: linear-gradient(-10deg, #e9ddbf, transparent 30%);
 }
+
+.icon-wrapper {
+  transition: transform 0.3s ease, font-weight 0.3s ease;
+}
+
+.icon-focus {
+  transform: scale(1.2);
+  /* Increase the scale to make it appear larger */
+  font-weight: bold;
+  /* Makes the icon bolder */
+}

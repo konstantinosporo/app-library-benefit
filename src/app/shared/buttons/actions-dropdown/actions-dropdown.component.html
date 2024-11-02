@@ -1,0 +1,16 @@
+<div class="custom-dropdown">
+  <button class="btn btn-refresh rounded-circle" title="Filter Settings" type="button" (click)="toggleDropdown()">
+    <span class="visually-hidden">Settings</span>
+    <i class="bi bi-filter"></i>
+  </button>
+  @if(isOpen){
+  <ng-container>
+    <ul class="custom-dropdown-menu bg-body-secondary" [ngClass]="{'show': isOpen}">
+      @for(action of dropdownActions;track action){
+      <li><a class="custom-dropdown-item" href="#" (click)="closeDropdown()"><i
+            [class]="action.icon+' me-2'"></i>{{action.title}}</a></li>
+      }
+    </ul>
+  </ng-container>
+  }
+</div>

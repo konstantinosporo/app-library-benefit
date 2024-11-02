@@ -4,7 +4,7 @@
 }
 
 .btn-refresh:hover {
-  background-color: var(--bs-secondary);
+  background-color: var(--bs-gray-500);
 }
 
 .btn-refresh:active {

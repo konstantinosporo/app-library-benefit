@@ -143,9 +143,10 @@ small {
   color: var(--bs-text);
 }
 
-span h1 {
+div,span h1 {
   color: var(--bs-text);
 }
+
 
 /* Accessibility: Form Validation */
 .is-invalid {
