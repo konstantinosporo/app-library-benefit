@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { CustomerApi } from '../customer';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { SpinnerComponent } from "../../shared/spinner/spinner.component";
@@ -15,19 +15,33 @@ import { CustomerHttpService } from '../../services/customers/customer-http.serv
   templateUrl: './view-customer.component.html',
   styleUrl: './view-customer.component.css'
 })
-export class ViewCustomerComponent {
+export class ViewCustomerComponent implements OnDestroy {
+  private readonly destroy$ = new Subject<void>();
   customerId: string = '';
   backButton: { title: string, route: string } = { title: 'Back to Customers', route: '/customers' };
   customerToView$!: Observable<CustomerApi>;
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Constructor that injects required services and initializes the component.
+   * Subscribes to the route parameters to get the customer ID and fetches the customer data if ID exists.
+   */
   constructor(
     private readonly customerHttpService: CustomerHttpService,
     private readonly route: ActivatedRoute
   ) {
-    this.route.params.subscribe(param => this.customerId = param['id'] || '');
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(param => this.customerId = param['id'] || '');
     if (this.customerId.length) {
       //console.log(this.customerId);
       this.customerToView$ = this.customerHttpService.getCustomerById(this.customerId);
     }
+  }
+  /**
+  * @konstantinosporo
+  * @description Catching the ng destroy hook to terminate subsriptions on destroy.
+  */
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -6,8 +6,7 @@
         <h1 class="fw-light">Customers Details</h1>
         <div class="d-flex my-1 align-items-center gap-1">
           <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshCustomers()" />
-          <app-add-new-button textValue="Add new" route="customer/add" [rounded]="true"
-            (clickEvent)="addNewCustomer($event)" />
+          <app-add-new-button textValue="Add new" route="customer/add" [rounded]="true" (clickEvent)="add($event)" />
         </div>
       </div>
       <hr class="text-primary mt-0">

@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
 import { SearchComponent } from '../shared/search/search.component';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { BookApi } from './book/book';
@@ -23,6 +23,9 @@ import { Filter, filterList, FilterID as ID } from '../shared/search/filter/filt
   styleUrl: './books.component.css'
 })
 export class BooksComponent implements CrudActions {
+  // Private allBooks stream because i dont use this in my template.(filters, searches)
+  private readonly allBooks$!: Observable<BookApi[]>;
+  private readonly destroy$ = new Subject<void>();
   /**
    * @konstantinosporo
    * @description 
@@ -30,7 +33,6 @@ export class BooksComponent implements CrudActions {
    * while the lifecycle of this component is there.
    */
   books$!: Observable<BookApi[]>;
-  private readonly allBooks$!: Observable<BookApi[]>;
   searchQueryState$!: Observable<string>;
   // Load the external filterlist
   filters: Filter[] = filterList;
@@ -56,13 +58,13 @@ export class BooksComponent implements CrudActions {
     this.searchQueryState$ = this.searchStateService.searchStream$;
     this.filterState$ = this.searchStateService.filterStream$;
     this.searchQueryState$
-      .pipe(filter((searchQuery: string) => searchQuery.length >= 0))
+      .pipe(takeUntil(this.destroy$), filter((searchQuery: string) => searchQuery.length >= 0))
       .subscribe((data) => {
         this.fetchFilteredBooks(data);
       });
 
     // subsribe to filter state service observable 
-    this.filterState$.subscribe(data => {
+    this.filterState$.pipe(takeUntil(this.destroy$)).subscribe(data => {
       //console.log(data);
       this.applyFilter(data as ID);
     });
@@ -123,7 +125,7 @@ export class BooksComponent implements CrudActions {
    * Navigate to the books/add-book route when the add new button is cliked.
    * It gets a route string as a param.
    */
-  addNewBook(route: string) {
+  add(route: string) {
     this.router.navigate([route]);
   }
   /**
@@ -165,9 +167,10 @@ export class BooksComponent implements CrudActions {
    * This method is subject to change because i get 404 when i try to delete for now.
    */
   confirmDelete(id: string) {
-    this.booksHttpService.deleteBookById(id).subscribe({
+    this.booksHttpService.deleteBookById(id).pipe(takeUntil(this.destroy$)).subscribe({
       next: (book: BookApi) => {
         this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully deleted!`);
+        this.router.navigate(['books']);
       },
       error: (err) => {
         //console.error('Error deleting book:', err);
@@ -206,6 +209,13 @@ export class BooksComponent implements CrudActions {
       this.fetchAvailableBooks();
     }
   }
-
+  /**
+ * @konstantinosporo
+ * @description Catching the ng destroy hook to terminate subsriptions on destroy.
+ */
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
 }

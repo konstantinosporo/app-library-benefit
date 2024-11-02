@@ -2,7 +2,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BookHttpService } from '../../../services/book/book-http.service';
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../../services/theme/theme.service';
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
 import { ChartPieComponent } from "../../charts/chart-pie/chart-pie.component";
 import { PieChartData } from '../../charts/chart-pie/pieChartData';

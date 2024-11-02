@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddCustomerComponent } from './add-customer.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('AddCustomerComponent', () => {
   let component: AddCustomerComponent;
@@ -8,7 +9,9 @@ describe('AddCustomerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddCustomerComponent]
+      imports: [AddCustomerComponent],
+      providers: [HttpClient, HttpHandler]
+
     })
     .compileComponents();
 

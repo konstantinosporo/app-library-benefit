@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Book, BookApi } from './book';
 import { DatePipe, NgClass } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BookApi } from './book';
 
 @Component({
   selector: 'app-book',

@@ -2,7 +2,7 @@ import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AlertService } from '../../services/alert-handlers/alert.service';
 import { BookHttpService } from '../../services/book/book-http.service';
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
@@ -16,13 +16,13 @@ import { BookApi } from '../book/book';
   styleUrl: './edit-book.component.css'
 })
 export class EditBookComponent implements OnDestroy {
-  categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
+  private readonly datePipe = new DatePipe('en-US');
+  private readonly destroy$ = new Subject<void>();
   backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
+  categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
   bookFormControl!: FormGroup;
   paramId!: string;
   titleFooter!: string;
-  private readonly datePipe = new DatePipe('en-US');
-  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly bookHttpService: BookHttpService,
@@ -37,14 +37,15 @@ export class EditBookComponent implements OnDestroy {
       author: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       type: new FormControl('', Validators.required),
     });
-    this.route.params.subscribe(param => {
-      this.bookHttpService.getBookById(param['id']).subscribe((book) => {
+    // Instanciate form and parameter variable, and footer title on component mount.
+    // Also using takeUntil() as im manually subscribe here.
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(param => {
+      this.bookHttpService.getBookById(param['id']).pipe(takeUntil(this.destroy$)).subscribe((book) => {
         this.patchForm(book);
       });
       this.paramId = param['id'];
       this.titleFooter = 'Editing Book with ID:';
     });
-
   }
   /**
    * @konstantinosporo
@@ -91,8 +92,7 @@ export class EditBookComponent implements OnDestroy {
     }
   }
   /**
-   * @konstantinosporo
-   * Method to update the value of the form when the data get fetched.
+   * @konstantinosporo Method to update the value of the form when the data get fetched.
    * @param book 
    */
   patchForm(book: BookApi) {
@@ -134,7 +134,10 @@ export class EditBookComponent implements OnDestroy {
 
     return selectedDate.getTime() === today.getTime();
   }
-
+  /**
+   * @konstantinosporo
+   * @description Catching the ng destroy hook to terminate subsriptions on destroy.
+   */
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
