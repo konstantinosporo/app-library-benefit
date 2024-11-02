@@ -8,7 +8,7 @@ import { map, Observable } from 'rxjs';
 })
 export class CustomerHttpService {
   // Available customers endpoint URL.
-  private readonly customerApiUrl: string = "https://book-api-bx2r.onrender.com/customers";
+  public readonly customerApiUrl: string = "https://book-api-bx2r.onrender.com/customers";
   // Mock Api tests
   //private readonly mockCustomerApiUrl: string = "https://66ee7c5b3ed5bb4d0bf10e97.mockapi.io/api/customers/";
 

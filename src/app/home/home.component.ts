@@ -4,12 +4,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CustomerApi } from '../customers/customer';
 import { ReservationApi } from '../reservations/reservation';
-import { ApiStatus, HealthCheckService } from '../services/api-health/health-check.service';
+import { HealthCheckService } from '../services/api-health/health-check.service';
 import { CustomerHttpService } from '../services/customers/customer-http.service';
 import { ReservationHttpService } from '../services/reservations/reservation-http.service';
 import { ThemeService } from '../services/theme/theme.service';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ChartGaugeComponent } from "./charts/chart-gauge/chart-gauge.component";
+import { ApiStatus } from '../services/api-health/api';
 
 
 @Component({

@@ -9,7 +9,7 @@ import { HeatMapData } from './charts';
 })
 export class ReservationHttpService {
   // Available reservations endpoint URL.
-  private readonly reservationApiUrl: string = "https://book-api-bx2r.onrender.com/reservations";
+  public readonly reservationApiUrl: string = "https://book-api-bx2r.onrender.com/reservations";
 
   constructor(private readonly http: HttpClient) { }
 

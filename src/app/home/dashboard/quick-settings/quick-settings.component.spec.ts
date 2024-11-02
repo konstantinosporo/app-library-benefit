@@ -6,7 +6,6 @@ import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
 
 const mockEChartsConfig = {};
 
-
 describe('QuickSettingsComponent', () => {
   let component: QuickSettingsComponent;
   let fixture: ComponentFixture<QuickSettingsComponent>;
