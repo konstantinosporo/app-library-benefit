@@ -5,7 +5,7 @@ import { NgxEchartsDirective } from 'ngx-echarts';
 import { Observable } from 'rxjs';
 import { HeatMapData } from '../../../services/reservations/charts';
 import { ReservationHttpService } from '../../../services/reservations/reservation-http.service';
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../../services/theme/theme.service';
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
 import { ChartHeatmapComponent } from "../../charts/chart-heatmap/chart-heatmap.component";
 

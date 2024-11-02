@@ -9,7 +9,7 @@ import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { Router } from '@angular/router';
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
-import { ThemeService } from '../services/theme.service';
+import { ThemeService } from '../services/theme/theme.service';
 
 @Component({
   selector: 'app-customers',
@@ -31,18 +31,28 @@ export class CustomersComponent implements CrudActions {
     this.dataStream$ = this.customerHttpService.getCustomers();
     this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
   }
-  // TODO IMPLEMENT CUSTOMERS VIEW AND EDIT 
+  // Navigate to the specified route to add a new record.
+  add(route: string) {
+    this.router.navigate([route]);
+  }
+  // Navigate to customers view page on click.
   view(id: string) {
     this.router.navigate([`customer/${id}/view`]);
   }
+  // Navigate to customers edit page on click.
   edit(id: string) {
     this.router.navigate([`customer/${id}/edit`]);
   }
+  // Initiate delete confirmation modal.
   delete(id: string) {
     //console.log(id);
     this.alertService.showDangerModal('Confirm Deletion', `Are you sure you want to delete customer with ID: ${id}`, () => this.confirmDelete(id), 'Delete Customer');
   }
-
+  /**
+   * @konstantinosporo
+   * @description After the confirmation of the modal, this method is triggered that tries to connect and delete the record from the API.
+   * @param id 
+   */
   confirmDelete(id: string) {
     this.customerHttpService.deleteCustomerById(id).subscribe({
       next: (user: CustomerApi) => {
@@ -59,11 +69,10 @@ export class CustomersComponent implements CrudActions {
       }
     });
   }
-
-  addNewCustomer(route: string) {
-    this.router.navigate([route]);
-  }
-
+  /**
+   * @konstantinosporo
+   * @description Simple refresh function that basically reemits the getCustomers() stream in the local observable.
+   */
   refreshCustomers() {
     this.dataStream$ = this.customerHttpService.getCustomers();
   }

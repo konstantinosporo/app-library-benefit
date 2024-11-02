@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { HeatmapComponent } from './heatmap.component';
 
 describe('HeatmapComponent', () => {
@@ -8,9 +9,11 @@ describe('HeatmapComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeatmapComponent]
+      imports: [HeatmapComponent],
+      providers: [HttpClient, HttpHandler]
+
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(HeatmapComponent);
     component = fixture.componentInstance;

@@ -9,7 +9,7 @@ import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ReservationApi, Status } from './reservation';
-import { ThemeService } from '../services/theme.service';
+import { ThemeService } from '../services/theme/theme.service';
 
 @Component({
   selector: 'app-reservations',
@@ -33,26 +33,28 @@ export class ReservationsComponent implements CrudActions {
     this.dataStream$ = this.reservationHttpService.getReservations();
     this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
   }
-  // TODO IMPLEMENT RESERVATIONS ADD REFRESH AND ADD NEW BUTTONS
+  // Check in CrudAction interface for more information app > lib > interfaces.ts
+  add(route: string) {
+    //console.log(route);
+    this.router.navigate([route]);
+  }
   view(id: string) {
     console.log(id);
   }
-
   edit(id: string) {
     console.log(id);
   }
-
   delete(id: string) {
     console.log(id);
-  }
-  addNewCustomer(route: string) {
-    //console.log(route);
-    this.router.navigate([route]);
   }
 
   refreshCustomers() {
     this.dataStream$ = this.reservationHttpService.getReservations();
   }
+  /**
+   * @konstantinosporo
+   * @description Same procedure as Books and Reservations
+   */
   complete(id: string) {
     this.alertService.showDangerModal('Confirm Completion', `Are you sure you want to complete this reservation?
       Reservation Id: ${id}`, () => this.confirmCompletion(id), "Complete Reservation");

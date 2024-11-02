@@ -31,12 +31,14 @@ export class AddCustomerComponent {
 
     })
   }
-
+  /**
+   * @konstantinosporo
+   * @description Initiates the confirmation modal which can initiate the confirmCreation() method.
+   */
   addCustomer() {
     //console.log(id);
     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create customer with fullname: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}`, () => this.confirmCreation(), "Add Customer");
   }
-
   /**
    * @konstantinosporo
    * @description Triggered after confirming the action modal. Method to create a new BookApi object, and adding it

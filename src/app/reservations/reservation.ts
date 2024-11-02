@@ -18,6 +18,10 @@ export interface ReservationApi {
   __v?: number;
 
 }
+/**
+ * @konstantinosporo
+ * @description Turned status into an enum for readability purposes.
+ */
 export enum Status {
   ACTIVE = "active",
   COMPLETED = "completed"

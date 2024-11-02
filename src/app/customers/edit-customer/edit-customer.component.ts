@@ -19,6 +19,11 @@ export class EditCustomerComponent {
   customerFormControl!: FormGroup;
   paramId!: string;
   titleFooter!: string;
+  /**
+   * @konstantinosporo
+   * @description Fetches the customer data based on the route parameter 'id' and patches the form with this data.
+   * Also initializes form controls for customer details.
+   */
   constructor(
     private readonly customerHttpService: CustomerHttpService,
     private readonly alertService: AlertService,
@@ -41,10 +46,21 @@ export class EditCustomerComponent {
       this.titleFooter = `Editing customer with ID:`;
     });
   }
-
+  /**
+   * @konstantinosporo
+   * @description  Opens an information modal to confirm if the user wants to edit the customer's details.
+   * Upon confirmation, calls `confirmEdit()` to save changes.
+   */
   editCustomer() {
     this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit customer: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}`, () => this.confirmEdit(), "Edit Customer");
   }
+  /**
+   * @konstantinosporo
+   * @description Confirms and saves the edited customer details if the form is valid.
+   * Calls the customer HTTP service to update the customer on the server.
+   * Upon success, displays a success toast message and navigates to the customer list.
+   * If an error occurs, logs the error and throws a descriptive error message.
+   */
   confirmEdit() {
     //console.log(this.customerFormControl.value);
     // console.log(this.customerFormControl.controls['name']);
@@ -73,6 +89,11 @@ export class EditCustomerComponent {
       });
     }
   }
+  /**
+   * @konstantinosporo
+   * @description Patches the customer form with the specified customer details.
+   * This method is used to populate the form fields with the customer's current data for editing.
+   */
   patchForm(customer: CustomerApi) {
     this.customerFormControl.patchValue({
       name: customer.name,
