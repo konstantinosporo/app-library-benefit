@@ -25,16 +25,17 @@ import { ReservationApi, Status } from './reservation';
 export class ReservationsComponent implements CrudActions, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly allReservations$!: Observable<ReservationApi[]>;
+  reservations$!: Observable<ReservationApi[]>;
+  status!: Status;
+  searchQueryState$!: Observable<string>;
+  isDarkTheme!: boolean;
+
   dropdownActions: DropdownActions[] = [
     { id: 'active', title: 'Active', icon: 'bi-circle' },
     { id: 'completed', title: 'Completed', icon: 'bi bi-check-circle' },
     { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
     { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
   ]
-  status!: Status;
-  reservations$!: Observable<ReservationApi[]>;
-  searchQueryState$!: Observable<string>;
-  isDarkTheme!: boolean;
 
   constructor(
     private readonly reservationHttpService: ReservationHttpService,
