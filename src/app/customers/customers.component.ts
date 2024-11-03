@@ -165,7 +165,7 @@ export class CustomersComponent implements CrudActions, OnDestroy {
     this.customerHttpService.deleteCustomerById(id).subscribe({
       next: (user: CustomerApi) => {
         //console.log(`User ${user.name} with id: ${user._id} has been deleted.`);
-        this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
+        this.alertService.showSuccessToast(`Customer with ID: ${id} successfully deleted!`);
         this.customers$ = this.customerHttpService.getCustomers(); // update the data stream!
         // this.alertService.showSuccessToast(`Customer with ID: ${user._id} successfully deleted!`);
         // this.mockDataStream$ = this.customerHttpService.getCustomers(); // Refetch the data stream

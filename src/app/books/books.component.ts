@@ -169,8 +169,8 @@ export class BooksComponent implements CrudActions {
   confirmDelete(id: string) {
     this.booksHttpService.deleteBookById(id).pipe(takeUntil(this.destroy$)).subscribe({
       next: (book: BookApi) => {
-        this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully deleted!`);
-        this.router.navigate(['books']);
+        this.alertService.showSuccessToast(`Book with ID: ${id} successfully deleted!`);
+        this.books$ = this.booksHttpService.getBooks();
       },
       error: (err) => {
         //console.error('Error deleting book:', err);
