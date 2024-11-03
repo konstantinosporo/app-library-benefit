@@ -227,7 +227,7 @@ export class BooksComponent implements CrudActions {
  * @description Catching the ng destroy hook to terminate subsriptions on destroy.
  */
   ngOnDestroy() {
-    this.searchStateService.updateSearch('');
+    this.searchStateService.resetSearch();
     this.destroy$.next();
     this.destroy$.complete();
   }

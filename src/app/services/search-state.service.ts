@@ -30,4 +30,8 @@ export class SearchStateService {
     //console.log(filterId);
     this.filterSubject.next(filterId);
   }
+
+  resetSearch(): void {
+    this.searchSubject.next('');
+  }
 }
