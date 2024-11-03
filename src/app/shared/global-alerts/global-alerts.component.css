@@ -1,3 +1,7 @@
 .toast {
   margin-bottom: 0;
 }
+
+.toast-body {
+  background-color: var(--bs-text-foreground) !important;
+}

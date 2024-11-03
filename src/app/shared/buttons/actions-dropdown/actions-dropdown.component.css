@@ -87,3 +87,7 @@
 .btn-refresh:active {
   transform: scale(0.95);
 }
+
+a {
+  cursor: pointer;
+}

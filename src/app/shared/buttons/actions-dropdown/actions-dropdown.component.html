@@ -7,8 +7,12 @@
   <ng-container>
     <ul class="custom-dropdown-menu bg-body-secondary" [ngClass]="{'show': isOpen}">
       @for(action of dropdownActions;track action){
-      <li><a class="custom-dropdown-item" href="#" (click)="closeDropdown()"><i
-            [class]="action.icon+' me-2'"></i>{{action.title}}</a></li>
+      <li>
+        <a class="custom-dropdown-item" (click)="handleClickedDropdown(action?.id || '')">
+          <i [class]="action.icon+' me-2'"></i>
+          {{action.title}}
+        </a>
+      </li>
       }
     </ul>
   </ng-container>

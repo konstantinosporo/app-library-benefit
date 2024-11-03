@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { DropdownActions } from './dropdown';
 
 @Component({
@@ -11,6 +11,7 @@ import { DropdownActions } from './dropdown';
 })
 export class ActionsDropdownComponent {
   @Input() dropdownActions!: DropdownActions[];
+  @Output() handleClickedDropdownEvent: EventEmitter<string> = new EventEmitter<string>();
   isOpen = false; // State to track the dropdown
 
   toggleDropdown() {
@@ -18,7 +19,13 @@ export class ActionsDropdownComponent {
   }
 
   closeDropdown() {
-    this.isOpen = false; // Close the dropdown
+    this.isOpen = false;
+  }
+
+  handleClickedDropdown(id: string) {
+    //console.log(id);
+    this.closeDropdown();
+    this.handleClickedDropdownEvent.emit(id);
   }
 
   @HostListener('document:click', ['$event'])
