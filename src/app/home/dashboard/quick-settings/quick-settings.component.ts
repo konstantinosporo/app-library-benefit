@@ -25,6 +25,5 @@ export class QuickSettingsComponent {
   ) {
     this.dataStream$ = this.bookHttpService.getAvailableBooksCountByType();
     this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
-
   }
 }

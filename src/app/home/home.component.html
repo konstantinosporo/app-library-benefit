@@ -37,12 +37,24 @@
   <section>
     <div class="container">
       <div class="row">
+        
         <div class="col-md-6">
+          @if(barChartData$ | async; as barChartData) {
+            <app-chart-bar [data]="barChartData"
+              seriesName="Total Reservations" dataChartName="Reservations" color="#f16821"
+              [theme]="isDarkTheme">
+            </app-chart-bar>
+          } @else {
+            <app-spinner minVh="min-vh-30"></app-spinner>
+          }
+        </div>
+
+        <div class="col-md-3">
           @if(customers$ | async; as customers){<app-chart-gauge [data]="customers" seriesName="Registered Customers"
             dataChartName="Users" [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           @if(reservations$ | async; as reservations){<app-chart-gauge [data]="reservations"
             seriesName="Total Reservations" dataChartName="Reservations" color="#f16821"
             [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}

@@ -26,7 +26,7 @@ export class ChartBarComponent {
     // Map `type` to `name` for ECharts
     const formattedData = this.data.map(item => ({
       value: item.value,
-      name: item.type
+      name: item.type,
     }));
 
     this.options = {

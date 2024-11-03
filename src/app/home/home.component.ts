@@ -12,6 +12,8 @@ import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ChartGaugeComponent } from "./charts/chart-gauge/chart-gauge.component";
 import { ApiStatus } from '../services/api-health/api';
 import { ChartBarComponent } from "./charts/chart-bar/chart-bar.component";
+import { PieChartData } from './charts/chart-pie/pieChartData';
+import { BookHttpService } from '../services/book/book-http.service';
 
 
 @Component({
@@ -26,18 +28,21 @@ export class HomeComponent {
   customers$!: Observable<CustomerApi[]>;
   reservations$!: Observable<ReservationApi[]>;
   apiStatuses$!: Observable<ApiStatus[]>;
+  barChartData$!: Observable<PieChartData[]>;
 
   constructor(
     private readonly healthCheckService: HealthCheckService,
     private readonly customerService: CustomerHttpService,
     private readonly reservationService: ReservationHttpService,
     private readonly themeService: ThemeService,
+    private readonly bookHttpService: BookHttpService
 
   ) {
     this.reservations$ = this.reservationService.getReservations();
     this.customers$ = this.customerService.getCustomers();
     this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
     this.apiStatuses$ = this.healthCheckService.checkApiStatus();
+    this.barChartData$ = this.bookHttpService.getAvailableBooksCountByType();
   }
 
 }
