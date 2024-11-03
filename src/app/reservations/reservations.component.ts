@@ -51,8 +51,8 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
     this.searchQueryState$ = this.searchStateService.searchStream$;
     this.searchQueryState$
       .pipe(takeUntil(this.destroy$), filter((searchQuery: string) => searchQuery.length >= 0))
-      .subscribe((data) => {
-        this.fetchFilteredReservations(data);
+      .subscribe((searchQuery) => {
+        this.fetchFilteredReservations(searchQuery);
       });
   }
   // Check in CrudAction interface for more information app > lib > interfaces.ts
@@ -137,7 +137,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
             const authorName = reservation?.book?.author?.toLowerCase() || '';
             const customerName = reservation?.customer?.name.toLowerCase() || '';
             const status = reservation?.status?.toLowerCase() || '';
-            const searchText = text.toLowerCase();
+            const searchText = text.toLowerCase().trim();
 
             return (
               bookName.includes(searchText) ||
@@ -237,7 +237,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
    * @description Catching the ng destroy hook to terminate subsriptions on destroy.
    */
   ngOnDestroy() {
-    this.searchStateService.updateSearch('');
+    this.searchStateService.resetSearch();
     this.destroy$.next();
     this.destroy$.complete();
   }
