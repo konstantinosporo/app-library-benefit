@@ -6,7 +6,7 @@
       </span>
       <input type="text" class="form-control rounded bg-transparent text-white" name="searchInput" id="searchInput"
         (focus)="isFocused = true" (blur)="isFocused = false" (change)="handleStateSearch(searchQuery.value)"
-        [placeholder]="searchPlaceholder" aria-label="Type Keywords" aria-describedby="Search Input" #searchQuery />
+        [placeholder]="placeholder" aria-label="Type Keywords" aria-describedby="Search Input" #searchQuery />
       @if(showContent){
       <ng-content></ng-content>
       }

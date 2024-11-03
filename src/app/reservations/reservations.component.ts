@@ -237,6 +237,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
    * @description Catching the ng destroy hook to terminate subsriptions on destroy.
    */
   ngOnDestroy() {
+    this.searchStateService.updateSearch('');
     this.destroy$.next();
     this.destroy$.complete();
   }
