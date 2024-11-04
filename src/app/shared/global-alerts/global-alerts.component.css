@@ -2,6 +2,33 @@
   margin-bottom: 0;
 }
 
-.toast-body {
+.toast-body,
+.modal-body,
+.modal-footer,
+.modal-header {
   background-color: var(--bs-text-foreground) !important;
+  color: var(--bs-text);
+}
+
+/* CSS */
+.btn-close-custom {
+  background-color: var(--bs-info);
+  border-radius: 50%;
+  filter: invert(1);
+  /* Makes the icon white */
+  opacity: 0.8;
+  /* Optional: adjust opacity */
+}
+
+.btn-close-custom:hover {
+  filter: invert(1.1);
+  /* Slightly brighter on hover */
+  opacity: 1;
+}
+
+/* Alternative for specific color */
+.btn-close-custom-red {
+  background-color: transparent;
+  filter: hue-rotate(180deg);
+  /* Adjust this to achieve various colors */
 }

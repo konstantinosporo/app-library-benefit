@@ -1,6 +1,6 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper title="Add Customer" [titleFooter]="'Please fill in all the required details.'"
-    iconClass="bi bi-database-add" [backButton]="backButton">
+  <app-basic-wrapper title="Add New Customer" [titleFooter]="'Please fill in all the required details.'"
+    iconClass="bi bi-cloud-plus" [backButton]="backButton">
     <form [formGroup]="customerFormControl" class="row g-3 needs-validation" novalidate>
 
       <!-- Customer Name-->
@@ -78,7 +78,8 @@
         <label for="phoneNumber" class="form-label">Customer Phone Number*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-phone"></i></span>
-          <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" [ngClass]="{
+          <input type="text" inputmode="numeric" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+            [ngClass]="{
                     'is-invalid': customerFormControl.get('phoneNumber')?.invalid && (customerFormControl.get('phoneNumber')?.touched || customerFormControl.get('phoneNumber')?.dirty),
                     'is-valid': customerFormControl.get('phoneNumber')?.valid && (customerFormControl.get('phoneNumber')?.touched || customerFormControl.get('phoneNumber')?.dirty)
                  }" required>
@@ -86,9 +87,13 @@
           @if(customerFormControl.get('phoneNumber')?.invalid && (customerFormControl.get('phoneNumber')?.touched ||
           customerFormControl.get('phoneNumber')?.dirty)){
           <div class="invalid-feedback">
-            @if(customerFormControl.get('phoneNumber')?.errors?.['required']){<div>PhoneNumber is required.</div>}
+            @if(customerFormControl.get('phoneNumber')?.errors?.['pattern']){<div>Phone number must be of digits.</div>}
+            @else{
+            @if(customerFormControl.get('phoneNumber')?.errors?.['required']){<div>Phone number is required.</div>}
             @if(customerFormControl.get('phoneNumber')?.errors?.['minlength']){<div>Minimum length is
               {{customerFormControl.get('phoneNumber')?.errors?.['minlength']?.['actualLength']}}/8.</div>}
+
+            }
           </div>
           }@else{<div class="w-100">&nbsp;</div>}
         </div>
@@ -99,7 +104,7 @@
         <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
           [disabled]="customerFormControl.invalid" (click)="addCustomer()">
           <i class="me-1"
-            [ngClass]="{'bi bi-person-fill-add': customerFormControl.valid, 'bi bi-person-fill-slash': customerFormControl.invalid}"></i>Add
+            [ngClass]="{'bi bi-person-fill-add': customerFormControl.valid, 'bi bi-person-fill-slash': customerFormControl.invalid}"></i>Upload
           Customer</button>
       </div>
 

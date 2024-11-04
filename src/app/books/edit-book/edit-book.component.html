@@ -1,6 +1,6 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Edit Book'" [titleFooter]="titleFooter" [docId]="paramId" [backButton]="backButton"
-    iconClass="bi bi-database-up">
+  <app-basic-wrapper [title]="'Edit Book Details'" [titleFooter]="titleFooter" [docId]="paramId"
+    [backButton]="backButton" iconClass="bi bi-database-up">
     <form [formGroup]="bookFormControl" class="row g-3 needs-validation" novalidate>
 
       <!-- Book Title-->
@@ -127,7 +127,7 @@
         <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
           [disabled]="bookFormControl.invalid" (click)="editBook()">
           <i class="me-1"
-            [ngClass]="{'bi bi-pencil': bookFormControl.valid, 'bi bi-file-earmark-x': bookFormControl.invalid}"></i>Edit
+            [ngClass]="{'bi bi-cloud-upload': bookFormControl.valid, 'bi bi-file-earmark-x': bookFormControl.invalid}"></i>Update
           Book</button>
       </div>
 

@@ -1,10 +1,11 @@
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <!-- Success Toast -->
-  <div class="toast shadow-lg" id="successToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header text-bg-success text-white">
+  <div class="toast shadow-lg bg-light-subtle text-dark" id="successToast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-success-subtle text-success">
       <i class="bi bi-check-circle me-2"></i>
       <span class="me-auto">Success!</span>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body" id="successToastBody">
       ...
@@ -12,11 +13,12 @@
   </div>
 
   <!-- Danger Toast  -->
-  <div class="toast shadow-lg" id="dangerToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header text-bg-danger text-white">
+  <div class="toast shadow-lg bg-light-subtle text-dark" id="dangerToast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-danger-subtle text-danger">
       <i class="bi bi-exclamation-triangle me-2"></i>
-      <span class="me-auto">Oops something went wrong!</span>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      <span class="me-auto">Oops, something went wrong!</span>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body" id="dangerToastBody">
       ...
@@ -24,11 +26,12 @@
   </div>
 
   <!-- Info Toast -->
-  <div class="toast shadow-lg" id="infoToast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header text-bg-info text-white">
+  <div class="toast shadow-lg bg-light-subtle text-dark" id="infoToast" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header bg-info-subtle text-info">
       <i class="bi bi-info-circle me-2"></i>
       <span class="me-auto">Reminder</span>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body" id="infoToastBody">
       ...
@@ -38,17 +41,17 @@
   <!-- Success Modal -->
   <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-success-subtle">
-          <h1 class="modal-title fs-5 text-success-emphasis" id="successModalTitle">Modal Title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content bg-light-subtle text-dark">
+        <div class="modal-header bg-success-subtle text-success">
+          <h1 class="modal-title fs-5" id="successModalTitle">Modal Title</h1>
+          <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="successModalBody">
           ...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger text-text" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-success text-white" id="successModalButton">Add item</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-secondary" id="successModalButton">Add item</button>
         </div>
       </div>
     </div>
@@ -57,16 +60,16 @@
   <!-- Danger Modal -->
   <div class="modal fade" id="dangerModal" tabindex="-1" aria-labelledby="dangerModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-danger-subtle">
-          <h1 class="modal-title fs-5 text-danger-emphasis" id="dangerModalTitle">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content bg-light-subtle text-dark">
+        <div class="modal-header bg-danger-subtle text-danger">
+          <h1 class="modal-title fs-5" id="dangerModalTitle">Modal title</h1>
+          <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="dangerModalBody">
           ...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger text-text" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-danger text-white" id="dangerModalButton">Modal Save</button>
         </div>
       </div>
@@ -76,20 +79,19 @@
   <!-- Info Modal -->
   <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-info-subtle">
-          <h1 class="modal-title fs-5 text-info-emphasis" id="infoModalTitle">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content bg-light-subtle text-dark">
+        <div class="modal-header bg-info-subtle text-info">
+          <h1 class="modal-title fs-5" id="infoModalTitle">Modal title</h1>
+          <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="infoModalBody">
           ...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger text-text" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-info text-white" id="infoModalButton">Modal Save</button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

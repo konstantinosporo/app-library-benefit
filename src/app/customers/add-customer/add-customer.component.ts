@@ -27,7 +27,7 @@ export class AddCustomerComponent {
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       surname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      phoneNumber: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('^[0-9]*$')]),
 
     })
   }
@@ -37,7 +37,7 @@ export class AddCustomerComponent {
    */
   addCustomer() {
     //console.log(id);
-    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create customer with fullname: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}`, () => this.confirmCreation(), "Add Customer");
+    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to upload customer: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}?`, () => this.confirmCreation(), "Save");
   }
   /**
    * @konstantinosporo
@@ -57,10 +57,8 @@ export class AddCustomerComponent {
       //console.table(newBook);
       this.customerHttpService.addCustomer(newCustomer).subscribe({
         next: (customer: CustomerApi) => {
-          this.alertService.showSuccessToast(`Customer with ID: ${customer._id} successfully created!`);
-          setTimeout(() => {
-            this.router.navigate(['customers']);
-          }, 1000);
+          this.alertService.showSuccessToast(`Customer with ID: ${customer._id} was successfully uploaded!`);
+          this.router.navigate(['customers']);
         },
         error: (err) => {
           console.error('Error creating customer:', err);

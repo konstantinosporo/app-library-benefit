@@ -44,7 +44,7 @@ export class AddBookComponent {
    */
   addBook() {
     //console.log(id);
-    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmCreation(), "Add Book");
+    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmCreation(), "Save");
   }
   /**
    * @konstantinosporo
@@ -70,7 +70,7 @@ export class AddBookComponent {
       //console.table(newBook);
       this.bookHttpService.addBook(newBook).subscribe({
         next: (book: BookApi) => {
-          this.alertService.showSuccessToast(`Book with ID: ${book._id} successfully created!`);
+          this.alertService.showSuccessToast(`${book.name} was uploaded successfully!`);
           this.router.navigate(['books']);
         },
         error: (err) => {

@@ -1,5 +1,5 @@
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="'Edit Customer'" [titleFooter]="titleFooter" [docId]="paramId"
+  <app-basic-wrapper [title]="'Edit Customer Info'" [titleFooter]="titleFooter" [docId]="paramId"
     iconClass="bi bi-database-up" [backButton]="backButton">
     <form [formGroup]="customerFormControl" class="row g-3 needs-validation" novalidate>
 
@@ -98,7 +98,7 @@
         <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
           [disabled]="customerFormControl.invalid" (click)="editCustomer()">
           <i class="me-1"
-            [ngClass]="{'bi bi-pencil': customerFormControl.valid, 'bi bi-person-fill-slash': customerFormControl.invalid}"></i>Edit
+            [ngClass]="{'bi bi-cloud-upload': customerFormControl.valid, 'bi bi-person-fill-slash': customerFormControl.invalid}"></i>Update
           Customer</button>
       </div>
 
