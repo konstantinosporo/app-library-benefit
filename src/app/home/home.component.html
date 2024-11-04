@@ -37,9 +37,12 @@
   <section>
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           @if(customers$ | async; as customers){<app-chart-gauge [data]="customers" seriesName="Registered Customers"
             dataChartName="Users" [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
+        </div> -->
+        <div class="col-md-6">
+          <app-available-books />
         </div>
 
         <div class="col-md-6">

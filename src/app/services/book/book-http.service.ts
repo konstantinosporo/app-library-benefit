@@ -55,6 +55,20 @@ export class BookHttpService {
   /**
    * @konstantinosporo
    * @description
+   * Retrieves available books from the API.
+   * @returns An observable of an array containing the IDs of available books.
+   */
+  getAvailableBooks(): Observable<(BookApi | undefined)[]> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(
+      map(books =>
+        books
+          .filter(book => book.available !== false) // Filter out unavailable books
+      )
+    );
+  }
+  /**
+   * @konstantinosporo
+   * @description
    * Retrieves the IDs of available books from the API.
    * @returns An observable of an array containing the IDs of available books.
    */
@@ -63,7 +77,7 @@ export class BookHttpService {
       map(books =>
         books
           .filter(book => book.available !== false) // Filter out unavailable books
-          .map(book => book._id)
+          .map(book => book._id) // Map the books to return only the ids.
       )
     );
   }

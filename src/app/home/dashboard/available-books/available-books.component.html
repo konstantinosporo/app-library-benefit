@@ -1,0 +1,23 @@
+@if(availableBooks$ | async; as books) {
+<div class="accordion-wrapper">
+  <div class="accordion" id="availableBooksAccordion">
+    @for(book of books; track book?._id) {
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button accordion-flush" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + book?._id" aria-expanded="false" [attr.aria-controls]="book?._id">
+          {{ book?.name }}
+        </button>
+      </h2>
+      <div [id]="book?._id" class="accordion-collapse collapse" data-bs-parent="#availableBooksAccordion">
+        <div class="accordion-body">
+          <p>Quick Edit</p>
+          <p>Quick Edit</p>
+          <p>Quick Edit</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

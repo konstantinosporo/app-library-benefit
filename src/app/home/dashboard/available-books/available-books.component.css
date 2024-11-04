@@ -1,0 +1,37 @@
+.accordion-wrapper {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.accordion {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Default background and text color for accordion headers */
+.accordion-button {
+  background-color: var(--bs-text-foreground);
+  color: var(--bs-text);
+  border: none;
+  font-weight: normal;
+  /* Default weight for collapsed state */
+}
+
+/* Style for active (expanded) accordion header */
+.accordion-button[aria-expanded="true"] {
+  background-color: var(--bs-text-foreground);
+  color: var(--bs-text);
+  font-weight: bold;
+  /* Apply bold only to expanded items */
+}
+
+/* Style for hover effect */
+.accordion-button:hover {
+  background-color: var(--bs-gray-500);
+}
+
+/* Remove box shadow */
+.accordion-button:focus {
+  box-shadow: none;
+}
