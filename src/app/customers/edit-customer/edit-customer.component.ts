@@ -52,7 +52,7 @@ export class EditCustomerComponent {
    * Upon confirmation, calls `confirmEdit()` to save changes.
    */
   editCustomer() {
-    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit customer: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}`, () => this.confirmEdit(), "Edit Customer");
+    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to update customer: ${this.customerFormControl.controls['name'].value} ${this.customerFormControl.controls['surname'].value}?`, () => this.confirmEdit(), "Save");
   }
   /**
    * @konstantinosporo
@@ -75,7 +75,7 @@ export class EditCustomerComponent {
       //console.table(newBook);
       this.customerHttpService.editCustomer(editedCustomer).subscribe({
         next: (customer: CustomerApi) => {
-          this.alertService.showSuccessToast(`Customer with ID: ${customer._id} successfully edited!`);
+          this.alertService.showSuccessToast(`Customer with ID: ${customer._id} successfully created.`);
           this.router.navigate(['customers']);
         },
         error: (err) => {

@@ -19,7 +19,7 @@ $black: #000 !default;
 
 // Adjusted Bootstrap Colors for Library Theme
 $blue: #4A708B !default; // Slate Blue (calm, trustworthy)
-$blue-link: #0056b3 !default; // Light Slate Blue (contrasts well in dark mode)
+$blue-link: #00518F !default; // Light Slate Blue (contrasts well in dark mode)
 $green: #6A9D66 !default; // Soft Sage Green (balance, growth)
 $yellow: #F0DCA0 !default; // Pale Yellow (enlightenment)
 $teal: #64A3B0 !default; // Soft Teal (peaceful accent)
@@ -48,9 +48,9 @@ $grays: (
 // $primary:   #5A4636 !default; 
 $primary: #00233D !default;
 // $secondary: #D0C6B8 !default; 
-$secondary: #E0E6F5 !default;
+$secondary: $blue-link !default;
 $success: $green !default;
-$info: $cyan !default;
+$info: $blue-link !default;
 $warning: $orange !default;
 $danger: $red !default;
 $light: $light !default;
@@ -143,7 +143,7 @@ small {
   color: var(--bs-text);
 }
 
-div,span h1, td a {
+span h1,div h1, td a {
   color: var(--bs-text);
 }
 

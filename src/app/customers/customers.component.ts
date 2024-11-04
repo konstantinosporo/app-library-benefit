@@ -29,8 +29,10 @@ export class CustomersComponent implements CrudActions, OnDestroy {
   isDarkTheme!: boolean;
   searchQueryState$!: Observable<string>;
   dropdownActions: DropdownActions[] = [
-    { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
-    { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
+    { id: 'asc', title: 'Ascending Name', icon: 'bi bi-arrow-up' },
+    { id: 'desc', title: 'Descending Name', icon: 'bi bi-arrow-down' },
+    { id: 'asc-email', title: 'Ascending Email', icon: 'bi bi-arrow-up' },
+    { id: 'desc-email', title: 'Descending Email', icon: 'bi bi-arrow-down' },
   ]
   constructor(
     private readonly customerHttpService: CustomerHttpService,
@@ -88,6 +90,12 @@ export class CustomersComponent implements CrudActions, OnDestroy {
         break;
       case ('desc'):
         this.fetchFilteredDescByName();
+        break;
+      case ('asc-email'):
+        this.fetchFilteredAscByEmail();
+        break;
+      case ('desc-email'):
+        this.fetchFilteredDescByEmail();
         break;
       default: break;
     }
@@ -155,7 +163,38 @@ export class CustomersComponent implements CrudActions, OnDestroy {
       )
     );
   }
-
+  /**
+   * @konstantinosporo
+   * @description
+   * Filter customers in descending order by customer email.
+   */
+  fetchFilteredAscByEmail() {
+    this.customers$ = this.allCustomers$.pipe(
+      map((customers) =>
+        customers.slice().sort((a, b) => {
+          const emailA = (a.email ?? '').toLowerCase();
+          const emailB = (b.email ?? '').toLowerCase();
+          return emailA.localeCompare(emailB); // Ascending order
+        })
+      )
+    );
+  }
+  /**
+   * @konstantinosporo
+   * @description
+   * Filter customer in descending order by customer email.
+   */
+  fetchFilteredDescByEmail() {
+    this.customers$ = this.allCustomers$.pipe(
+      map((customers) =>
+        customers.slice().sort((a, b) => {
+          const emailA = (a.email ?? '').toLowerCase();
+          const emailB = (b.email ?? '').toLowerCase();
+          return emailB.localeCompare(emailA); // Descending order
+        })
+      )
+    );
+  }
   /**
    * @konstantinosporo
    * @description After the confirmation of the modal, this method is triggered that tries to connect and delete the record from the API.

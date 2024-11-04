@@ -2,7 +2,7 @@ import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { combineLatest, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 import { CustomerApi } from '../../customers/customer';
 import { AlertService } from '../../services/alert-handlers/alert.service';
@@ -54,11 +54,11 @@ export class AddReservationComponent implements OnDestroy {
   }
   addReservation() {
     //console.log(id);
-    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to create reservation?
-      Book Details:
-      Book ID: ${this.reservationFormControl.controls['bookId'].value}
-      Customer ID: ${this.reservationFormControl.controls['customerId'].value}
-      `, () => this.confirmCreation(), "Add Reservation");
+    combineLatest([this.selectedBookTitle$, this.selectedCustomerName$])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([bookTitle, customerName]) => {
+        this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${bookTitle} to  ${customerName}?`, () => this.confirmCreation(), "Save");
+      })
   }
   handleSelectedBook() {
     //console.log('clicked');

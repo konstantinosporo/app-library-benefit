@@ -1,6 +1,6 @@
 @if(customerToView$ | async; as customer){
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper [title]="customer.name + ''+ customer.surname" [docId]="customer._id"
+  <app-basic-wrapper [title]="customer.name + ' '+ customer.surname" [docId]="customer._id"
     [titleFooter]="'Showing result for customer ID:'" [backButton]="backButton" [showTitleIcon]="false">
     <form class="row g-3">
       <!-- Customer Title -->

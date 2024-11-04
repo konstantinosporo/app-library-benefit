@@ -14,7 +14,7 @@
                   'bg-success': apiStatus.status,
                   'bg-danger': !apiStatus.status
                 }">
-                <i class="text-secondary" [ngClass]="apiStatus.status ? 'bi bi-wifi' : 'bi bi-wifi-off'"></i>
+                <i class="text-white" [ngClass]="apiStatus.status ? 'bi bi-wifi' : 'bi bi-wifi-off'"></i>
                 {{ apiStatus.status ? 'Online ' : 'Offline' }}
               </span>
               <strong><small class="ms-1">{{ apiStatus.title }}</small></strong>

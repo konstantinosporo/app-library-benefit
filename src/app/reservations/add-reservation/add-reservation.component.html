@@ -1,6 +1,6 @@
 @if((bookIds$|async) && (customerIds$ |async)){
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
-  <app-basic-wrapper title="Add Reservation" titleFooter="Please fill in all the required details."
+  <app-basic-wrapper title="Add New Reservation" titleFooter="Please fill in all the required details."
     iconClass="bi bi-database-add" [backButton]="backButton">
     <form [formGroup]="reservationFormControl" class="row g-3 needs-validation" novalidate>
 
@@ -39,7 +39,7 @@
       </div>
 
 
-      <!-- Selected Book Name-->
+      <!-- Selected Customer Name-->
       <div class="col-md-6">
         <span class="form-label">Customer Details</span>
         <div class="input-group has-validation mt-2">
@@ -100,7 +100,7 @@
         <button class="btn btn-custom disabled-notice float-end float-md-start" type="submit"
           [disabled]="reservationFormControl.invalid" (click)="addReservation()">
           <i class="me-1"
-            [ngClass]="{'bi bi-person-fill-add': reservationFormControl.valid, 'bi bi-person-fill-slash': reservationFormControl.invalid}"></i>Add
+            [ngClass]="{'bi bi-cloud-upload': reservationFormControl.valid, 'bi bi-person-fill-slash': reservationFormControl.invalid}"></i>Upload
           Reservation</button>
       </div>
 

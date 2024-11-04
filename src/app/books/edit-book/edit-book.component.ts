@@ -53,7 +53,7 @@ export class EditBookComponent implements OnDestroy {
    */
   editBook() {
     //console.log(id);
-    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmEdit(), "Edit Book");
+    this.alertService.showInfoModal('Confirm Changes', `Are you sure you want to edit book with title: ${this.bookFormControl.controls['name'].value}`, () => this.confirmEdit(), "Save");
   }
   /**
    * @konstantinosporo
