@@ -46,6 +46,19 @@ export class BookHttpService {
   /**
    * @konstantinosporo
    * @description
+   * Fetches the name of a book by its ID.
+   * @param id - The ID of the book.
+   * @returns An observable of the book name or undefined if not found.
+   */
+  getBookIdByName(bookName: string): Observable<(BookApi["_id"] | undefined)> {
+    return this.http.get<BookApi[]>(this.bookApiUrl).pipe(map(books => {
+      const book = books.find(book => book.name === bookName);
+      return book ? book._id : undefined;
+    }));
+  }
+  /**
+   * @konstantinosporo
+   * @description
    * Retrieves all book IDs from the API.
    * @returns An observable of an array containing the IDs of all books.
    */

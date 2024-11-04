@@ -1,4 +1,4 @@
-@if((bookIds$|async) && (customerIds$ |async)){
+@if((availableBookNames$|async) && (customerNames$ |async)){
 <div class="container min-vh-75 d-flex justify-content-center align-items-center">
   <app-basic-wrapper title="Add New Reservation" titleFooter="Please fill in all the required details."
     iconClass="bi bi-database-add" [backButton]="backButton">
@@ -10,30 +10,30 @@
         <div class="input-group has-validation mt-2">
           <span class="input-group-text"><i class="bi bi-info-square"></i></span>
           <div class="form-control" [ngClass]="{
-                'is-invalid': reservationFormControl.get('bookId')?.invalid && 
-                              (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty),
-                'is-valid': reservationFormControl.get('bookId')?.valid && 
-                             (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty)
+                'is-invalid': reservationFormControl.get('bookName')?.invalid && 
+                              (reservationFormControl.get('bookName')?.touched || reservationFormControl.get('bookName')?.dirty),
+                'is-valid': reservationFormControl.get('bookName')?.valid && 
+                             (reservationFormControl.get('bookName')?.touched || reservationFormControl.get('bookName')?.dirty)
               }">
-            {{ (selectedBookTitle$ | async) || 'No book selected.' }} <!-- Update this dynamically -->
+            {{ (selectedBookId$ | async) || 'No book selected.' }}
           </div>
         </div>
       </div>
       <!-- Book ID-->
       <div class="col-md-6">
-        <label for="bookId" class="form-label">Select Book</label>
-        <ng-select class="custom-ng-select" [items]="bookIds$ | async" bindLabel="id" bindValue="id"
-          placeholder="Select or paste Book ID" formControlName="bookId" (change)="handleSelectedBook()" [ngClass]="{
-            'is-invalid': reservationFormControl.get('bookId')?.invalid &&
-                          (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty),
-            'is-valid': reservationFormControl.get('bookId')?.valid &&
-                        (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty)
+        <label for="bookName" class="form-label">Select Book</label>
+        <ng-select class="custom-ng-select" [items]="availableBookNames$ | async" bindLabel="id" bindValue="id"
+          placeholder="Select or paste Book ID" formControlName="bookName" (change)="handleSelectedBook()" [ngClass]="{
+            'is-invalid': reservationFormControl.get('bookName')?.invalid &&
+                          (reservationFormControl.get('bookName')?.touched || reservationFormControl.get('bookName')?.dirty),
+            'is-valid': reservationFormControl.get('bookName')?.valid &&
+                        (reservationFormControl.get('bookName')?.touched || reservationFormControl.get('bookName')?.dirty)
           }" required>
         </ng-select>
-        @if(reservationFormControl.get('bookId')?.invalid && (reservationFormControl.get('bookId')?.touched ||
-        reservationFormControl.get('bookId')?.dirty)){
+        @if(reservationFormControl.get('bookName')?.invalid && (reservationFormControl.get('bookName')?.touched ||
+        reservationFormControl.get('bookName')?.dirty)){
         <div class="invalid-feedback">
-          @if(reservationFormControl.get('bookId')?.errors?.['required']){<div>Book ID is required.</div>}
+          @if(reservationFormControl.get('bookName')?.errors?.['required']){<div>Book ID is required.</div>}
         </div>
         }@else {<div>&nbsp;</div>}
       </div>
@@ -45,31 +45,32 @@
         <div class="input-group has-validation mt-2">
           <span class="input-group-text"><i class="bi bi-info-square"></i></span>
           <div class="form-control" [ngClass]="{
-                      'is-invalid': reservationFormControl.get('customerId')?.invalid && 
-                                    (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty),
-                      'is-valid': reservationFormControl.get('customerId')?.valid && 
-                                   (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty)
+                      'is-invalid': reservationFormControl.get('customerName')?.invalid && 
+                                    (reservationFormControl.get('customerName')?.touched || reservationFormControl.get('customerName')?.dirty),
+                      'is-valid': reservationFormControl.get('customerName')?.valid && 
+                                   (reservationFormControl.get('customerName')?.touched || reservationFormControl.get('customerName')?.dirty)
                     }">
-            {{ (selectedCustomerName$ | async) || 'No customer selected.' }} <!-- Update this dynamically -->
+            {{ (selectedCustomerId$ | async) || 'No customer selected.' }}
           </div>
         </div>
       </div>
       <!-- Customer ID-->
       <div class="col-md-6">
-        <label for="customerId" class="form-label">Select Customer</label>
-        <ng-select class="custom-ng-select" [items]="customerIds$ | async" bindLabel="id" bindValue="id"
-          placeholder="Select or paste Book ID" formControlName="customerId" (change)="handleSelectedCustomer()"
+        <label for="customerName" class="form-label">Select Customer</label>
+        <ng-select class="custom-ng-select" [items]="customerNames$ | async" bindLabel="id" bindValue="id"
+          placeholder="Select or paste Book ID" formControlName="customerName" (change)="handleSelectedCustomer()"
           [ngClass]="{
-                  'is-invalid': reservationFormControl.get('customerId')?.invalid &&
-                                (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty),
-                  'is-valid': reservationFormControl.get('customerId')?.valid &&
-                              (reservationFormControl.get('customerId')?.touched || reservationFormControl.get('customerId')?.dirty)
+                  'is-invalid': reservationFormControl.get('customerName')?.invalid &&
+                                (reservationFormControl.get('customerName')?.touched || reservationFormControl.get('customerName')?.dirty),
+                  'is-valid': reservationFormControl.get('customerName')?.valid &&
+                              (reservationFormControl.get('customerName')?.touched || reservationFormControl.get('customerName')?.dirty)
                 }" required>
         </ng-select>
-        @if(reservationFormControl.get('customerId')?.invalid && (reservationFormControl.get('customerId')?.touched ||
-        reservationFormControl.get('customerId')?.dirty)){
+        @if(reservationFormControl.get('customerName')?.invalid && (reservationFormControl.get('customerName')?.touched
+        ||
+        reservationFormControl.get('customerName')?.dirty)){
         <div class="invalid-feedback">
-          @if(reservationFormControl.get('customerId')?.errors?.['required']){<div>Customer ID is required.</div>}
+          @if(reservationFormControl.get('customerName')?.errors?.['required']){<div>Customer ID is required.</div>}
         </div>
         }@else{<div>&nbsp;</div>}
       </div>

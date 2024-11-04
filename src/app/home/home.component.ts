@@ -16,12 +16,13 @@ import { AvailableBooksComponent } from "./dashboard/available-books/available-b
 import { PieChartData } from './charts/chart-pie/pieChartData';
 import { BookHttpService } from '../services/book/book-http.service';
 import { ChartPieComponent } from './charts/chart-pie/chart-pie.component';
+import { ApiStatusComponent } from "./dashboard/api-status/api-status.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, SpinnerComponent, ChartBarComponent, ChartPieComponent, AvailableBooksComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, SpinnerComponent, ChartBarComponent, ChartPieComponent, AvailableBooksComponent, ApiStatusComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
