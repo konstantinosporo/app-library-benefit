@@ -3,6 +3,6 @@
 }
 
 nav li>a.active {
-  color: var(--bs-gray);
+  color: var(--bs-custom-gray);
   text-decoration: none;
 }

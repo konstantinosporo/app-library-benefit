@@ -1,5 +1,6 @@
 .accordion-wrapper {
-  max-height: 400px;
+  max-height: 378px;
+  min-height: 378px;
   overflow-y: auto;
   padding-right: 1rem;
 }
@@ -10,7 +11,8 @@
 }
 
 /* Default background and text color for accordion headers */
-.accordion-button {
+.accordion-button,
+.accordion-body {
   background-color: var(--bs-text-foreground);
   color: var(--bs-text);
   border: none;

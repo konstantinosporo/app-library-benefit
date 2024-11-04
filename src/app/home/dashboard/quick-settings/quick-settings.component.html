@@ -1,24 +1,12 @@
 <div class="container">
-  <div class="col-md-6">
-    <h3>Quick Settings</h3>
-    <ul class="list-group">
-
-    </ul>
-  </div>
   <div class="row">
     <div class="col-md-6">
-      @if(dataStream$ | async; as pieChartData){
-      <div class="container">
-        <app-chart-pie [data]="pieChartData" [theme]="isDarkTheme" />
-      </div>
-      }@else{<app-spinner minVh="min-vh-30 " />}
+      @if(customers$ | async; as customers){<app-chart-gauge [data]="customers" seriesName="Registered Customers"
+        dataChartName="Users" [theme]="isDarkTheme" />}@else{<app-spinner minVh="min-vh-30 " />}
     </div>
     <div class="col-md-6">
-      @if(dataStream$ | async; as pieChartData){
-      <div class="container">
-        <app-chart-bar [data]="pieChartData" [theme]="isDarkTheme" />
-      </div>
-      }@else{<app-spinner minVh="min-vh-30 " />}
+      @if(reservations$ | async; as reservations){<app-chart-gauge [data]="reservations" seriesName="Total Reservations"
+        dataChartName="Reservations" [theme]="isDarkTheme" color="#f16821" />}@else{<app-spinner minVh="min-vh-30 " />}
     </div>
   </div>
 </div>

@@ -16,6 +16,13 @@ export class ChartPieComponent implements OnChanges {
   @Input() color?: string;
   options!: EChartsOption;
 
+  private readonly colorPalette: { [key: string]: string } = {
+    'Fiction': '#d99831',
+    'Non-Fiction': '#B85450',
+    'Biography': '#64A3B0',
+    'Sci-Fi': '#8F7CA6'
+  };
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.setChartOptions();
@@ -26,7 +33,10 @@ export class ChartPieComponent implements OnChanges {
     // Map `type` to `name` for ECharts
     const formattedData = this.data.map(item => ({
       value: item.value,
-      name: item.type
+      name: item.type,
+      itemStyle: {
+        color: this.colorPalette[item.type] || ''
+      }
     }));
 
     this.options = {
@@ -38,6 +48,9 @@ export class ChartPieComponent implements OnChanges {
         left: 'center'
       },
       backgroundColor: 'transparent',
+      textStyle: {
+        fontFamily: 'Poppins'
+      },
       series: [
         {
           name: 'Book Type',
@@ -48,7 +61,7 @@ export class ChartPieComponent implements OnChanges {
           itemStyle: {
             borderRadius: 10,
             borderColor: '#fff',
-            borderWidth: 2
+            borderWidth: 2,
           },
           label: {
             show: false,
@@ -64,7 +77,7 @@ export class ChartPieComponent implements OnChanges {
           labelLine: {
             show: false
           },
-          data: formattedData,  // Use the formatted data
+          data: formattedData,
         }
       ]
     };

@@ -1,5 +1,9 @@
 @if(availableBooks$ | async; as books) {
-<div class="accordion-wrapper">
+<div class="container">
+  <app-search [showContent]="true" searchPlaceholder="Search Available Books...">
+  </app-search>
+</div>
+<div class="accordion-wrapper px-3">
   <div class="accordion" id="availableBooksAccordion">
     @for(book of books; track book?._id) {
     <div class="accordion-item">
@@ -10,14 +14,28 @@
         </button>
       </h2>
       <div [id]="book?._id" class="accordion-collapse collapse" data-bs-parent="#availableBooksAccordion">
-        <div class="accordion-body">
-          <p>Quick Edit</p>
-          <p>Quick Edit</p>
-          <p>Quick Edit</p>
+        <div class="accordion-body d-flex align-items-center justify-content-between">
+          <div>
+            <!-- Quick Edit and Quick Reservation Buttons -->
+            <a [routerLink]="['/book', book?._id, 'edit']" class="btn btn-sm btn-custom rounded-pill me-2">Quick
+              Edit</a>
+            <a [routerLink]="['/reservation', book?._id, 'add']" class="btn btn-sm btn-custom rounded-pill">Quick
+              Reservation</a>
+          </div>
+
+          <!-- Badge with Creation Date -->
+          <span class="badge text-muted p-2">
+            <small>
+              <i class="bi bi-globe me-1"></i> Created on {{ book?.createdOn | date:'longDate' }}
+            </small>
+          </span>
         </div>
+
       </div>
     </div>
     }
   </div>
 </div>
+}@else{
+<app-spinner minVh="min-vh-30" />
 }

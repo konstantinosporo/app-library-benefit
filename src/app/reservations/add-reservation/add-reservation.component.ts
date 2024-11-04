@@ -1,7 +1,7 @@
 import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 import { CustomerApi } from '../../customers/customer';
@@ -28,19 +28,21 @@ import { futureDateValidator } from './custom-validation';
   styleUrl: './add-reservation.component.css'
 })
 export class AddReservationComponent implements OnDestroy {
+  private readonly destroy$ = new Subject<void>();
   backButton: { title: string, route: string } = { title: 'Back to Reservations', route: '/reservations' };
   reservationFormControl!: FormGroup;
   bookIds$!: Observable<(BookApi["_id"] | undefined)[]>;
   customerIds$!: Observable<(CustomerApi["_id"] | undefined)[]>;
   selectedBookTitle$!: Observable<(BookApi["name"] | undefined)>;
   selectedCustomerName$!: Observable<(string | undefined)>;
-  private readonly destroy$ = new Subject<void>();
+  paramId: string | null = null;
 
   constructor(
     private readonly reservationService: ReservationHttpService,
     private readonly bookHttpService: BookHttpService,
     private readonly customerHttpService: CustomerHttpService,
     private readonly alertService: AlertService,
+    private readonly route: ActivatedRoute,
     private readonly router: Router
 
   ) {
@@ -51,6 +53,17 @@ export class AddReservationComponent implements OnDestroy {
     });
     this.bookIds$ = this.bookHttpService.getAvailableBookIds();
     this.customerIds$ = this.customerHttpService.getAllCustomerIds();
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      this.paramId = params['id'];
+
+      // check if the params have an id first
+      if (this.paramId) {
+        this.reservationFormControl.patchValue({
+          bookId: this.paramId
+        });
+        this.handleSelectedBook(); // also update the book name
+      }
+    });
   }
   addReservation() {
     //console.log(id);

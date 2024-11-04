@@ -16,12 +16,17 @@ import { QuickSettingsComponent } from './home/dashboard/quick-settings/quick-se
 export const routes: Routes = [
   // HOME ROUTE
   {
-    path: '', component: HomeComponent, title: 'Home | AppLibrary', children:
-      [
-        { path: 'dashboard/quick-settings', component: QuickSettingsComponent, title: 'Quick Settings | AppLibary' },
-        { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Week Sales HeatMap | AppLibary' },
-        // { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibary' },
-      ],
+    path: '',
+    component: HomeComponent,
+    title: 'Home | AppLibrary',
+    children: [
+      // Default child route that redirects to dashboard/quick-settings
+      { path: '', redirectTo: 'dashboard/quick-settings', pathMatch: 'full' },
+
+      { path: 'dashboard/quick-settings', component: QuickSettingsComponent, title: 'Quick Settings | AppLibrary' },
+      { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Week Sales HeatMap | AppLibrary' },
+      // { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibrary' },
+    ],
   },
   // BOOKS ROUTES
   { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
@@ -31,6 +36,7 @@ export const routes: Routes = [
   // RESERVATION ROUTES
   { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
   { path: 'reservation/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
+  { path: 'reservation/:id/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
   // CUSTOMERS ROUTES
   { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
   { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },

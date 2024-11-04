@@ -16,17 +16,25 @@ export class ChartBarComponent {
   @Input() color?: string;
   options!: EChartsOption;
 
+  private readonly colorPalette: { [key: string]: string } = {
+    'Fiction': '#d99831',
+    'Non-Fiction': '#B85450',
+    'Biography': '#64A3B0',
+    'Sci-Fi': '#8F7CA6'
+  };
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.setChartOptions();
     }
   }
-  
+
   setChartOptions() {
     // Map `type` to `name` for ECharts
     const formattedData = this.data.map(item => ({
       value: item.value,
-      name: item.type
+      name: item.type,
+      itemStyle: { color: this.colorPalette[item.type] || '' }
     }));
 
     this.options = {
@@ -37,12 +45,16 @@ export class ChartBarComponent {
       },
       yAxis: {
         type: 'value',
-        name: 'Availability'
+        name: 'Book Availability'
       },
       backgroundColor: 'transparent',
       series: [
         {
-          data: formattedData.map(item => item.value),
+          data: formattedData.map(item => ({
+            value: item.value,
+            name: item.name,
+            itemStyle: item.itemStyle
+          })),
           type: 'bar'
         }
       ]
