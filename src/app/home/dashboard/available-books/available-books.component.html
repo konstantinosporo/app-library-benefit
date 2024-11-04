@@ -19,7 +19,7 @@
             <!-- Quick Edit and Quick Reservation Buttons -->
             <a [routerLink]="['/book', book?._id, 'edit']" class="btn btn-sm btn-custom rounded-pill me-2">Quick
               Edit</a>
-            <a [routerLink]="['/reservation', book?._id, 'add']" class="btn btn-sm btn-custom rounded-pill">Quick
+            <a [routerLink]="['/reservation', book?.name, 'add']" class="btn btn-sm btn-custom rounded-pill">Quick
               Reservation</a>
           </div>
 

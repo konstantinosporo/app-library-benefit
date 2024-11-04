@@ -33,6 +33,14 @@ export class CustomerHttpService {
       })
     );
   }
+  getCustomerIdByName(customerName: string): Observable<string | undefined> {
+    return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(
+      map(customers => {
+        const customer = customers.find(customer => customer.name === customerName);
+        return customer ? customer._id : undefined;
+      })
+    );
+  }
   getAllCustomerIds(): Observable<(CustomerApi["_id"] | undefined)[]> {
     return this.http.get<CustomerApi[]>(this.customerApiUrl).pipe(map(customers => customers.map(customer => customer._id)));
   }
