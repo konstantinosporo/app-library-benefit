@@ -6,6 +6,9 @@ import { QuickSettingsComponent } from './dashboard/quick-settings/quick-setting
 import { HomeComponent } from './home.component';
 import { provideRouter } from '@angular/router';
 import { routes } from '../app.routes';
+import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
+
+const mockEChartsConfig = {};
 
 describe('ChartHeatmapComponent', () => {
   let component: HomeComponent;
@@ -14,7 +17,11 @@ describe('ChartHeatmapComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HomeComponent, HeatmapComponent, QuickSettingsComponent],
-      providers: [HttpClient, HttpHandler, provideRouter(routes)]
+      providers: [HttpClient, HttpHandler, provideRouter(routes),
+        {
+          provide: NGX_ECHARTS_CONFIG,
+          useValue: mockEChartsConfig
+        }]
     })
       .compileComponents();
 

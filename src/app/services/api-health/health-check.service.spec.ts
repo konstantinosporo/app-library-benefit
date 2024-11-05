@@ -44,9 +44,9 @@ describe('HealthCheckService', () => {
 
   it('should return correct status for mixed endpoints: some online, some offline', () => {
     const expectedStatuses: ApiStatus[] = [
-      { title: 'Books API', endpoint: 'https://book-api-bx2r.onrender.com/books', status: true },
-      { title: 'Customers API', endpoint: 'https://book-api-bx2r.onrender.com/customers', status: false },
-      { title: 'Reservations API', endpoint: 'https://book-api-bx2r.onrender.com/reservations', status: false } // simulate two offline apis
+      { title: 'Books', endpoint: 'https://book-api-bx2r.onrender.com/books', status: true },
+      { title: 'Customers', endpoint: 'https://book-api-bx2r.onrender.com/customers', status: false },
+      { title: 'Reservations', endpoint: 'https://book-api-bx2r.onrender.com/reservations', status: false } // simulate two offline apis
     ];
 
     service.checkApiStatus().subscribe(statuses => {

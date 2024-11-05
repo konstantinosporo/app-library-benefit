@@ -5,17 +5,19 @@
         <div class="col-lg-5">
           <h1 class="display-4 font-weight-bold text"><i class="bi bi-activity me-1"></i>Dashboard</h1>
         </div>
-        <div class="col-lg-7">
-          <div class="d-flex justify-content-evenly">
-            <app-api-status></app-api-status>
+        <div class="container">
+          <div class="d-flex align-items-baseline">
+            <div class="vr" style="height: 1.1em;"></div>
+            <p class="card-header-pills text small mb-0 ms-2">Quick settings and system information.</p>
           </div>
         </div>
+
       </div>
     </div>
-    <div class="container">
-      <div class="d-flex align-items-baseline">
-        <div class="vr" style="height: 1.1em;"></div>
-        <p class="card-header-pills text small mb-0 ms-2">Quick settings and system information.</p>
+
+    <div class="container mt-1">
+      <div class="row justify-content-start gap-1">
+        <app-api-status></app-api-status>
       </div>
     </div>
   </section>
@@ -23,49 +25,54 @@
   <section>
     <div class="container">
       <!-- Header Section -->
-      <div class="row">
-        <div class="col-md-6">
+      <div class="row mb-1 g-4">
+        <div class="col-12">
           <h3><i class="bi bi-sliders"></i> Quick Settings</h3>
+          <div class="container">
+            <div class="d-flex align-items-center ml-1">
+              <div class="vr me-2" style="height: 1.2em;"></div>
+              <p class="mb-0">Showing list of available books.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Content Row -->
-      <div class="row g-4 mt-3">
-        <!-- Left Column for Available Books (Accordion) -->
-        <div class="col-lg-10 mx-auto">
-          <div class="container mb-3">
-            <app-available-books />
-            <hr class="text-primary">
-
+      <!-- First Row: Available Books Section -->
+      <div class="row g-4">
+        <div class="col-12 px-0 col-lg-10 mx-auto">
+          <div class="container mb-4">
+            <app-available-books></app-available-books>
           </div>
         </div>
-        <!-- Right Column for Toggling Charts -->
-        <div class="row">
-          <div class="col-md-6">
-            <h3><i class="bi bi-bar-chart me-1"></i>Available Books per Type</h3>
-          </div>
+      </div>
+
+      <!-- Header Section -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3><i class="bi bi-bar-chart"></i> Available Books per Type</h3>
+        </div>
+      </div>
+
+      <!-- Second Row: Chart Section -->
+      <div class="row g-4">
+        <div class="col-12 mx-auto">
           @if(dataStream$ | async; as chartData) {
           <div class="container">
             @if(isBarChart) {
             <!-- Bar Chart View -->
-            <div class="d-flex align-items-center">
-              <div class="vr me-2" style="height: 1.2em;"></div>
-              <p class="mb-0">
-                Viewing {{ isBarChart ? 'bar' : 'pie' }} chart of available books per type.
-              </p>
-              <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                <i class="bi bi-pie-chart me-1 text-white"></i>Switch to Pie
-              </button>
+            <div class="col-12 mx-auto">
+              <div class="d-flex align-items-center">
+                <div class="vr me-2" style="height: 1.2em;"></div>
+                <p class="mb-0">Viewing bar chart of available books per type.</p>
+                <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
+                  <i class="bi bi-pie-chart me-1 text-white"></i>Switch to Pie
+                </button>
+              </div>
             </div>
-
-            <!-- Chart Display Area -->
-            <div class="mt-4">
-              <ng-container *ngIf="isBarChart">
+            <div class="col-lg-10 mx-auto">
+              <div class="mt-4">
                 <app-chart-bar [data]="chartData" [theme]="isDarkTheme"></app-chart-bar>
-              </ng-container>
-              <ng-container *ngIf="!isBarChart">
-                <app-chart-pie [data]="chartData" [theme]="isDarkTheme"></app-chart-pie>
-              </ng-container>
+              </div>
             </div>
             } @else {
             <!-- Pie Chart View -->
@@ -77,16 +84,16 @@
               </button>
             </div>
             <div class="mt-4">
-              <app-chart-pie [data]="chartData" [theme]="isDarkTheme" />
+              <app-chart-pie [data]="chartData" [theme]="isDarkTheme"></app-chart-pie>
             </div>
             }
-            <p class="small text-center"><i class="bi bi-question-circle me-1"></i>Actual data consumed from the API.
-            </p>
           </div>
           } @else {
           <!-- Loading Spinner -->
           <app-spinner minVh="min-vh-30"></app-spinner>
           }
+          <p class="small text-center"><i class="bi bi-question-circle me-1"></i>Actual data consumed from the API.
+          </p>
         </div>
       </div>
     </div>
@@ -95,25 +102,36 @@
 
   <section>
     <div class="container mt-3">
-      <div class="col-md-6">
-        <h3><i class="bi bi-info-circle me-1"></i>System Information & Statistics</h3>
+      <!-- Header Section -->
+      <div class="row mb-1 g-4">
+        <div class="col-12">
+          <h3><i class="bi bi-info-circle me-1"></i>System Information & Statistics</h3>
+          <div class="container">
+            <div class="d-flex align-items-center ml-1">
+              <div class="vr me-2" style="height: 1.2em;"></div>
+              <p class="mb-0">Additional system statistics. </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <nav
-        style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-        aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a routerLink="dashboard/quick-settings" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">Graphs 1</a>
-          </li>
-          <li class="breadcrumb-item">
-            <a routerLink="dashboard/heatmap" routerLinkActive="active">Graphs 2</a>
-          </li>
-          <!-- <li class="breadcrumb-item">
-            <a routerLink="chart2" routerLinkActive="active">Chart2</a>
-          </li> -->
-        </ol>
-      </nav>
+      <div class="col-lg-11 mx-auto mt-4">
+        <nav
+          style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+          aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a routerLink="dashboard/quick-settings" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">Graphs 1</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="dashboard/heatmap" routerLinkActive="active">Graphs 2</a>
+            </li>
+            <!-- <li class="breadcrumb-item">
+              <a routerLink="chart2" routerLinkActive="active">Chart2</a>
+            </li> -->
+          </ol>
+        </nav>
+      </div>
     </div>
 
     <ng-container>

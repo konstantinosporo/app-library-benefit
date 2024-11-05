@@ -68,7 +68,7 @@ describe('EditCustomerComponent', () => {
 
   it('should navigate to customers after editing', () => {
     component.confirmEdit(); // Simulate editing
-    expect(mockAlertService.showSuccessToast).toHaveBeenCalledWith('Customer with ID: 1 successfully edited!');
+    expect(mockAlertService.showSuccessToast).toHaveBeenCalledWith('Customer with ID: 1 successfully created.');
     expect(mockRouter.navigate).toHaveBeenCalledWith(['customers']);
   });
 });

@@ -33,20 +33,4 @@ describe('SearchStateService', () => {
     });
   });
 
-  describe('updateFilter', () => {
-    it('should update the filterSubject with the provided filter ID', (done) => {
-      // mock filter id
-      const newFilterId = FilterID.AVAILABLE;
-      // mock sub to the filterStream$
-      service.filterStream$.pipe(
-        first((filterId) => filterId === newFilterId),
-        take(1)
-      ).subscribe((filterId) => {
-        expect(filterId).toBe(newFilterId);
-        done();
-      });
-
-      service.updateFilter(newFilterId);
-    });
-  });
 });

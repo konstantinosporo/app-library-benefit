@@ -14,11 +14,8 @@ import { SpinnerComponent } from "../shared/spinner/spinner.component";
 import { ChartBarComponent } from "./charts/chart-bar/chart-bar.component";
 import { ChartPieComponent } from './charts/chart-pie/chart-pie.component';
 import { PieChartData } from './charts/chart-pie/pieChartData';
-import { AvailableBooksComponent } from "./dashboard/available-books/available-books.component";
-import { PieChartData } from './charts/chart-pie/pieChartData';
-import { BookHttpService } from '../services/book/book-http.service';
-import { ChartPieComponent } from './charts/chart-pie/chart-pie.component';
 import { ApiStatusComponent } from "./dashboard/api-status/api-status.component";
+import { AvailableBooksComponent } from "./dashboard/available-books/available-books.component";
 
 
 @Component({

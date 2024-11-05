@@ -1,6 +1,6 @@
 .accordion-wrapper {
-  max-height: 370px;
-  min-height: 370px;
+  max-height: 320px;
+  min-height: 320px;
   overflow-y: auto;
   padding-right: 1rem;
 }
@@ -37,3 +37,4 @@
 .accordion-button:focus {
   box-shadow: none;
 }
+
