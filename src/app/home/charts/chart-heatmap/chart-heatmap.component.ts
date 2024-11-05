@@ -36,12 +36,15 @@ export class ChartHeatmapComponent implements OnInit, OnChanges {
       xAxis: {
         type: 'category',
         data: this.data.days,
-        name: 'Week days'
+        name: 'Day',
+        axisLabel: { interval: 0, rotate: 30 }
       },
       yAxis: {
         type: 'category',
-        data: ['Reservations'],
-        name: 'Activity'
+        data: ['Total Reservations'],
+        name: 'Reservations',
+        axisLabel: { interval: 0, rotate: 90 }
+
       },
       visualMap: {
         min: Math.min(...this.data.counts),
@@ -54,9 +57,9 @@ export class ChartHeatmapComponent implements OnInit, OnChanges {
       backgroundColor: 'transparent',
       series: [
         {
-          name: 'Reservations',
+          name: 'Total Reservations by Day',
           type: 'heatmap',
-          data: this.data.days.map((day, index) => [day, 'Reservations', this.data.counts[index] || 0]),
+          data: this.data.days.map((day, index) => [day, 'Total Reservations', this.data.counts[index] || 0]),
           label: {
             show: true
           },

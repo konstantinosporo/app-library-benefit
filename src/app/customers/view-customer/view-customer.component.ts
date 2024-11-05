@@ -18,7 +18,7 @@ import { CustomerHttpService } from '../../services/customers/customer-http.serv
 export class ViewCustomerComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
   customerId: string = '';
-  backButton: { title: string, route: string } = { title: 'Back to Customers', route: '/customers' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/customers' };
   customerToView$!: Observable<CustomerApi>;
   /**
    * @konstantinosporo

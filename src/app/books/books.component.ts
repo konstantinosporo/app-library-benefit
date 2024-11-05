@@ -175,7 +175,7 @@ export class BooksComponent implements CrudActions {
     this.alertService.showDangerModal('Confirm Deletion', `Are you sure you want to delete book with ID: ${id}`, () => this.confirmDelete(id), 'Delete Book');
   }
   /**
-   * Refreshes the books observable.
+   * @description Refreshes the books observable.
    */
   refreshBooks() {
     this.books$ = this.booksHttpService.getBooks();

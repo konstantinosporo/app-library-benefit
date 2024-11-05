@@ -18,7 +18,7 @@ import { BookApi } from '../book/book';
 export class EditBookComponent implements OnDestroy {
   private readonly datePipe = new DatePipe('en-US');
   private readonly destroy$ = new Subject<void>();
-  backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/books' };
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
   bookFormControl!: FormGroup;
   paramId!: string;

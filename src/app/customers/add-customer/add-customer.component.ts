@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AddCustomerComponent {
   customerFormControl!: FormGroup;
-  backButton: { title: string, route: string } = { title: 'Back to Customers', route: '/customers' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/customers' };
 
   constructor(
     private readonly customerHttpService: CustomerHttpService,

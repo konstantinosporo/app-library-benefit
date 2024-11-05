@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './edit-customer.component.css'
 })
 export class EditCustomerComponent {
-  backButton: { title: string, route: string } = { title: 'Back to Customers', route: '/customers' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/customers' };
   customerFormControl!: FormGroup;
   paramId!: string;
   titleFooter!: string;
