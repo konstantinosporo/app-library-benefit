@@ -1,4 +1,4 @@
-<div class="card mx-auto my-3 library-gradient border-0" style="border-radius: 10em;">
+<div class="card mx-auto my-2 library-gradient border-0" style="border-radius: 10em;">
   <div class="card-body p-2">
     <div class="input-group gap-1 align-items-center">
       <span class="input-group-text bg-transparent border-0 text-white icon-wrapper" [class.icon-focus]="isFocused">
@@ -6,7 +6,7 @@
       </span>
       <input type="text" class="form-control rounded bg-transparent text-white" name="searchInput" id="searchInput"
         (focus)="isFocused = true" (blur)="isFocused = false" (change)="handleStateSearch(searchQuery.value)"
-        [placeholder]="placeholder" aria-label="Type Keywords" aria-describedby="Search Input" #searchQuery />
+        [placeholder]="searchPlaceholder" aria-label="Type Keywords" aria-describedby="Search Input" #searchQuery />
       @if(showContent){
       <ng-content></ng-content>
       }

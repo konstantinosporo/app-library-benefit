@@ -1,7 +1,8 @@
 <div class="container">
   @if(dataStream$ | async; as heatmapData){
-  <app-chart-heatmap [data]="heatmapData" seriesName="Total Customers" dataChartName="Registered Users"
-    [theme]="isDarkTheme" />
+  <div class="col-lg-11 mx-auto">
+    <app-chart-heatmap [data]="heatmapData" seriesName="Total Customers" dataChartName="Registered Users"
+      [theme]="isDarkTheme" />
+  </div>
   }@else{<app-spinner minVh="min-vh-30 " />}
 </div>
-

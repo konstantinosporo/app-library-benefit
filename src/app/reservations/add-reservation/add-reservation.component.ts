@@ -29,7 +29,7 @@ import { futureDateValidator } from './custom-validation';
 })
 export class AddReservationComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
-  backButton: { title: string, route: string } = { title: 'Back to Reservations', route: '/reservations' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/reservations' };
   reservationFormControl!: FormGroup;
 
   // WITH HOW SHOULD I HAVE MADE IT 

@@ -1,25 +1,25 @@
 <div class="home-container">
+  <!-- Header -->
   <section class="text-start my-5">
     <div class="container">
-      <div class="row d-flex justify-content-between align-items-baseline">
+      <div class="row d-flex align-items-baseline">
         <div class="col-lg-5">
           <h1 class="display-4 font-weight-bold text"><i class="bi bi-activity me-1"></i>Dashboard</h1>
-        </div>
-        <div class="container">
           <div class="d-flex align-items-baseline">
             <div class="vr" style="height: 1.1em;"></div>
             <p class="card-header-pills text small mb-0 ms-2">Quick settings and system information.</p>
           </div>
         </div>
-
+        <div class="col-lg-5">
+          <div class="container mt-1">
+            <div class="row justify-content-start gap-1">
+              <app-api-status></app-api-status>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="container mt-1">
-      <div class="row justify-content-start gap-1">
-        <app-api-status></app-api-status>
-      </div>
-    </div>
   </section>
 
   <section>
@@ -47,7 +47,7 @@
       </div>
 
       <!-- Header Section -->
-      <div class="row mt-5">
+      <div class="row mt-3">
         <div class="col-12">
           <h3><i class="bi bi-bar-chart"></i> Available Books per Type</h3>
         </div>
@@ -63,9 +63,9 @@
             <div class="col-12 mx-auto">
               <div class="d-flex align-items-center">
                 <div class="vr me-2" style="height: 1.2em;"></div>
-                <p class="mb-0">Viewing bar chart of available books per type.</p>
-                <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                  <i class="bi bi-pie-chart me-1 text-white"></i>Switch to Pie
+                <p class="mb-0 flex-grow-1 text-truncate">Bar chart view.</p>
+                <button class="btn btn-sm btn-secondary py-0 text-white text-nowrap" (click)="toggleChart()">
+                  <i class="bi bi-pie-chart me-1 text-white"></i>Pie
                 </button>
               </div>
             </div>
@@ -78,15 +78,16 @@
             <!-- Pie Chart View -->
             <div class="d-flex align-items-center">
               <div class="vr me-2" style="height: 1.2em;"></div>
-              <p class="mb-0">Viewing pie chart of available books per type.</p>
-              <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                <i class="bi bi-bar-chart me-1 text-white"></i>Switch to Bar
+              <p class="mb-0 flex-grow-1 me-3 text-truncate">Pie chart view.</p>
+              <button class="btn btn-sm btn-secondary py-0 text-white text-nowrap" (click)="toggleChart()">
+                <i class="bi bi-bar-chart me-1 text-white"></i>Bar
               </button>
             </div>
             <div class="mt-4">
               <app-chart-pie [data]="chartData" [theme]="isDarkTheme"></app-chart-pie>
             </div>
             }
+
           </div>
           } @else {
           <!-- Loading Spinner -->

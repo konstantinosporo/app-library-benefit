@@ -1,11 +1,11 @@
 import { DatePipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BookApi } from '../../books/book/book';
 import { AlertService } from '../../services/alert-handlers/alert.service';
 import { BookHttpService } from '../../services/book/book-http.service';
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class AddBookComponent {
   categories: string[] = ['Fiction', 'Non-Fiction', 'Sci-Fi', 'Biography'];
-  backButton: { title: string, route: string } = { title: 'Back to Books', route: '/books' };
+  backButton: { title: string, route: string } = { title: 'Back', route: '/books' };
   datePipe = new DatePipe('en-US');
   /**
    * @konstantinosporo
@@ -29,7 +29,8 @@ export class AddBookComponent {
   constructor(
     private readonly bookHttpService: BookHttpService,
     private readonly alertService: AlertService,
-    private readonly router: Router) {
+    private readonly router: Router
+  ) {
     this.bookFormControl = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       year: new FormControl(null, [Validators.required, Validators.min(1900), Validators.max(2024)]),

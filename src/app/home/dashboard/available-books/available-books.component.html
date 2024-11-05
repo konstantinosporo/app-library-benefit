@@ -1,9 +1,13 @@
-@if(availableBooks$ | async; as books) {
 <div class="container">
-  <app-search [showContent]="true" searchPlaceholder="Search Available Books...">
+  <app-search [showContent]="true" searchPlaceholder="Search available Books...">
+    <app-actions-dropdown [dropdownActions]="dropdownActions"
+      (handleClickedDropdownEvent)="getClickedDropdownId($event)" />
+    <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshAvailableBooks()" />
+    <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add" (clickEvent)="add($event)" />
   </app-search>
 </div>
-<div class="accordion-wrapper px-3">
+@if(availableBooks$ | async; as books) {
+<div class="accordion-wrapper mx-4">
   <div class="accordion" id="availableBooksAccordion">
     @for(book of books; track book?._id) {
     <div class="accordion-item">
@@ -14,15 +18,15 @@
         </button>
       </h2>
       <div [id]="book?._id" class="accordion-collapse collapse" data-bs-parent="#availableBooksAccordion">
-        <div class="accordion-body d-flex align-items-center justify-content-between">
-          <div>
+        <div
+          class="accordion-body d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between">
+          <div class="mb-2 mb-sm-0">
             <!-- Quick Edit and Quick Reservation Buttons -->
             <a [routerLink]="['/book', book?._id, 'edit']" class="btn btn-sm btn-custom rounded-pill me-2">Quick
               Edit</a>
             <a [routerLink]="['/reservation', book?.name, 'add']" class="btn btn-sm btn-custom rounded-pill">Quick
               Reservation</a>
           </div>
-
           <!-- Badge with Creation Date -->
           <span class="badge text-muted p-2">
             <small>
@@ -30,12 +34,20 @@
             </small>
           </span>
         </div>
-
       </div>
     </div>
     }
   </div>
 </div>
-}@else{
-<app-spinner minVh="min-vh-30" />
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 ms-3 mt-1">
+      <ng-container>
+        <small>Total available books: {{books.length}}</small>
+      </ng-container>
+    </div>
+  </div>
+</div>
+} @else {
+<app-spinner minVh="min-vh-27" />
 }

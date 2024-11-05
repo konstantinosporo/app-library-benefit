@@ -41,7 +41,8 @@ export class ChartBarComponent {
       xAxis: {
         type: 'category',
         data: formattedData.map(item => item.name),
-        name: 'Types'
+        name: 'Types',
+        axisLabel: { interval: 0, rotate: 30 }
       },
       yAxis: {
         type: 'value',
