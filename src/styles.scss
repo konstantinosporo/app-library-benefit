@@ -131,46 +131,60 @@ body.dark {
     filter: invert(1);
   }
 
-      .ng-select .ng-value {
-        background-color: var(--bs-dark); 
-        color: var(--bs-text); 
+  .ng-select .ng-value {
+    background-color: var(--bs-dark);
+    color: var(--bs-text);
+  }
+
+  .ng-select .ng-value-label {
+    color: var(--bs-text);
+  }
+
+  .ng-select .ng-select-container {
+    border: 1px solid var(--bs-dark);
+    color: var(--bs-text);
+    background-color: var(--bs-dark);
+  }
+
+  .ng-select .ng-select-container .ng-placeholder {
+    color: var(--bs-placeholder-color, #999);
+
+    .ng-dropdown-panel .ng-option.ng-option-selected {
+      color: var(--bs-btn-card);
+      background-color: var(--bs-text-foreground);
+    }
+
+    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+      background-color: var(--bs-dark);
+      color: var(--bs-text);
+      padding: 8px 10px;
+
+      &hover {
+        background-color: red;
       }
+    }
+  }
 
-      .ng-select .ng-value-label {
-        color: var(--bs-text); 
-      }
+  .accordion-button,
+  .accordion-body {
+    background-color: rgba(0, 35, 61, .9);
+    color: var(--bs-text);
 
-      .ng-select .ng-select-container {
-        border: 1px solid var(--bs-dark);
-        color: var(--bs-text); 
-        background-color: var(--bs-dark); 
-      }
+  }
 
-      .ng-select .ng-select-container .ng-placeholder {
-        color: var(--bs-placeholder-color, #999); 
+  .accordion-button[aria-expanded="true"] {
+    background-color: rgba(0, 35, 61, .8);
+    color: var(--bs-text);
+    font-weight: bold;
+  }
 
-      .ng-dropdown-panel .ng-option.ng-option-selected {
-        color: var(--bs-btn-card); 
-        background-color: var(--bs-text-foreground);
-      }
+  /* Update SVG icon to white */
+  .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+  }
 
-      .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-        background-color: var(--bs-dark);
-        color: var(--bs-text);
-        padding: 8px 10px;
-
-        &hover{
-          background-color: red;
-        }
-      }
 
 }
-}
-
-
-
-
-
 
 /* Main Layout */
 main {
@@ -183,7 +197,9 @@ small {
   color: var(--bs-text);
 }
 
-span h1,div h1, td a {
+span h1,
+div h1,
+td a {
   color: var(--bs-text);
 }
 
@@ -214,12 +230,12 @@ span h1,div h1, td a {
 }
 
 /* Custom mixin for cards */
-$background-light: rgba($light, 0.5); 
-$background-dark: rgba($primary, 0.5); 
+$background-light: rgba($light, 0.5);
+$background-dark: rgba($primary, 0.5);
 
 /* Define a function to check for dark mode*/
 @mixin background-mode {
-  background-color: $background-light; 
+  background-color: $background-light;
   transition: background-color 0.2s ease;
 
   /* Adjust for dark mode when .dark class is present on the parent */
@@ -246,21 +262,27 @@ td {
 .min-vh-30 {
   min-height: 30vh !important;
 }
+
 .min-vh-40 {
   min-height: 40vh !important;
 }
+
 .min-vh-50 {
   min-height: 50vh !important;
 }
+
 .min-vh-70 {
   min-height: 70vh !important;
 }
+
 .min-vh-75 {
   min-height: 75vh !important;
 }
+
 .min-vh-80 {
   min-height: 80vh !important;
 }
+
 .min-vh-85 {
   min-height: 85vh !important;
 }

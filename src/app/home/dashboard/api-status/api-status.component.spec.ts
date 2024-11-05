@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApiStatusComponent } from './api-status.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('ApiStatusComponent', () => {
   let component: ApiStatusComponent;
@@ -8,9 +10,12 @@ describe('ApiStatusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ApiStatusComponent]
+      imports: [ApiStatusComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ApiStatusComponent);
     component = fixture.componentInstance;
