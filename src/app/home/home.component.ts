@@ -4,18 +4,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CustomerApi } from '../customers/customer';
 import { ReservationApi } from '../reservations/reservation';
+import { ApiStatus } from '../services/api-health/api';
 import { HealthCheckService } from '../services/api-health/health-check.service';
+import { BookHttpService } from '../services/book/book-http.service';
 import { CustomerHttpService } from '../services/customers/customer-http.service';
 import { ReservationHttpService } from '../services/reservations/reservation-http.service';
 import { ThemeService } from '../services/theme/theme.service';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
-import { ChartGaugeComponent } from "./charts/chart-gauge/chart-gauge.component";
-import { ApiStatus } from '../services/api-health/api';
 import { ChartBarComponent } from "./charts/chart-bar/chart-bar.component";
-import { AvailableBooksComponent } from "./dashboard/available-books/available-books.component";
-import { PieChartData } from './charts/chart-pie/pieChartData';
-import { BookHttpService } from '../services/book/book-http.service';
 import { ChartPieComponent } from './charts/chart-pie/chart-pie.component';
+import { PieChartData } from './charts/chart-pie/pieChartData';
+import { AvailableBooksComponent } from "./dashboard/available-books/available-books.component";
 
 
 @Component({

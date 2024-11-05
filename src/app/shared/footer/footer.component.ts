@@ -40,4 +40,8 @@ export class FooterComponent {
       href: "https://www.github.com"
     }
   ];
+
+  get currentYear() {
+    return new Date().getFullYear();
+  }
 }

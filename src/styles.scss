@@ -1,6 +1,7 @@
 // THIS FILE OVERWRITES THE DEFAULT VALUES OF BOOTRSTRAP
 // Custom Bootstrap SCSS imports
 @import "@ng-select/ng-select/themes/default.theme.css";
+
 @import '../node_modules/bootstrap/scss/functions';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;800&display=swap');
 
@@ -130,7 +131,46 @@ body.dark {
     filter: invert(1);
   }
 
+      .ng-select .ng-value {
+        background-color: var(--bs-dark); 
+        color: var(--bs-text); 
+      }
+
+      .ng-select .ng-value-label {
+        color: var(--bs-text); 
+      }
+
+      .ng-select .ng-select-container {
+        border: 1px solid var(--bs-dark);
+        color: var(--bs-text); 
+        background-color: var(--bs-dark); 
+      }
+
+      .ng-select .ng-select-container .ng-placeholder {
+        color: var(--bs-placeholder-color, #999); 
+
+      .ng-dropdown-panel .ng-option.ng-option-selected {
+        color: var(--bs-btn-card); 
+        background-color: var(--bs-text-foreground);
+      }
+
+      .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+        background-color: var(--bs-dark);
+        color: var(--bs-text);
+        padding: 8px 10px;
+
+        &hover{
+          background-color: red;
+        }
+      }
+
 }
+}
+
+
+
+
+
 
 /* Main Layout */
 main {

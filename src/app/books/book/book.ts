@@ -5,7 +5,7 @@
  * The actual projects Endpoint Book Interface.
  * Endpoint URL: https://book-api-bx2r.onrender.com/books
  */
-export interface BookApi{
+export interface BookApi {
   _id?: string;
   name: string;
   year: number;
@@ -13,5 +13,10 @@ export interface BookApi{
   author: string;
   available?: boolean;
   createdOn: Date;
+}
+
+export enum Sort {
+  ASC = 'asc',
+  DESC = 'desc',
 }
 

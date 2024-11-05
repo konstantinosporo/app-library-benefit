@@ -4,7 +4,7 @@
     iconClass="bi bi-database-add" [backButton]="backButton">
     <form [formGroup]="reservationFormControl" class="row g-3 needs-validation" novalidate>
 
-      <!-- Selected Book Name-->
+      <!-- Selected Book Id-->
       <div class="col-md-6">
         <span class="form-label">Book Details</span>
         <div class="input-group has-validation mt-2">
@@ -19,10 +19,10 @@
           </div>
         </div>
       </div>
-      <!-- Book ID-->
+      <!-- Book Name-->
       <div class="col-md-6">
         <label for="bookId" class="form-label">Select Book</label>
-        <ng-select class="custom-ng-select" [items]="bookIds$ | async" bindLabel="id" bindValue="id"
+        <ng-select class="custom" [items]="bookIds$ | async" bindLabel="id" bindValue="id"
           placeholder="Select or paste Book ID" formControlName="bookId" (change)="handleSelectedBook()" [ngClass]="{
             'is-invalid': reservationFormControl.get('bookId')?.invalid &&
                           (reservationFormControl.get('bookId')?.touched || reservationFormControl.get('bookId')?.dirty),
@@ -39,7 +39,7 @@
       </div>
 
 
-      <!-- Selected Customer Name-->
+      <!-- Selected Customer Id-->
       <div class="col-md-6">
         <span class="form-label">Customer Details</span>
         <div class="input-group has-validation mt-2">
@@ -54,10 +54,10 @@
           </div>
         </div>
       </div>
-      <!-- Customer ID-->
+      <!-- Customer Name-->
       <div class="col-md-6">
         <label for="customerId" class="form-label">Select Customer</label>
-        <ng-select class="custom-ng-select" [items]="customerIds$ | async" bindLabel="id" bindValue="id"
+        <ng-select class="text-red" [items]="customerIds$ | async" bindLabel="id" bindValue="id"
           placeholder="Select or paste Book ID" formControlName="customerId" (change)="handleSelectedCustomer()"
           [ngClass]="{
                   'is-invalid': reservationFormControl.get('customerId')?.invalid &&
