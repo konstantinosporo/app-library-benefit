@@ -1,0 +1,17 @@
+<div class="d-flex flex-wrap align-items-center justify-content-start">
+  @if(apiStatuses$ | async; as apiStatuses) {
+  @for(apiStatus of apiStatuses; track apiStatus.title) {
+  <ng-container>
+    <p class="d-flex align-items-center mb-0 me-3">
+      <span class="badge text-white" [ngClass]="{ 'bg-success': apiStatus.status, 'bg-danger': !apiStatus.status }">
+        <i [ngClass]="apiStatus.status ? 'bi bi-wifi' : 'bi bi-wifi-off'" class="text-white"></i>
+        {{ apiStatus.status ? 'Online' : 'Offline' }}
+      </span>
+      <strong><small class="ms-1">{{ apiStatus.title }}</small></strong>
+    </p>
+  </ng-container>
+  }
+  } @else {
+  <app-spinner minVh=" " />
+  }
+</div>

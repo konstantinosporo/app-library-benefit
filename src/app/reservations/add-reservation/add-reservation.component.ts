@@ -2,7 +2,7 @@ import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 import { CustomerApi } from '../../customers/customer';
 import { AlertService } from '../../services/alert-handlers/alert.service';
@@ -31,10 +31,16 @@ export class AddReservationComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>();
   backButton: { title: string, route: string } = { title: 'Back to Reservations', route: '/reservations' };
   reservationFormControl!: FormGroup;
-  bookIds$!: Observable<(BookApi["_id"] | undefined)[]>;
-  customerIds$!: Observable<(CustomerApi["_id"] | undefined)[]>;
-  selectedBookTitle$!: Observable<(BookApi["name"] | undefined)>;
-  selectedCustomerName$!: Observable<(string | undefined)>;
+
+  // WITH HOW SHOULD I HAVE MADE IT 
+  availableBooks$!: Observable<(BookApi | undefined)[]>;
+  allCustomers$!: Observable<CustomerApi[]>;
+  availableBookNames$!: Observable<(BookApi["_id"] | undefined)[]>;
+  customerNames$!: Observable<(CustomerApi["_id"] | undefined)[]>;
+
+  selectedBookId$!: Observable<(BookApi["_id"] | undefined)>;
+  selectedCustomerId$!: Observable<(CustomerApi["_id"] | undefined)>;
+
   paramId: string | null = null;
 
   constructor(
@@ -47,19 +53,24 @@ export class AddReservationComponent implements OnDestroy {
 
   ) {
     this.reservationFormControl = new FormGroup({
-      bookId: new FormControl('', Validators.required),
-      customerId: new FormControl('', Validators.required),
+      bookName: new FormControl('', Validators.required),
+      customerName: new FormControl('', Validators.required),
       returnBy: new FormControl('', [Validators.required, futureDateValidator()]),
     });
-    this.bookIds$ = this.bookHttpService.getAvailableBookIds();
-    this.customerIds$ = this.customerHttpService.getAllCustomerIds();
+
+    this.availableBooks$ = this.bookHttpService.getAvailableBooks();
+    this.allCustomers$ = this.customerHttpService.getCustomers();
+
+    this.availableBookNames$ = this.availableBooks$.pipe(map(books => books.map(book => book?.name)));
+    this.customerNames$ = this.allCustomers$.pipe(map(customers => customers.map(customer => (customer.name + ' ' + customer.surname))));
+    // Scenario where i press quick reservation.
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.paramId = params['id'];
+      this.paramId = params['name'];
 
       // check if the params have an id first
       if (this.paramId) {
         this.reservationFormControl.patchValue({
-          bookId: this.paramId
+          bookName: this.paramId
         });
         this.handleSelectedBook(); // also update the book name
       }
@@ -67,24 +78,25 @@ export class AddReservationComponent implements OnDestroy {
   }
   addReservation() {
     //console.log(id);
-    combineLatest([this.selectedBookTitle$, this.selectedCustomerName$])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(([bookTitle, customerName]) => {
-        this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${bookTitle} to  ${customerName}?`, () => this.confirmCreation(), "Save");
-      })
+    // combineLatest([this.selectedBookTitle$, this.selectedCustomerName$])
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(([bookTitle, customerName]) => {
+    //     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${bookTitle} to  ${customerName}?`, () => this.confirmCreation(), "Save");
+    //   })
+    this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${this.reservationFormControl.controls['bookName'].value} to  ${this.reservationFormControl.controls['customerName'].value}?`, () => this.confirmCreation(), "Save");
   }
   handleSelectedBook() {
     //console.log('clicked');
-    const selectedBookId: string = this.reservationFormControl.controls['bookId'].value;
-    if (this.reservationFormControl.controls['bookId'].value) {
-      this.selectedBookTitle$ = this.bookHttpService.getBookNameById(selectedBookId);
+    const selectedBookName: string = this.reservationFormControl.controls['bookName'].value;
+    if (this.reservationFormControl.controls['bookName'].value) {
+      this.selectedBookId$ = this.bookHttpService.getBookIdByName(selectedBookName);
     }
   }
   handleSelectedCustomer() {
     //console.log('clicked');
-    const selectedCustomerId: string = this.reservationFormControl.controls['customerId'].value;
-    if (this.reservationFormControl.controls['bookId'].value) {
-      this.selectedCustomerName$ = this.customerHttpService.getCustomerNameById(selectedCustomerId);
+    const selectedCustomerName: string = this.reservationFormControl.controls['customerName'].value;
+    if (this.reservationFormControl.controls['bookName'].value) {
+      this.selectedCustomerId$ = this.customerHttpService.getCustomerIdByName(selectedCustomerName.split(' ')[0]);
     }
   }
   /**
@@ -93,37 +105,42 @@ export class AddReservationComponent implements OnDestroy {
    *  in the API endpoint. It also uses alert service and global error service for outputing success and, error messages.
    */
   confirmCreation() {
-    //console.log(this.reservationFormControl.value);
-    // console.log(this.reservationFormControl.controls['name']);
     if (this.reservationFormControl.valid) {
-      const newReservation: ReservationApi = {
-        bookId: this.reservationFormControl.controls['bookId'].value as string,
-        customerId: this.reservationFormControl.controls['customerId'].value as string,
-        returnBy: this.reservationFormControl.controls['returnBy'].value
-          ? new Date(this.reservationFormControl.controls['returnBy'].value).toISOString()
-          : new Date().toISOString(),
-      };
-      //console.table(newReservation);
-      // Also catching the scenario where a book was available when the reservation started but was 
-      // reserved before clicking the reserve button, as i only fetch available books.
-      this.bookHttpService.getBookById(newReservation.bookId as string)
+      // Using combineLatest to retrieve both selectedBookId and selectedCustomerId together
+      combineLatest([this.selectedBookId$, this.selectedCustomerId$])
         .pipe(
-          tap(book => {
-            if (!book.available) {
-              //console.log(!book.available);
-              throw new Error('Book is already reserved');
-            }
-          }),
-          switchMap(() => this.reservationService.addReservation(newReservation)),
           takeUntil(this.destroy$),
+          switchMap(([selectedBookId, selectedCustomerId]) => {
+            if (!selectedBookId || !selectedCustomerId) {
+              this.alertService.showDangerToast('Please select both a book and a customer.');
+              throw new Error('Selection is incomplete');
+            }
+
+            const newReservation: ReservationApi = {
+              bookId: selectedBookId,
+              customerId: selectedCustomerId,
+              returnBy: this.reservationFormControl.controls['returnBy'].value
+                ? new Date(this.reservationFormControl.controls['returnBy'].value).toISOString()
+                : new Date().toISOString(),
+            };
+
+            // Check if the book is still available before adding the reservation
+            return this.bookHttpService.getBookById(newReservation.bookId as string).pipe(
+              tap(book => {
+                if (!book.available) {
+                  throw new Error('Book is already reserved');
+                }
+              }),
+              switchMap(() => this.reservationService.addReservation(newReservation))
+            );
+          })
         )
         .subscribe({
           next: (reservation: ReservationApi) => {
-            this.alertService.showSuccessToast(`Reservation with ID: ${reservation._id} successfully created!`);
+            this.alertService.showSuccessToast(`Book was reserved to ${this.reservationFormControl.controls['customerName'].value} successfully!`);
             this.router.navigate(['reservations']);
           },
           error: (err) => {
-            //console.error('Error creating reservation!', err);
             if (err.message === 'Book is already reserved') {
               this.alertService.showDangerToast('The book is already reserved!');
             } else {
@@ -131,7 +148,6 @@ export class AddReservationComponent implements OnDestroy {
             }
           }
         });
-
     }
   }
   /**

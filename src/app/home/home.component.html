@@ -1,26 +1,13 @@
 <div class="home-container">
-  <section class="title-section text-start my-5">
+  <section class="text-start my-5">
     <div class="container">
       <div class="row d-flex justify-content-between align-items-baseline">
         <div class="col-lg-5">
-          <h1 class="display-4 font-weight-bold text"><i class="bi bi-activity"></i>Dashboard</h1>
+          <h1 class="display-4 font-weight-bold text"><i class="bi bi-activity me-1"></i>Dashboard</h1>
         </div>
         <div class="col-lg-7">
-          <div class="d-flex justify-content-between">
-            @if(apiStatuses$ |async; as apiStatuses){
-            @for(apiStatus of apiStatuses; track apiStatus.title){
-            <p>
-              <span class="badge text-white" [ngClass]="{
-                  'bg-success': apiStatus.status,
-                  'bg-danger': !apiStatus.status
-                }">
-                <i class="text-white" [ngClass]="apiStatus.status ? 'bi bi-wifi' : 'bi bi-wifi-off'"></i>
-                {{ apiStatus.status ? 'Online ' : 'Offline' }}
-              </span>
-              <strong><small class="ms-1">{{ apiStatus.title }}</small></strong>
-            </p>
-            }
-            }@else{<app-spinner minVh=" " [spinnerSize]="{ width: '1rem', height: '1rem' }" />}
+          <div class="d-flex justify-content-evenly">
+            <app-api-status></app-api-status>
           </div>
         </div>
       </div>
@@ -45,23 +32,29 @@
       <!-- Content Row -->
       <div class="row g-4 mt-3">
         <!-- Left Column for Available Books (Accordion) -->
-        <div class="col-lg-6">
-          <app-available-books></app-available-books>
-        </div>
+        <div class="col-lg-10 mx-auto">
+          <div class="container mb-3">
+            <app-available-books />
+            <hr class="text-primary">
 
+          </div>
+        </div>
         <!-- Right Column for Toggling Charts -->
-        <div class="col-lg-6">
+        <div class="row">
+          <div class="col-md-6">
+            <h3><i class="bi bi-bar-chart me-1"></i>Available Books per Type</h3>
+          </div>
           @if(dataStream$ | async; as chartData) {
           <div class="container">
-            <!-- Conditionally Render Chart Based on isBarChart -->
+            @if(isBarChart) {
+            <!-- Bar Chart View -->
             <div class="d-flex align-items-center">
               <div class="vr me-2" style="height: 1.2em;"></div>
               <p class="mb-0">
                 Viewing {{ isBarChart ? 'bar' : 'pie' }} chart of available books per type.
               </p>
               <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                <i class="bi" [ngClass]="isBarChart ? 'bi-pie-chart' : 'bi-bar-chart'"></i>
-                Switch to {{ isBarChart ? 'Pie' : 'Bar' }}
+                <i class="bi bi-pie-chart me-1 text-white"></i>Switch to Pie
               </button>
             </div>
 
@@ -74,9 +67,20 @@
                 <app-chart-pie [data]="chartData" [theme]="isDarkTheme"></app-chart-pie>
               </ng-container>
             </div>
-
-            <p class="small text-center mt-3">
-              <i class="bi bi-question-circle me-1"></i>Actual data consumed from the API.
+            } @else {
+            <!-- Pie Chart View -->
+            <div class="d-flex align-items-center">
+              <div class="vr me-2" style="height: 1.2em;"></div>
+              <p class="mb-0">Viewing pie chart of available books per type.</p>
+              <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
+                <i class="bi bi-bar-chart me-1 text-white"></i>Switch to Bar
+              </button>
+            </div>
+            <div class="mt-4">
+              <app-chart-pie [data]="chartData" [theme]="isDarkTheme" />
+            </div>
+            }
+            <p class="small text-center"><i class="bi bi-question-circle me-1"></i>Actual data consumed from the API.
             </p>
           </div>
           } @else {
