@@ -60,8 +60,12 @@
               }@else {<span class="text-muted">{{ 'Deleted Book' }}</span>}
 
               @if(checkOverdue(reservation) && (reservation.status === 'active')){
-              <i class="bi bi-exclamation-triangle text-warning" title="Warning: Book has not been return yet!">
-              </i>
+              <small>
+                <i class="bi bi-exclamation-triangle text-warning small"
+                  title="Warning: Book has not been returned yet!">
+                  Overdue
+                </i>
+              </small>
               }
             </td>
 
@@ -91,27 +95,26 @@
               <span class="rounded-pill px-2" [ngClass]="{
                       'text-bg-green': reservation.status === 'active',
                       'text-bg-red': reservation.status !== 'active'
-                    }" [title]="reservation.status === 'active'?'Complete Reservation': 'Completed'">
-                <button class="btn btn-link btn-sm text-decoration-none text-white custom-width  text-showdowed "
-                  (click)="complete(reservation._id ?? 'NO ID')" [disabled]="reservation?.status === 'completed'"
+                    }" [title]="reservation.status === 'active'?'Active Reservation': 'Completed Reservation'">
+                <button class="btn btn-link btn-sm text-decoration-none text-white custom-width  text-showdowed"
+                  [disabled]="reservation?.status === 'completed'"
                   onkeypress>{{ reservation.status | uppercase}}</button>
               </span>
             </td>
 
             <td>
-              <button class="btn btn-sm btn-green text-white " (click)="view(reservation._id ?? 'NO ID')"
-                aria-labelledby="View">
-                <i class="bi bi-eye"></i>
-              </button>
-              <button class="btn btn-sm btn-orange text-white mx-1 " (click)="edit(reservation._id ?? 'NO ID')"
-                aria-labelledby="Edit">
-                <i class="bi bi-pencil"></i>
-              </button>
-              <button class="btn btn-sm btn-red text-white " (click)="delete(reservation._id ?? 'NO ID')"
-                aria-labelledby="Delete">
-                <i class="bi bi-trash"></i>
+              <button class="btn btn-sm  text-white  {{ reservation.status === 'active' ? 'btn-success' : 'btn-blue' }}"
+                (click)="complete(reservation._id ?? 'NO ID')" aria-label="View"
+                [disabled]="reservation?.status === 'completed'"
+                [title]="reservation.status === 'active' ? 'Return Book' : 'Book Returned'">
+                <i [ngClass]="{
+                  'bi bi-arrow-return-left': reservation.status === 'active',
+                  'bi bi-check-circle': reservation.status === 'completed'
+                }"></i>
+                <span class="visually-hidden">{{ reservation.status === 'active' ? 'Return' : 'Returned' }}</span>
               </button>
             </td>
+
 
           </tr>
           }

@@ -22,11 +22,15 @@
 
   <section>
     <div class="container">
-      <div class="col-md-6">
-        <h3> <i class="bi bi-sliders"></i> Quick Settings</h3>
+      <!-- Header Section -->
+      <div class="row">
+        <div class="col-md-6">
+          <h3><i class="bi bi-sliders"></i> Quick Settings</h3>
+        </div>
       </div>
 
-      <div class="row g-4">
+      <!-- Content Row -->
+      <div class="row g-4 mt-3">
         <!-- Left Column for Available Books (Accordion) -->
         <div class="col-lg-10 mx-auto">
           <div class="container mb-3">
@@ -41,18 +45,27 @@
             <h3><i class="bi bi-bar-chart me-1"></i>Available Books per Type</h3>
           </div>
           @if(dataStream$ | async; as chartData) {
-          <div class="col-lg-10 mx-auto mt-3">
+          <div class="container">
             @if(isBarChart) {
             <!-- Bar Chart View -->
             <div class="d-flex align-items-center">
               <div class="vr me-2" style="height: 1.2em;"></div>
-              <p class="mb-0">Viewing bar chart of available books per type.</p>
+              <p class="mb-0">
+                Viewing {{ isBarChart ? 'bar' : 'pie' }} chart of available books per type.
+              </p>
               <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                <i class="bi bi-pie-chart me-1 text-white"></i>Pie
+                <i class="bi bi-pie-chart me-1 text-white"></i>Switch to Pie
               </button>
             </div>
+
+            <!-- Chart Display Area -->
             <div class="mt-4">
-              <app-chart-bar [data]="chartData" [theme]="isDarkTheme" />
+              <ng-container *ngIf="isBarChart">
+                <app-chart-bar [data]="chartData" [theme]="isDarkTheme"></app-chart-bar>
+              </ng-container>
+              <ng-container *ngIf="!isBarChart">
+                <app-chart-pie [data]="chartData" [theme]="isDarkTheme"></app-chart-pie>
+              </ng-container>
             </div>
             } @else {
             <!-- Pie Chart View -->
@@ -60,7 +73,7 @@
               <div class="vr me-2" style="height: 1.2em;"></div>
               <p class="mb-0">Viewing pie chart of available books per type.</p>
               <button class="btn btn-sm btn-secondary py-0 ms-auto text-white" (click)="toggleChart()">
-                <i class="bi bi-bar-chart me-1 text-white"></i>Bar
+                <i class="bi bi-bar-chart me-1 text-white"></i>Switch to Bar
               </button>
             </div>
             <div class="mt-4">
@@ -71,12 +84,14 @@
             </p>
           </div>
           } @else {
-          <app-spinner minVh="min-vh-30" />
+          <!-- Loading Spinner -->
+          <app-spinner minVh="min-vh-30"></app-spinner>
           }
         </div>
       </div>
     </div>
   </section>
+
 
   <section>
     <div class="container mt-3">

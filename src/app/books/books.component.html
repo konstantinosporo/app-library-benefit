@@ -2,16 +2,12 @@
   <div class="home-container">
     <div class="col-12 mx-auto">
       <div class="col-10 col-md-9 mx-auto">
-        <app-search [showContent]="true" searchPlaceholder="Search Books...">
+        <app-search [showContent]="true" searchPlaceholder="Search Reservations...">
+          <app-actions-dropdown [dropdownActions]="dropdownActions"
+            (handleClickedDropdownEvent)="getClickedDropdownId($event)" />
+          <app-refresh-page-button [rounded]="true" (handleRefreshEvent)="refreshBooks()" />
           <app-add-new-button [textValue]="'Add book'" [rounded]="true" route="book/add" (clickEvent)="add($event)" />
         </app-search>
-      </div>
-      <div class="container">
-        <div class="col-10 col-lg-8 mx-auto">
-          @for(filter of filters; track filter.id){
-          <app-filter [id]="filter.id" [filterId]="filter.id" [title]="filter.title" [checked]="filter.isChecked" />
-          }
-        </div>
       </div>
     </div>
 

@@ -4,7 +4,7 @@
     iconClass="bi bi-database-add" [backButton]="backButton">
     <form [formGroup]="reservationFormControl" class="row g-3 needs-validation" novalidate>
 
-      <!-- Selected Book Name-->
+      <!-- Selected Book Id-->
       <div class="col-md-6">
         <span class="form-label">Book Details</span>
         <div class="input-group has-validation mt-2">
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <!-- Book ID-->
+      <!-- Book Name-->
       <div class="col-md-6">
         <label for="bookName" class="form-label">Select Book</label>
         <ng-select class="custom-ng-select" [items]="availableBookNames$ | async" bindLabel="id" bindValue="id"
@@ -39,7 +39,7 @@
       </div>
 
 
-      <!-- Selected Customer Name-->
+      <!-- Selected Customer Id-->
       <div class="col-md-6">
         <span class="form-label">Customer Details</span>
         <div class="input-group has-validation mt-2">
@@ -54,7 +54,7 @@
           </div>
         </div>
       </div>
-      <!-- Customer ID-->
+      <!-- Customer Name-->
       <div class="col-md-6">
         <label for="customerName" class="form-label">Select Customer</label>
         <ng-select class="custom-ng-select" [items]="customerNames$ | async" bindLabel="id" bindValue="id"

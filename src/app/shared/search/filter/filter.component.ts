@@ -15,8 +15,8 @@ export class FilterComponent {
   @Input() title: string = '';
   @Input() checked: boolean = false;
 
-  handleStateFilter(id: FilterID) {
-    console.log(id);
-    this.searchStateService.updateFilter(id);
-  }
+  // handleStateFilter(id: FilterID) {
+  //   console.log(id);
+  //   this.searchStateService.updateFilter(id);
+  // }
 }

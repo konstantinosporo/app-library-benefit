@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
 import { SearchComponent } from '../shared/search/search.component';
 import { SpinnerComponent } from "../shared/spinner/spinner.component";
-import { BookApi } from './book/book';
+import { BookApi, Sort } from './book/book';
 import { BookComponent } from "./book/book.component";
 
 import { Router } from '@angular/router';
@@ -11,14 +11,16 @@ import { CrudActions } from '../_lib/interfaces';
 import { AlertService } from '../services/alert-handlers/alert.service';
 import { BookHttpService } from '../services/book/book-http.service';
 import { SearchStateService } from '../services/search-state.service';
+import { ActionsDropdownComponent } from "../shared/buttons/actions-dropdown/actions-dropdown.component";
+import { DropdownActions } from '../shared/buttons/actions-dropdown/dropdown';
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
+import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
 import { FilterComponent } from "../shared/search/filter/filter.component";
-import { Filter, filterList, FilterID as ID } from '../shared/search/filter/filters';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, FilterComponent],
+  imports: [AsyncPipe, JsonPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, FilterComponent, ActionsDropdownComponent, RefreshPageButtonComponent],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })
@@ -34,9 +36,13 @@ export class BooksComponent implements CrudActions {
    */
   books$!: Observable<BookApi[]>;
   searchQueryState$!: Observable<string>;
-  // Load the external filterlist
-  filters: Filter[] = filterList;
-  filterState$!: Observable<string>;
+
+  dropdownActions: DropdownActions[] = [
+    { id: 'all', title: 'All', icon: 'bi-circle' },
+    { id: 'available', title: 'Available', icon: 'bi bi-check-circle' },
+    { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
+    { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
+  ];
   /**
    * @konstantinosporo
    * @description
@@ -56,19 +62,13 @@ export class BooksComponent implements CrudActions {
     this.allBooks$ = this.booksHttpService.getBooks();
     this.books$ = this.allBooks$;
     this.searchQueryState$ = this.searchStateService.searchStream$;
-    this.filterState$ = this.searchStateService.filterStream$;
     this.searchQueryState$
       .pipe(takeUntil(this.destroy$), filter((searchQuery: string) => searchQuery.length >= 0))
       .subscribe((data) => {
         this.fetchFilteredBooks(data);
+        // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
+        //this.fetchFilteredBooksSSR(data);
       });
-
-    // subsribe to filter state service observable 
-    this.filterState$.pipe(takeUntil(this.destroy$)).subscribe(data => {
-      //console.log(data);
-      this.applyFilter(data as ID);
-    });
-
   }
   /**
    * @konstantinosporo
@@ -84,6 +84,21 @@ export class BooksComponent implements CrudActions {
       this.books$ = this.allBooks$.pipe(map((books) => books.filter((book) => {
         return book.name.toLowerCase().includes(text.toLowerCase()) || book.author.toLowerCase().includes(text.toLowerCase());
       })));
+    }
+  }
+  /**
+   * @konstantinosporo
+   * @description
+   * Filters the api server side for close mathes of the searched query string.
+   * Accepts a text string as a param.
+   * // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
+   */
+  fetchFilteredBooksSSR(text: string) {
+    if (text.length === 0) {
+      this.books$ = this.allBooks$;
+    } else {
+      // console.log(`FROM THE METHOD fetchdata(): ${text}`);
+      this.books$ = this.booksHttpService.getBookSSR(text);
     }
   }
   /**
@@ -160,6 +175,80 @@ export class BooksComponent implements CrudActions {
     this.alertService.showDangerModal('Confirm Deletion', `Are you sure you want to delete book with ID: ${id}`, () => this.confirmDelete(id), 'Delete Book');
   }
   /**
+   * Refreshes the books observable.
+   */
+  refreshBooks() {
+    this.books$ = this.booksHttpService.getBooks();
+  }
+  getClickedDropdownId(id: string) {
+    //console.log(id + '' + 'from father comp');
+    switch (id) {
+      case ('all'):
+        this.fetchFilteredAllBooks();
+        break;
+      case ('available'):
+        this.fetchFilteredAvailableBooks();
+        break;
+      case ('asc'):
+        this.fetchFilteredAscBooks();
+        // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
+        //this.fetchFilteredAscBooksSSR(Sort.ASC);
+        break;
+      case ('desc'):
+        this.fetchFilteredDescBooks();
+        // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
+        //this.fetchFilteredAscBooksSSR(Sort.DESC);
+        break;
+      default: break;
+    }
+  }
+  fetchFilteredAllBooks() {
+    this.books$ = this.booksHttpService.getBooks();
+  }
+  fetchFilteredAvailableBooks() {
+    this.books$ = this.allBooks$.pipe(
+      map((books) =>
+        books.filter((book) => {
+          return book.available === true;
+        })
+      )
+    );
+  }
+  /**
+   * @description Client side filter.
+   */
+  fetchFilteredAscBooks() {
+    this.books$ = this.allBooks$.pipe(
+      map((books) =>
+        books.slice().sort((a, b) => {
+          const nameA = (a.name ?? '').toLowerCase();
+          const nameB = (b.name ?? '').toLowerCase();
+          return nameA.localeCompare(nameB); // Ascending order
+        })
+      )
+    );
+  }
+  /**
+   * @description Server side filter.
+   */
+  fetchFilteredAscBooksSSR(sort: Sort) {
+    this.books$ = this.booksHttpService.getFilteredSortSSR(sort);
+  }
+  /**
+   * @description Client side filter.
+   */
+  fetchFilteredDescBooks() {
+    this.books$ = this.allBooks$.pipe(
+      map((books) =>
+        books.slice().sort((a, b) => {
+          const nameA = (a.name ?? '').toLowerCase();
+          const nameB = (b.name ?? '').toLowerCase();
+          return nameB.localeCompare(nameA); // Descending order
+        })
+      )
+    );
+  }
+  /**
    * @konstantinosporo
    * @description
    * Attempt to delete the specified record from the API endpoint.
@@ -182,33 +271,7 @@ export class BooksComponent implements CrudActions {
       }
     });
   }
-  /**
-   * @konstantinosporo
-   * Applies the specified filter to the book list by updating the relevant observable 
-   * and setting the appropriate filter as checked.
-   * @param filterId - The filter ID to apply (either ID.ALL or ID.AVAILABLE).
-   */
-  applyFilter(filterId: ID) {
-    // reset filters to avoid check radio bugs
-    this.filters.forEach(filter => filter.isChecked = false);
 
-    if (filterId === ID.ALL) {
-      this.books$ = this.allBooks$;
-      // find and mark the 'ALL' filter as checked for UI consistency.
-      const allFilter = this.filters.find(filter => filter.id === ID.ALL);
-      if (allFilter) {
-        allFilter.isChecked = true;
-      }
-    } else if (filterId === ID.AVAILABLE) {
-      // find and mark the 'AVAILABLE' filter as checked.
-      const availableFilter = this.filters.find(filter => filter.id === ID.AVAILABLE);
-      if (availableFilter) {
-        availableFilter.isChecked = true;
-      }
-      // apply the available books filter by fetching only books marked as available.
-      this.fetchAvailableBooks();
-    }
-  }
   createImgUrls(book: BookApi): string {
     switch (book.type) {
       case ('Non-Fiction'):

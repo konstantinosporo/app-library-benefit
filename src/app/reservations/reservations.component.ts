@@ -35,7 +35,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
     { id: 'completed', title: 'Completed', icon: 'bi bi-check-circle' },
     { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
     { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
-  ]
+  ];
 
   constructor(
     private readonly reservationHttpService: ReservationHttpService,
@@ -61,13 +61,13 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
     this.router.navigate([route]);
   }
   view(id: string) {
-    console.log(id);
+    //console.log(id);
   }
   edit(id: string) {
-    console.log(id);
+    //console.log(id);
   }
   delete(id: string) {
-    console.log(id);
+    //console.log(id);
   }
   refreshCustomers() {
     this.reservations$ = this.reservationHttpService.getReservations();

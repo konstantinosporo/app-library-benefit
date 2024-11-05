@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { BookApi } from '../../books/book/book';
@@ -42,6 +42,20 @@ export class BookHttpService {
       const book = books.find(book => book._id === id);
       return book ? book.name : undefined;
     }));
+  }
+  /**
+   * @description Get book SSR.
+   */
+  getBookSSR(searchQuery: string): Observable<BookApi[]> {
+    const baseParams = new HttpParams().set('search', searchQuery);
+    return this.http.get<BookApi[]>(this.bookApiUrl, { params: baseParams });
+  }
+  /**
+   * Sort books SSR
+   */
+  getFilteredSortSSR(sort: string): Observable<BookApi[]> {
+    const baseParams = new HttpParams().set('sort', sort);
+    return this.http.get<BookApi[]>(this.bookApiUrl, { params: baseParams });
   }
   /**
    * @konstantinosporo
