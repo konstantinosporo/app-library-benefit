@@ -32,14 +32,13 @@ export class AddReservationComponent implements OnDestroy {
   backButton: { title: string, route: string } = { title: 'Back', route: '/reservations' };
   reservationFormControl!: FormGroup;
 
-  // WITH HOW SHOULD I HAVE MADE IT 
   availableBooks$!: Observable<(BookApi | undefined)[]>;
-  allCustomers$!: Observable<CustomerApi[]>;
-  availableBookNames$!: Observable<(BookApi["_id"] | undefined)[]>;
-  customerNames$!: Observable<(CustomerApi["_id"] | undefined)[]>;
+  availableBookNames$!: Observable<(string | undefined)[]>;
+  selectedBookId$!: Observable<(string | undefined)>;
 
-  selectedBookId$!: Observable<(BookApi["_id"] | undefined)>;
-  selectedCustomerId$!: Observable<(CustomerApi["_id"] | undefined)>;
+  allCustomers$!: Observable<CustomerApi[]>;
+  customerNames$!: Observable<(string | undefined)[]>;
+  selectedCustomerId$!: Observable<(string | undefined)>;
 
   paramId: string | null = null;
 
@@ -65,24 +64,25 @@ export class AddReservationComponent implements OnDestroy {
     this.customerNames$ = this.allCustomers$.pipe(map(customers => customers.map(customer => (customer.name + ' ' + customer.surname))));
     // Scenario where i press quick reservation.
     this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.paramId = params['name'];
+      this.paramId = params['id'];
 
       // check if the params have an id first
       if (this.paramId) {
-        this.reservationFormControl.patchValue({
-          bookName: this.paramId
+        this.bookHttpService.getBookById(this.paramId).pipe(takeUntil(this.destroy$)).subscribe(book => {
+          // book is the result from the HTTP call
+          this.reservationFormControl.patchValue({
+            bookName: book.name // here i have access to the requested book if there is one
+          });
+          this.handleSelectedBook(); // Call after I have the book data
         });
-        this.handleSelectedBook(); // also update the book name
       }
     });
+
   }
+  /**@konstantinosporo
+   * @description Same proccess!!
+   */
   addReservation() {
-    //console.log(id);
-    // combineLatest([this.selectedBookTitle$, this.selectedCustomerName$])
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe(([bookTitle, customerName]) => {
-    //     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${bookTitle} to  ${customerName}?`, () => this.confirmCreation(), "Save");
-    //   })
     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${this.reservationFormControl.controls['bookName'].value} to  ${this.reservationFormControl.controls['customerName'].value}?`, () => this.confirmCreation(), "Save");
   }
   handleSelectedBook() {
@@ -137,7 +137,7 @@ export class AddReservationComponent implements OnDestroy {
         )
         .subscribe({
           next: (reservation: ReservationApi) => {
-            this.alertService.showSuccessToast(`Book was reserved to ${this.reservationFormControl.controls['customerName'].value} successfully!`);
+            this.alertService.showSuccessToast(`${this.reservationFormControl.controls['bookName'].value} was reserved to ${this.reservationFormControl.controls['customerName'].value} successfully!`);
             this.router.navigate(['reservations']);
           },
           error: (err) => {
