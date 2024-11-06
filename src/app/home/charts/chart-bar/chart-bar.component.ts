@@ -46,7 +46,8 @@ export class ChartBarComponent {
       },
       yAxis: {
         type: 'value',
-        name: 'Book Availability'
+        name: 'Book Availability',
+        minInterval: 1,
       },
       backgroundColor: 'transparent',
       series: [
