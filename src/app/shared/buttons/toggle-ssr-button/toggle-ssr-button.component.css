@@ -1,9 +1,10 @@
 .toggle-btn {
   position: absolute;
-  top: 2%;
+  top: 10%;
   right: 1%;
   width: 180px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  opacity: 0; /* Make the button invisible initially */
+  transition: opacity 0.3s ease, background-color 0.3s ease;
   border: 0;
 }
 
@@ -18,7 +19,7 @@
 }
 
 .toggle-btn:hover {
+  opacity: 1; /* Make the button fully visible on hover */
   background-color: var(--bs-text-foreground);
   color: var(--bs-text);
-  transform: translateY(100%) scale(1.05);
 }
