@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch=false",
+    "prebuild": "node check-test-results.js",
+    "postbuild": "echo 'Build completed successfully'"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-json-reporter": "^1.2.1",
     "typescript": "~5.5.2"
   }
 }
