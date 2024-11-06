@@ -103,15 +103,15 @@
             </td>
 
             <td>
-              <button class="btn btn-sm  text-white  {{ reservation.status === 'active' ? 'btn-success' : 'btn-blue' }}"
-                (click)="complete(reservation._id ?? 'NO ID')" aria-label="View"
+              <button class="btn btn-sm text-white {{ reservation.status === 'active' ? 'btn-success' : 'btn-blue' }}"
+                (click)="complete(reservation._id ?? 'NO ID')"
+                [attr.aria-label]="reservation.status === 'active' ? 'Return' : 'Returned'"
                 [disabled]="reservation?.status === 'completed'"
                 [title]="reservation.status === 'active' ? 'Return Book' : 'Book Returned'">
                 <i [ngClass]="{
                   'bi bi-arrow-return-left': reservation.status === 'active',
                   'bi bi-check-circle': reservation.status === 'completed'
                 }"></i>
-                <span class="visually-hidden">{{ reservation.status === 'active' ? 'Return' : 'Returned' }}</span>
               </button>
             </td>
 

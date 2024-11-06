@@ -34,5 +34,7 @@
     }@else{
     <app-spinner />
     }
+
   </div>
+  <app-toggle-ssr-button [ssrMode]="ssrMode" (handleToggleEvent)="toggleSSR()"/>
 </div>

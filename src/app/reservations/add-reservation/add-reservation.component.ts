@@ -85,6 +85,9 @@ export class AddReservationComponent implements OnDestroy {
   addReservation() {
     this.alertService.showSuccessModal('Confirm Creation', `Are you sure you want to reserve ${this.reservationFormControl.controls['bookName'].value} to  ${this.reservationFormControl.controls['customerName'].value}?`, () => this.confirmCreation(), "Save");
   }
+  /**
+   * @description Handles the selected book to show its id.
+   */
   handleSelectedBook() {
     //console.log('clicked');
     const selectedBookName: string = this.reservationFormControl.controls['bookName'].value;
@@ -92,6 +95,9 @@ export class AddReservationComponent implements OnDestroy {
       this.selectedBookId$ = this.bookHttpService.getBookIdByName(selectedBookName);
     }
   }
+  /**
+   * @description Handles the selected customer to show its id.
+   */
   handleSelectedCustomer() {
     //console.log('clicked');
     const selectedCustomerName: string = this.reservationFormControl.controls['customerName'].value;
@@ -153,7 +159,7 @@ export class AddReservationComponent implements OnDestroy {
   /**
    * @konstantinosporo
    * @description
-   * Manual unsubrcription because i manually subscribe
+   * Manual unsubrcription because i manually subscribe.
    */
   ngOnDestroy() {
     this.destroy$.next();
