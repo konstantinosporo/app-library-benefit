@@ -32,7 +32,7 @@ export class AvailableBooksComponent {
   constructor(
     private readonly bookHttpService: BookHttpService,
     private readonly searchStateService: SearchStateService,
-    private readonly router : Router
+    private readonly router: Router
   ) {
     this.allAvailableBooks$ = this.bookHttpService.getAvailableBooks();
     this.availableBooks$ = this.allAvailableBooks$;
@@ -44,21 +44,39 @@ export class AvailableBooksComponent {
       });
   }
   /**
-   * @konstantinosporo
-   * @description
-   * Actively filters the api for close matches of the searched query string.
-   * Accepts a text string as a param.
-   */
+ * @konstantinosporo
+ * @description
+ * Actively filters the available books for close matches to the searched query string.
+ * Supports multi-term searches by splitting the text parameter into individual words.
+ */
   fetchFilteredBooks(text: string) {
-    if (text.length === 0) {
+    if (text.trim().length === 0) {
       this.availableBooks$ = this.allAvailableBooks$;
     } else {
-      // console.log(`FROM THE METHOD fetchdata(): ${text}`);
-      this.availableBooks$ = this.allAvailableBooks$.pipe(map((books) => books.filter((book) => {
-        return book?.name.toLowerCase().includes(text.toLowerCase()) || book?.author.toLowerCase().includes(text.toLowerCase());
-      })));
+      const searchTerms = text.toLowerCase().trim().split(' ');
+
+      this.availableBooks$ = this.allAvailableBooks$.pipe(
+        map((books) =>
+          books.filter((book) => {
+            const bookId = book?._id?.toLowerCase() || '';
+            const bookName = book?.name?.toLowerCase() || '';
+            const bookAuthor = book?.author?.toLowerCase() || '';
+            const bookType = book?.type?.toLowerCase() || '';
+            const bookPublished = book?.year || '';
+
+            return searchTerms.every((term) =>
+              bookId.includes(term) ||
+              bookName.includes(term) ||
+              bookAuthor.includes(term) ||
+              bookType.includes(term) ||
+              bookPublished.toString().includes(term)
+            );
+          })
+        )
+      );
     }
   }
+
   getClickedDropdownId(id: string) {
     //console.log(id + '' + 'from father comp');
     switch (id) {

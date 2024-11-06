@@ -16,11 +16,12 @@ import { DropdownActions } from '../shared/buttons/actions-dropdown/dropdown';
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
 import { FilterComponent } from "../shared/search/filter/filter.component";
+import { ToggleSsrButtonComponent } from "../shared/buttons/toggle-ssr-button/toggle-ssr-button.component";
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, FilterComponent, ActionsDropdownComponent, RefreshPageButtonComponent],
+  imports: [AsyncPipe, JsonPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, FilterComponent, ActionsDropdownComponent, RefreshPageButtonComponent, ToggleSsrButtonComponent],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })
@@ -43,6 +44,10 @@ export class BooksComponent implements CrudActions {
     { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
     { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
   ];
+
+  // For Presentation Purposes Only.
+  ssrMode: boolean = false;
+
   /**
    * @konstantinosporo
    * @description
@@ -59,13 +64,14 @@ export class BooksComponent implements CrudActions {
     private readonly alertService: AlertService,
     private readonly router: Router,
   ) {
+    this.ssrMode = false;
     this.allBooks$ = this.booksHttpService.getBooks();
     this.books$ = this.allBooks$;
     this.searchQueryState$ = this.searchStateService.searchStream$;
     this.searchQueryState$
       .pipe(takeUntil(this.destroy$), filter((searchQuery: string) => searchQuery.length >= 0))
       .subscribe((data) => {
-        this.fetchFilteredBooks(data);
+        !this.ssrMode ? this.fetchFilteredBooks(data) : this.fetchFilteredBooksSSR(data);
         // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
         //this.fetchFilteredBooksSSR(data);
       });
@@ -77,13 +83,30 @@ export class BooksComponent implements CrudActions {
    * Accepts a text string as a param.
    */
   fetchFilteredBooks(text: string) {
-    if (text.length === 0) {
+    if (text.trim().length === 0) {
       this.books$ = this.allBooks$;
     } else {
-      // console.log(`FROM THE METHOD fetchdata(): ${text}`);
-      this.books$ = this.allBooks$.pipe(map((books) => books.filter((book) => {
-        return book.name.toLowerCase().includes(text.toLowerCase()) || book.author.toLowerCase().includes(text.toLowerCase());
-      })));
+      const searchTerms = text.toLowerCase().trim().split(' ');
+
+      this.books$ = this.allBooks$.pipe(
+        map((books) =>
+          books.filter((book) => {
+            const bookId = book?._id?.toLowerCase() || '';
+            const bookName = book?.name?.toLowerCase() || '';
+            const bookAuthor = book?.author?.toLowerCase() || '';
+            const bookType = book?.type?.toLowerCase() || '';
+            const bookPublished = book?.year || '';
+
+            return searchTerms.every((term) =>
+              bookId.includes(term) ||
+              bookName.includes(term) ||
+              bookAuthor.includes(term) ||
+              bookType.includes(term) ||
+              bookPublished.toString().includes(term)
+            );
+          })
+        )
+      );
     }
   }
   /**
@@ -190,12 +213,12 @@ export class BooksComponent implements CrudActions {
         this.fetchFilteredAvailableBooks();
         break;
       case ('asc'):
-        this.fetchFilteredAscBooks();
+        !this.ssrMode ? this.fetchFilteredAscBooks() : this.fetchFilteredAscBooksSSR(Sort.ASC);
         // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
         //this.fetchFilteredAscBooksSSR(Sort.ASC);
         break;
       case ('desc'):
-        this.fetchFilteredDescBooks();
+        !this.ssrMode ? this.fetchFilteredDescBooks() : this.fetchFilteredAscBooksSSR(Sort.DESC);
         // TODO PRESENTATION ONLY UNCOMMENT TO PRESENT THE SSR SEARCH SCENARIO
         //this.fetchFilteredAscBooksSSR(Sort.DESC);
         break;
@@ -284,6 +307,9 @@ export class BooksComponent implements CrudActions {
         return `/bookCovers/sciFi.jpg`
       default: return `/library/book.webp`;
     }
+  }
+  toggleSSR() {
+    this.ssrMode = !this.ssrMode;
   }
   /**
  * @konstantinosporo

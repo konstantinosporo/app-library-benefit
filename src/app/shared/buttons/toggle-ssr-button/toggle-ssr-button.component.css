@@ -1,0 +1,24 @@
+.toggle-btn {
+  position: absolute;
+  top: 2%;
+  right: 1%;
+  width: 180px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 0;
+}
+
+.toggle-btn:focus,
+.toggle-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.toggle-btn span {
+  font-weight: bold;
+}
+
+.toggle-btn:hover {
+  background-color: var(--bs-text-foreground);
+  color: var(--bs-text);
+  transform: translateY(100%) scale(1.05);
+}

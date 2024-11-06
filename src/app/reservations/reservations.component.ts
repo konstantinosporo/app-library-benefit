@@ -121,11 +121,11 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
     }
   }
   /**
-  * @konstantinosporo
-  * @description
-  * Actively filters the api for close matxhes of the searched query string.
-  * Accepts a text string as a param.
-  */
+ * @konstantinosporo
+ * @description
+ * Actively filters the API for close matches of the searched query string.
+ * Accepts a text string as a param.
+ */
   fetchFilteredReservations(text: string) {
     if (text.length === 0) {
       this.reservations$ = this.allReservations$;
@@ -133,23 +133,33 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
       this.reservations$ = this.allReservations$.pipe(
         map((reservations) =>
           reservations.filter((reservation) => {
+            // Trim and split the search query text first
+            const searchTextParts = text.toLowerCase().trim().split(' ');
+
             const bookName = reservation?.book?.name?.toLowerCase() || '';
             const authorName = reservation?.book?.author?.toLowerCase() || '';
+            const bookId = reservation?.book?._id?.toLowerCase() || '';
             const customerName = reservation?.customer?.name.toLowerCase() || '';
+            const customerSurname = reservation?.customer?.surname.toLowerCase() || '';
+            const customerId = reservation.customer?._id?.toLowerCase() || '';
             const status = reservation?.status?.toLowerCase() || '';
-            const searchText = text.toLowerCase().trim();
 
             return (
-              bookName.includes(searchText) ||
-              authorName.includes(searchText) ||
-              customerName.includes(searchText) ||
-              status === searchText
+              bookName.includes(searchTextParts.join(' ')) ||
+              authorName.includes(searchTextParts.join(' ')) ||
+              bookId.includes(searchTextParts.join(' ')) ||
+              customerId.includes(searchTextParts.join(' ')) ||
+              status === searchTextParts.join(' ') ||
+              searchTextParts.every((part) =>
+                customerName.includes(part) || customerSurname.includes(part)
+              ) 
             );
           })
         )
       );
     }
   }
+
   /**
    * @konstantinosporo
    * @description

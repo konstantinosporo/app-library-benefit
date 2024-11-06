@@ -101,36 +101,41 @@ export class CustomersComponent implements CrudActions, OnDestroy {
     }
   }
   /**
-  * @konstantinosporo
-  * @description
-  * Actively filters the api for close matxhes of the searched query string.
-  * Accepts a text string as a param.
-  */
+ * @konstantinosporo
+ * @description
+ * Actively filters the API for close matches of the searched query string.
+ * Accepts a text string as a parameter and allows combined searches of name and surname.
+ */
   fetchFilteredCustomers(text: string) {
-    if (text.length === 0) {
+    if (text.trim().length === 0) {
       this.customers$ = this.allCustomers$;
     } else {
-      this.customers$ = this.allCustomers$.pipe(
-        map((customer) =>
-          customer.filter((customer) => {
-            const customerName = customer.name.toLowerCase() || '';
-            const customerSurname = customer.surname.toLowerCase() || '';
-            const customerEmail = customer.email.toLowerCase() || '';
-            const customerPhone = customer.phoneNumber.toLowerCase() || '';
-            const searchText = text.toLowerCase();
+      // if the searchquery is more than one word split it to search independenlty
+      const searchTerms = text.toLowerCase().trim().split(' ');
 
-            return (
-              customerName.includes(searchText) ||
-              customerSurname.includes(searchText) ||
-              customerName.includes(searchText) ||
-              customerEmail.includes(searchText) ||
-              customerPhone.includes(searchText)
+      this.customers$ = this.allCustomers$.pipe(
+        map((customers) =>
+          customers.filter((customer) => {
+            const customerId = customer._id?.toLowerCase() || '';
+            const customerName = customer.name?.toLowerCase() || '';
+            const customerSurname = customer.surname?.toLowerCase() || '';
+            const customerEmail = customer.email?.toLowerCase() || '';
+            const customerPhone = customer.phoneNumber?.toLowerCase() || '';
+
+            // for every given word search 
+            return searchTerms.every((term) =>
+              customerId.includes(term) ||
+              customerName.includes(term) ||
+              customerSurname.includes(term) ||
+              customerEmail.includes(term) ||
+              customerPhone.includes(term)
             );
           })
         )
       );
     }
   }
+
   /**
  * @konstantinosporo
  * @description

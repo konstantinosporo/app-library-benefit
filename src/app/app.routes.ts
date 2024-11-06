@@ -20,12 +20,11 @@ export const routes: Routes = [
     component: HomeComponent,
     title: 'Home | AppLibrary',
     children: [
-      // Default child route that redirects to dashboard/quick-settings
-      { path: '', redirectTo: 'dashboard/quick-settings', pathMatch: 'full' },
+      // default child for home page
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-      { path: 'dashboard/quick-settings', component: QuickSettingsComponent, title: 'Quick Settings | AppLibrary' },
-      { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Week Sales HeatMap | AppLibrary' },
-      // { path: 'chart2', component: TestChart2Component, title: 'Chart2 | AppLibrary' },
+      { path: 'dashboard', component: QuickSettingsComponent, title: 'Dashboard | AppLibrary' },
+      { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Sales HeatMap | AppLibrary' },
     ],
   },
   // BOOKS ROUTES
