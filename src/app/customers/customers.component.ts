@@ -1,19 +1,19 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
 import { CrudActions } from '../_lib/interfaces';
 import { AlertService } from '../services/alert-handlers/alert.service';
 import { CustomerHttpService } from '../services/customers/customer-http.service';
-import { CustomerApi } from './customer';
-import { SpinnerComponent } from "../shared/spinner/spinner.component";
-import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
-import { Router } from '@angular/router';
-import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
+import { SearchStateService } from '../services/search-state.service';
 import { ThemeService } from '../services/theme/theme.service';
-import { SearchComponent } from "../shared/search/search.component";
 import { ActionsDropdownComponent } from "../shared/buttons/actions-dropdown/actions-dropdown.component";
 import { DropdownActions } from '../shared/buttons/actions-dropdown/dropdown';
-import { SearchStateService } from '../services/search-state.service';
+import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
+import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
+import { SearchComponent } from "../shared/search/search.component";
+import { SpinnerComponent } from "../shared/spinner/spinner.component";
+import { CustomerApi } from './customer';
 
 @Component({
   selector: 'app-customers',

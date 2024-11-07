@@ -1,11 +1,12 @@
+import { NgClass } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService } from '../../services/alert-handlers/alert.service';
 import { CustomerHttpService } from '../../services/customers/customer-http.service';
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
-import { NgClass } from '@angular/common';
-import { AlertService } from '../../services/alert-handlers/alert.service';
 import { CustomerApi } from '../customer';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-customer',
@@ -60,15 +61,25 @@ export class AddCustomerComponent {
           this.alertService.showSuccessToast(`Customer with ID: ${customer._id} was successfully uploaded!`);
           this.router.navigate(['customers']);
         },
-        error: (err) => {
-          console.error('Error creating customer:', err);
-          if (err instanceof Error) {
-            throw new Error(`Error creating customer: ${err.message}`);
-          } else {
-            throw new Error('Error creating customer.');
+        error: (err: HttpErrorResponse) => {
+          //console.log(err); // the most possible scenario is to throw an httpresponse
+
+          let errorMessage = 'An unknown error occurred';
+
+          // check for duplicate key
+          if (err.error?.message?.includes('E11000 duplicate key error') && err.error.message.includes('email')) {
+            errorMessage = 'Email already exists!';
+          } else if (err.error?.message) {
+            // uknown error 
+            errorMessage = err.error.message;
           }
+
+          this.alertService.showDangerToast(errorMessage);
+
+          //console.error('Error creating customer:', errorMessage);
         }
       });
+
     }
   }
 }

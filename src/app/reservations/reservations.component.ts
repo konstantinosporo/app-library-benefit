@@ -33,8 +33,8 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
   dropdownActions: DropdownActions[] = [
     { id: 'active', title: 'Active', icon: 'bi-circle' },
     { id: 'completed', title: 'Completed', icon: 'bi bi-check-circle' },
-    { id: 'asc', title: 'Ascending', icon: 'bi bi-arrow-up' },
-    { id: 'desc', title: 'Descending', icon: 'bi bi-arrow-down' },
+    { id: 'asc', title: 'Ascending Date', icon: 'bi bi-arrow-up' },
+    { id: 'desc', title: 'Descending Date', icon: 'bi bi-arrow-down' },
   ];
 
   constructor(
@@ -72,6 +72,9 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
   refreshCustomers() {
     this.reservations$ = this.reservationHttpService.getReservations();
   }
+  /**
+   * @description Get the clcicked event from the child.
+   */
   getClickedDropdownId(id: string) {
     //console.log(id + '' + 'from father comp');
     switch (id) {
@@ -105,7 +108,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
       //console.table(newBook);
       this.reservationHttpService.completeReservation(id).subscribe({
         next: (reservation: ReservationApi) => {
-          this.alertService.showSuccessToast(`Reservation with ID: ${reservation._id} successfully completed!`);
+          this.alertService.showSuccessToast(`Reservation with ID: ${id} successfully completed!`);
           this.reservations$ = this.reservationHttpService.getReservations();
 
         },
@@ -152,7 +155,7 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
               status === searchTextParts.join(' ') ||
               searchTextParts.every((part) =>
                 customerName.includes(part) || customerSurname.includes(part)
-              ) 
+              )
             );
           })
         )
@@ -229,11 +232,12 @@ export class ReservationsComponent implements CrudActions, OnDestroy {
   checkOverdue(reservation: ReservationApi): boolean {
     return (new Date(reservation.returnBy) < new Date());
   }
-  /*
+  /**
    * @konstantinosporo
    * @description Change color of return by date to notify that a book is close to return.
    */
   getReturnByInfo(reservation: ReservationApi): { notify: string, class?: string, progress: number } {
+    reservation.book?.available
     const daysLeft = (new Date(reservation.returnBy).getTime() - new Date().getTime()) / (1000 * 3600 * 24);
 
     if (daysLeft < 0) return { notify: 'Return date is overdue.', class: 'progress-red', progress: 100 };

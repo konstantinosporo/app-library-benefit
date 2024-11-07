@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EChartsOption } from 'echarts';
-import { PieChartData } from './pieChartData';
 import { NgxEchartsDirective } from 'ngx-echarts';
+import { PieChartData } from './pieChartData';
 
 @Component({
   selector: 'app-chart-pie',
@@ -15,22 +15,22 @@ export class ChartPieComponent implements OnChanges {
   @Input() theme?: boolean;
   @Input() color?: string;
   options!: EChartsOption;
-
+  // e-chart collor pallete object
   private readonly colorPalette: { [key: string]: string } = {
     'Fiction': '#d99831',
     'Non-Fiction': '#B85450',
     'Biography': '#64A3B0',
     'Sci-Fi': '#8F7CA6'
   };
-
+  // listen for theme parent changes
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
       this.setChartOptions();
     }
   }
-
+  // set the e-charts config object
   setChartOptions() {
-    // Map `type` to `name` for ECharts
+    // map `type` to `name` for ECharts
     const formattedData = this.data.map(item => ({
       value: item.value,
       name: item.type,
