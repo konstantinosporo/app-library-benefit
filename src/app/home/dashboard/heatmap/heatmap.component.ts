@@ -26,12 +26,10 @@ export class HeatmapComponent {
     private readonly reservationHttpService: ReservationHttpService,
     private readonly themeService: ThemeService,
 
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.dataStream$ = this.reservationHttpService.getReservationsByDay();
     this.themeService.isDarkThemeStream$.subscribe(isDarkTheme => this.isDarkTheme = isDarkTheme);
-  }
 
+  }
 
 }

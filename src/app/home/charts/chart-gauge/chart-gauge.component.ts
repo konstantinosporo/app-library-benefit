@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import type { EChartsOption } from 'echarts';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { CustomerApi } from '../../../customers/customer';
@@ -22,13 +22,13 @@ export class ChartGaugeComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.setChartOptions();
   }
-
+  // listen to theme changes from the parent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['theme']) {
       this.setChartOptions();
     }
   }
-
+  // e-charts options configuration object
   private setChartOptions(): void {
     this.options = {
       tooltip: {

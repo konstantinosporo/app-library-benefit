@@ -1,12 +1,12 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { CustomerHttpService } from '../../services/customers/customer-http.service';
+import { SpinnerComponent } from "../../shared/spinner/spinner.component";
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { CustomerApi } from '../customer';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe, NgClass } from '@angular/common';
-import { SpinnerComponent } from "../../shared/spinner/spinner.component";
-import { ActivatedRoute } from '@angular/router';
-import { CustomerHttpService } from '../../services/customers/customer-http.service';
 
 @Component({
   selector: 'app-view-customer',
