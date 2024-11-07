@@ -24,6 +24,8 @@ export class AlertService {
     }
   }
   /**
+  * @kyriakosklapsis
+  * Future Update convert to using renderer
   * @konstantinosporo
   * @description
   * Method that triggers the bootstrap modal. Can dynamically set the context of its body, title 
@@ -38,7 +40,6 @@ export class AlertService {
     if (modalTitle) {
       modalTitle.textContent = title;
     }
-
     if (modalBody) {
       modalBody.textContent = message;
     }
@@ -56,8 +57,22 @@ export class AlertService {
         };
       }
     }
-
   }
+
+  private showQrCodeModal(title: string, modalId: string) {
+    const modalTitle = document.getElementById(`${modalId}Title`);
+    const modalElement = document.getElementById(modalId);
+
+    if (modalTitle) {
+      modalTitle.textContent = title;
+    }
+
+    if (modalElement) {
+      const modal = new Modal(modalElement);
+      modal.show();
+      }
+    }
+
   /**
    * @konstantinosporo
    * Shows green toast. Sets the content of the toast.
@@ -99,5 +114,12 @@ export class AlertService {
    */
   showInfoModal(title: string, message: string, onSave?: () => void, buttonText?: string) {
     this.showModal(title, message, 'infoModal', onSave, buttonText);
+  }
+  /**
+   * @konstantinosporo
+   * Shows a QR modal.
+   */
+  showQrModal(title: string) {
+    this.showQrCodeModal(title, 'qrModal');
   }
 }
