@@ -18,29 +18,29 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home | AppLibrary',
+    title: 'BookWave',
     children: [
       // default child for home page
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-      { path: 'dashboard', component: QuickSettingsComponent, title: 'Dashboard | AppLibrary' },
-      { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Sales HeatMap | AppLibrary' },
+      { path: 'dashboard', component: QuickSettingsComponent, title: 'Dashboard | BookWave' },
+      { path: 'dashboard/heatmap', component: HeatmapComponent, title: 'Sales HeatMap | BookWave' },
     ],
   },
   // BOOKS ROUTES
-  { path: 'books', component: BooksComponent, title: 'Books | AppLibrary' },
-  { path: 'book/add', component: AddBookComponent, title: 'Add Book | AppLibrary' },
-  { path: 'book/:id/edit', component: EditBookComponent, title: 'Edit Book | AppLibrary' },
-  { path: 'book/:id/view', component: ViewBookComponent, title: 'View Book | AppLibrary' },
+  { path: 'books', component: BooksComponent, title: 'Books | BookWave' },
+  { path: 'book/add', component: AddBookComponent, title: 'Add Book | BookWave' },
+  { path: 'book/:id/edit', component: EditBookComponent, title: 'Edit Book | BookWave' },
+  { path: 'book/:id/view', component: ViewBookComponent, title: 'View Book | BookWave' },
   // RESERVATION ROUTES
-  { path: 'reservations', component: ReservationsComponent, title: 'Reservations | AppLibrary' },
-  { path: 'reservation/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
-  { path: 'reservation/:id/add', component: AddReservationComponent, title: 'Add Reservation | AppLibrary' },
+  { path: 'reservations', component: ReservationsComponent, title: 'Reservations | BookWave' },
+  { path: 'reservation/add', component: AddReservationComponent, title: 'Add Reservation | BookWave' },
+  { path: 'reservation/:id/add', component: AddReservationComponent, title: 'Add Reservation | BookWave' },
   // CUSTOMERS ROUTES
-  { path: 'customers', component: CustomersComponent, title: 'Customers | AppLibrary' },
-  { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | AppLibrary' },
-  { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Edit Customer | AppLibrary' },
-  { path: 'customer/:id/view', component: ViewCustomerComponent, title: 'View Customer | AppLibrary' },
+  { path: 'customers', component: CustomersComponent, title: 'Customers | BookWave' },
+  { path: 'customer/add', component: AddCustomerComponent, title: 'Add Customer | BookWave' },
+  { path: 'customer/:id/edit', component: EditCustomerComponent, title: 'Edit Customer | BookWave' },
+  { path: 'customer/:id/view', component: ViewCustomerComponent, title: 'View Customer | BookWave' },
 
 
 

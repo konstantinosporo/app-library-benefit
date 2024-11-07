@@ -1,4 +1,4 @@
-# AppLibraryBenefit 
+# BookWave 
 **Contributors:** Poros K. Ioulios, Klapsis Kyriakos  
 **Team Name:** "IP && KK"
 
