@@ -2,6 +2,7 @@ import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { combineLatest, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 import { CustomerApi } from '../../customers/customer';
@@ -12,7 +13,6 @@ import { ReservationHttpService } from '../../services/reservations/reservation-
 import { SpinnerComponent } from "../../shared/spinner/spinner.component";
 import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
 import { ReservationApi } from '../reservation';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { futureDateValidator } from './custom-validation';
 
 @Component({

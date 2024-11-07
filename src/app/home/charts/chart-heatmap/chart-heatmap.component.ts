@@ -18,16 +18,17 @@ export class ChartHeatmapComponent implements OnInit, OnChanges {
   @Input() color?: string;
   options!: EChartsOption;
 
+  // initialize the e-charts config on init
   ngOnInit(): void {
     this.setChartOptions();
   }
-
+  // listen for theme changes from the parent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['theme']) {
       this.setChartOptions();
     }
   }
-
+  // e-charts options configuration object
   private setChartOptions(): void {
     this.options = {
       tooltip: {

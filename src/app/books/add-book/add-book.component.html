@@ -31,7 +31,7 @@
         <label for="year" class="form-label">Year Published*</label>
         <div class="input-group has-validation">
           <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-          <input type="number" class="form-control" formControlName="year" id="year" placeholder="e.g., 2024" [ngClass]="{
+          <input type="number" class="form-control" formControlName="year" id="year" placeholder="" [ngClass]="{
                     'is-invalid': bookFormControl.get('year')?.invalid && (bookFormControl.get('year')?.touched || bookFormControl.get('year')?.dirty),
                     'is-valid': bookFormControl.get('year')?.valid && (bookFormControl.get('year')?.touched || bookFormControl.get('year')?.dirty)
                  }" required>

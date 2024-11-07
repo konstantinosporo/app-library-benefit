@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { AlertService } from '../../services/alert-handlers/alert.service';
-import { CustomerApi } from '../customer';
-import { CustomerHttpService } from '../../services/customers/customer-http.service';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../services/alert-handlers/alert.service';
+import { CustomerHttpService } from '../../services/customers/customer-http.service';
+import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic-wrapper.component";
+import { CustomerApi } from '../customer';
 
 @Component({
   selector: 'app-edit-customer',

@@ -1,9 +1,9 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiStatus } from '../../../services/api-health/api';
 import { HealthCheckService } from '../../../services/api-health/health-check.service';
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
-import { AsyncPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-api-status',

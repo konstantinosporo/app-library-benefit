@@ -1,16 +1,16 @@
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
 import { BookApi } from '../../../books/book/book';
 import { BookHttpService } from '../../../services/book/book-http.service';
-import { AsyncPipe, DatePipe } from '@angular/common';
-import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
-import { SearchComponent } from '../../../shared/search/search.component';
-import { Router, RouterLink } from '@angular/router';
 import { SearchStateService } from '../../../services/search-state.service';
 import { ActionsDropdownComponent } from "../../../shared/buttons/actions-dropdown/actions-dropdown.component";
 import { DropdownActions } from '../../../shared/buttons/actions-dropdown/dropdown';
-import { RefreshPageButtonComponent } from "../../../shared/buttons/refresh-page-button/refresh-page-button.component";
 import { AddNewButtonComponent } from "../../../shared/buttons/add-new-button/add-new-button.component";
+import { RefreshPageButtonComponent } from "../../../shared/buttons/refresh-page-button/refresh-page-button.component";
+import { SearchComponent } from '../../../shared/search/search.component';
+import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-available-books',
@@ -76,7 +76,9 @@ export class AvailableBooksComponent {
       );
     }
   }
-
+  /**
+   * @description Get the childs button id that is clicked.
+   */
   getClickedDropdownId(id: string) {
     //console.log(id + '' + 'from father comp');
     switch (id) {

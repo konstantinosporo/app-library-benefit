@@ -1,7 +1,7 @@
 <div class="container min-vh-100">
   <div class="home-container">
     <div class="col-12 mx-auto">
-      <div class="col-10 col-md-9 mx-auto">
+      <div class="col-lg-10 col-md-9 mx-auto">
         <app-search [showContent]="true" searchPlaceholder="Search Reservations...">
           <app-actions-dropdown [dropdownActions]="dropdownActions"
             (handleClickedDropdownEvent)="getClickedDropdownId($event)" />
@@ -36,5 +36,5 @@
     }
 
   </div>
-  <app-toggle-ssr-button [ssrMode]="ssrMode" (handleToggleEvent)="toggleSSR()"/>
+  <app-toggle-ssr-button [ssrMode]="ssrMode" (handleToggleEvent)="toggleSSR()" />
 </div>
