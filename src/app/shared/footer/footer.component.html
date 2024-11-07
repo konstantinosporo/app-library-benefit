@@ -2,10 +2,15 @@
   <footer class="text-center text-white">
     <div class="container pt-4">
       <section class="mb-4">
-        @for (icon of socialsList; track icon.title) {
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" [href]="icon.href" role="button" onkeydown
-          data-mdb-ripple-color="dark"><i [class]="icon.icon"></i><span
+        @for (icon of socialsList; track icon.title; let last=$last ) {
+          @if ($last) {
+            <button class="btn btn-link" (click)="handleQR()"><i [class]="icon.icon"></i><span
+              class="visually-hidden">{{icon.title}}</span></button>
+          } @else {
+            <a class="btn btn-link btn-floating btn-lg text-dark m-1" [href]="icon.href" role="button" onkeydown
+            data-mdb-ripple-color="dark"><i [class]="icon.icon"></i><span
             class="visually-hidden">{{icon.title}}</span></a>
+          }
         }
       </section>
     </div>
