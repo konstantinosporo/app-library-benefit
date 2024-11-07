@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AlertService } from '../../services/alert-handlers/alert.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-footer',
@@ -11,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class FooterComponent {
 
-  constructor(private readonly alertService: AlertService ) { }
+  constructor(private readonly alertService: AlertService) { }
   socialsList: { title: string, icon: string, href: string }[] = [
     // {
     //   title: "Facebook",
@@ -56,6 +55,6 @@ export class FooterComponent {
 
   handleQR() {
     console.log('asdfsdfsdfsf');
-    this.alertService.showQrModal('Qr Code')
+    this.alertService.showQrModal('Connect to BookWave!')
   }
 }
