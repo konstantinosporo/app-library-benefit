@@ -58,6 +58,4 @@ export class FooterComponent {
     console.log('asdfsdfsdfsf');
     this.alertService.showQrModal('Qr Code')
   }
-
-
 }
