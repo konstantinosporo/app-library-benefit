@@ -50,6 +50,8 @@ export class ChartBarComponent {
         type: 'value',
         name: 'Book Availability',
         minInterval: 1,
+        min: 0,
+        max: 6
       },
       backgroundColor: 'transparent',
       series: [
