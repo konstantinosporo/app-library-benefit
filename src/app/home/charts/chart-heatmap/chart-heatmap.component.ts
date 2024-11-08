@@ -2,11 +2,11 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { EChartsOption } from 'echarts';
 import { NgxEchartsDirective } from 'ngx-echarts';
 import { HeatMapData } from '../../../services/reservations/charts';
-import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
+
 @Component({
   selector: 'app-chart-heatmap',
   standalone: true,
-  imports: [NgxEchartsDirective, SpinnerComponent],
+  imports: [NgxEchartsDirective],
   templateUrl: './chart-heatmap.component.html',
   styleUrl: './chart-heatmap.component.css'
 })

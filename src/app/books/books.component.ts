@@ -1,4 +1,4 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { filter, map, Observable, Subject, takeUntil } from 'rxjs';
 import { SearchComponent } from '../shared/search/search.component';
@@ -15,13 +15,12 @@ import { ActionsDropdownComponent } from "../shared/buttons/actions-dropdown/act
 import { DropdownActions } from '../shared/buttons/actions-dropdown/dropdown';
 import { AddNewButtonComponent } from "../shared/buttons/add-new-button/add-new-button.component";
 import { RefreshPageButtonComponent } from "../shared/buttons/refresh-page-button/refresh-page-button.component";
-import { FilterComponent } from "../shared/search/filter/filter.component";
 import { ToggleSsrButtonComponent } from "../shared/buttons/toggle-ssr-button/toggle-ssr-button.component";
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, FilterComponent, ActionsDropdownComponent, RefreshPageButtonComponent, ToggleSsrButtonComponent],
+  imports: [AsyncPipe, SearchComponent, SpinnerComponent, BookComponent, AddNewButtonComponent, ActionsDropdownComponent, RefreshPageButtonComponent, ToggleSsrButtonComponent],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })

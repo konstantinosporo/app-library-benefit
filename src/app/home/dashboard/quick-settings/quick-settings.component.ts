@@ -1,4 +1,4 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomerApi } from '../../../customers/customer';
@@ -7,13 +7,12 @@ import { CustomerHttpService } from '../../../services/customers/customer-http.s
 import { ReservationHttpService } from '../../../services/reservations/reservation-http.service';
 import { ThemeService } from '../../../services/theme/theme.service';
 import { SpinnerComponent } from "../../../shared/spinner/spinner.component";
-import { ChartBarComponent } from "../../charts/chart-bar/chart-bar.component";
 import { ChartGaugeComponent } from '../../charts/chart-gauge/chart-gauge.component';
 
 @Component({
   selector: 'app-quick-settings',
   standalone: true,
-  imports: [ChartGaugeComponent, AsyncPipe, SpinnerComponent, JsonPipe, ChartBarComponent],
+  imports: [ChartGaugeComponent, AsyncPipe, SpinnerComponent],
   templateUrl: './quick-settings.component.html',
   styleUrl: './quick-settings.component.css'
 })

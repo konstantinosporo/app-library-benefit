@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { BookApi } from '../book/book';
 @Component({
   selector: 'app-edit-book',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, NgClass, BasicWrapperComponent],
+  imports: [ReactiveFormsModule, NgClass, BasicWrapperComponent],
   templateUrl: './edit-book.component.html',
   styleUrl: './edit-book.component.css'
 })

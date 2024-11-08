@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { BookApi } from '../book/book';
 @Component({
   selector: 'app-view-book',
   standalone: true,
-  imports: [BasicWrapperComponent, AsyncPipe, JsonPipe, DatePipe, SpinnerComponent],
+  imports: [BasicWrapperComponent, AsyncPipe, DatePipe, SpinnerComponent],
   templateUrl: './view-book.component.html',
   styleUrl: './view-book.component.css'
 })
