@@ -15,7 +15,7 @@ export class BasicWrapperComponent {
   @Input() titleFooter?: string = '';
   @Input() docId?: string;
   @Input() footer?: string = '';
-  @Input() backButton?: { title: string, route: string }
+  @Input() backButton?: { title: string, route: string };
 
   constructor(
     private readonly router: Router,

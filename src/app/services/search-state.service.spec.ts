@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { SearchStateService } from './search-state.service';
 import { first, take } from 'rxjs';
-import { FilterID } from '../shared/search/filter/filters';
 
 describe('SearchStateService', () => {
   let service: SearchStateService;

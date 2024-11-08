@@ -1,4 +1,4 @@
-import { DatePipe, JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { BasicWrapperComponent } from "../../shared/wrappers/basic-wrapper/basic
 @Component({
   selector: 'app-add-book',
   standalone: true,
-  imports: [BasicWrapperComponent, ReactiveFormsModule, NgIf, NgClass, NgFor, JsonPipe, DatePipe],
+  imports: [BasicWrapperComponent, ReactiveFormsModule, NgClass],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css'
 })

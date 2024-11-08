@@ -1,8 +1,8 @@
-import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { combineLatest, map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { BookApi } from '../../books/book/book';
 import { CustomerApi } from '../../customers/customer';
@@ -19,11 +19,11 @@ import { futureDateValidator } from './custom-validation';
   selector: 'app-add-reservation',
   standalone: true,
   imports: [
-    ReactiveFormsModule, FormsModule,
-    NgClass, AsyncPipe, JsonPipe,
+    ReactiveFormsModule,
+    NgClass, AsyncPipe,
     BasicWrapperComponent,
     SpinnerComponent,
-    NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent,],
+    NgSelectComponent],
   templateUrl: './add-reservation.component.html',
   styleUrl: './add-reservation.component.css'
 })

@@ -30,7 +30,8 @@ export class AddCustomerComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       phoneNumber: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('^[0-9]*$')]),
 
-    })
+    });
+    
   }
   /**
    * @konstantinosporo

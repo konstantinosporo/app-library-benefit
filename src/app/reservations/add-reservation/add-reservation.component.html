@@ -33,7 +33,7 @@
         @if(reservationFormControl.get('bookName')?.invalid && (reservationFormControl.get('bookName')?.touched ||
         reservationFormControl.get('bookName')?.dirty)){
         <div class="invalid-feedback">
-          @if(reservationFormControl.get('bookName')?.errors?.['required']){<div>Book ID is required.</div>}
+          @if(reservationFormControl.get('bookName')?.errors?.['required']){<div>Book Name is required.</div>}
         </div>
         }@else {<div>&nbsp;</div>}
       </div>
@@ -70,7 +70,7 @@
         ||
         reservationFormControl.get('customerName')?.dirty)){
         <div class="invalid-feedback">
-          @if(reservationFormControl.get('customerName')?.errors?.['required']){<div>Customer ID is required.</div>}
+          @if(reservationFormControl.get('customerName')?.errors?.['required']){<div>Customer Name is required.</div>}
         </div>
         }@else{<div>&nbsp;</div>}
       </div>
